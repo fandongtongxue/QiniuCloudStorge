@@ -7,15 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		745A6B4F952DDAA06D163BC2 /* libPods-QiniuCloudStorge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0FA3ED4A0983B1A899C33CA /* libPods-QiniuCloudStorge.a */; };
 		AFB2E75C1D952E6400ECC1D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E75B1D952E6400ECC1D0 /* main.m */; };
 		AFB2E75F1D952E6400ECC1D0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E75E1D952E6400ECC1D0 /* AppDelegate.m */; };
 		AFB2E7621D952E6400ECC1D0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7611D952E6400ECC1D0 /* ViewController.m */; };
 		AFB2E7651D952E6400ECC1D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB2E7631D952E6400ECC1D0 /* Main.storyboard */; };
 		AFB2E7671D952E6400ECC1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFB2E7661D952E6400ECC1D0 /* Assets.xcassets */; };
 		AFB2E76A1D952E6400ECC1D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB2E7681D952E6400ECC1D0 /* LaunchScreen.storyboard */; };
+		AFB2E7B41D95301000ECC1D0 /* UIColor+FD.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7731D95301000ECC1D0 /* UIColor+FD.m */; };
+		AFB2E7B51D95301000ECC1D0 /* UIView+FD.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7751D95301000ECC1D0 /* UIView+FD.m */; };
+		AFB2E7B61D95301000ECC1D0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7781D95301000ECC1D0 /* WebViewController.m */; };
+		AFB2E7B71D95301000ECC1D0 /* ConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E77C1D95301000ECC1D0 /* ConfigViewController.m */; };
+		AFB2E7B81D95301000ECC1D0 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E77F1D95301000ECC1D0 /* ContainerViewController.m */; };
+		AFB2E7B91D95301000ECC1D0 /* ImageFileDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7821D95301000ECC1D0 /* ImageFileDetailCell.m */; };
+		AFB2E7BA1D95301000ECC1D0 /* ImageFileDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7841D95301000ECC1D0 /* ImageFileDetailModel.m */; };
+		AFB2E7BB1D95301000ECC1D0 /* ImageFileDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7861D95301000ECC1D0 /* ImageFileDetailViewController.m */; };
+		AFB2E7BC1D95301000ECC1D0 /* ImageFileListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7881D95301000ECC1D0 /* ImageFileListViewController.m */; };
+		AFB2E7BD1D95301000ECC1D0 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E78A1D95301000ECC1D0 /* ImageViewController.m */; };
+		AFB2E7BE1D95301000ECC1D0 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E78D1D95301000ECC1D0 /* AboutViewController.m */; };
+		AFB2E7BF1D95301000ECC1D0 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E78F1D95301000ECC1D0 /* MoreViewController.m */; };
+		AFB2E7C01D95301000ECC1D0 /* RootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7921D95301000ECC1D0 /* RootNavigationController.m */; };
+		AFB2E7C11D95301000ECC1D0 /* RootTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7951D95301000ECC1D0 /* RootTabBarController.m */; };
+		AFB2E7C21D95301000ECC1D0 /* VideoFileDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7981D95301000ECC1D0 /* VideoFileDetailViewController.m */; };
+		AFB2E7C31D95301000ECC1D0 /* VideoFileListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E79A1D95301000ECC1D0 /* VideoFileListViewController.m */; };
+		AFB2E7C41D95301000ECC1D0 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E79C1D95301000ECC1D0 /* VideoViewController.m */; };
+		AFB2E7C51D95301000ECC1D0 /* BaseNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E79F1D95301000ECC1D0 /* BaseNetworking.m */; };
+		AFB2E7C61D95301000ECC1D0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7A31D95301000ECC1D0 /* MBProgressHUD.m */; };
+		AFB2E7C71D95301000ECC1D0 /* AppHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7A91D95301000ECC1D0 /* AppHelper.m */; };
+		AFB2E7C81D95301000ECC1D0 /* MapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7AD1D95301000ECC1D0 /* MapManager.m */; };
+		AFB2E7C91D95301000ECC1D0 /* QiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7B01D95301000ECC1D0 /* QiniuUploadManager.m */; };
+		AFB2E7CA1D95301000ECC1D0 /* UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7B31D95301000ECC1D0 /* UserDefault.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E0AB2BB18E49B5D06986DAC /* Pods-QiniuCloudStorge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiniuCloudStorge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QiniuCloudStorge/Pods-QiniuCloudStorge.debug.xcconfig"; sourceTree = "<group>"; };
 		AFB2E7571D952E6400ECC1D0 /* QiniuCloudStorge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiniuCloudStorge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB2E75B1D952E6400ECC1D0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AFB2E75D1D952E6400ECC1D0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -26,6 +51,57 @@
 		AFB2E7661D952E6400ECC1D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFB2E7691D952E6400ECC1D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AFB2E76B1D952E6400ECC1D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFB2E7721D95301000ECC1D0 /* UIColor+FD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FD.h"; sourceTree = "<group>"; };
+		AFB2E7731D95301000ECC1D0 /* UIColor+FD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FD.m"; sourceTree = "<group>"; };
+		AFB2E7741D95301000ECC1D0 /* UIView+FD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FD.h"; sourceTree = "<group>"; };
+		AFB2E7751D95301000ECC1D0 /* UIView+FD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FD.m"; sourceTree = "<group>"; };
+		AFB2E7771D95301000ECC1D0 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		AFB2E7781D95301000ECC1D0 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		AFB2E77B1D95301000ECC1D0 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
+		AFB2E77C1D95301000ECC1D0 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
+		AFB2E77E1D95301000ECC1D0 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
+		AFB2E77F1D95301000ECC1D0 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
+		AFB2E7811D95301000ECC1D0 /* ImageFileDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFileDetailCell.h; sourceTree = "<group>"; };
+		AFB2E7821D95301000ECC1D0 /* ImageFileDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFileDetailCell.m; sourceTree = "<group>"; };
+		AFB2E7831D95301000ECC1D0 /* ImageFileDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFileDetailModel.h; sourceTree = "<group>"; };
+		AFB2E7841D95301000ECC1D0 /* ImageFileDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFileDetailModel.m; sourceTree = "<group>"; };
+		AFB2E7851D95301000ECC1D0 /* ImageFileDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFileDetailViewController.h; sourceTree = "<group>"; };
+		AFB2E7861D95301000ECC1D0 /* ImageFileDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFileDetailViewController.m; sourceTree = "<group>"; };
+		AFB2E7871D95301000ECC1D0 /* ImageFileListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFileListViewController.h; sourceTree = "<group>"; };
+		AFB2E7881D95301000ECC1D0 /* ImageFileListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFileListViewController.m; sourceTree = "<group>"; };
+		AFB2E7891D95301000ECC1D0 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		AFB2E78A1D95301000ECC1D0 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		AFB2E78C1D95301000ECC1D0 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		AFB2E78D1D95301000ECC1D0 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		AFB2E78E1D95301000ECC1D0 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		AFB2E78F1D95301000ECC1D0 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		AFB2E7911D95301000ECC1D0 /* RootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNavigationController.h; sourceTree = "<group>"; };
+		AFB2E7921D95301000ECC1D0 /* RootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationController.m; sourceTree = "<group>"; };
+		AFB2E7941D95301000ECC1D0 /* RootTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabBarController.h; sourceTree = "<group>"; };
+		AFB2E7951D95301000ECC1D0 /* RootTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarController.m; sourceTree = "<group>"; };
+		AFB2E7971D95301000ECC1D0 /* VideoFileDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoFileDetailViewController.h; sourceTree = "<group>"; };
+		AFB2E7981D95301000ECC1D0 /* VideoFileDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoFileDetailViewController.m; sourceTree = "<group>"; };
+		AFB2E7991D95301000ECC1D0 /* VideoFileListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoFileListViewController.h; sourceTree = "<group>"; };
+		AFB2E79A1D95301000ECC1D0 /* VideoFileListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoFileListViewController.m; sourceTree = "<group>"; };
+		AFB2E79B1D95301000ECC1D0 /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
+		AFB2E79C1D95301000ECC1D0 /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
+		AFB2E79E1D95301000ECC1D0 /* BaseNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNetworking.h; sourceTree = "<group>"; };
+		AFB2E79F1D95301000ECC1D0 /* BaseNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNetworking.m; sourceTree = "<group>"; };
+		AFB2E7A21D95301000ECC1D0 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		AFB2E7A31D95301000ECC1D0 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		AFB2E7A61D95301000ECC1D0 /* AppDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDefine.h; sourceTree = "<group>"; };
+		AFB2E7A71D95301000ECC1D0 /* AppHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHeader.h; sourceTree = "<group>"; };
+		AFB2E7A81D95301000ECC1D0 /* AppHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHelper.h; sourceTree = "<group>"; };
+		AFB2E7A91D95301000ECC1D0 /* AppHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppHelper.m; sourceTree = "<group>"; };
+		AFB2E7AA1D95301000ECC1D0 /* AppPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPrefixHeader.pch; sourceTree = "<group>"; };
+		AFB2E7AC1D95301000ECC1D0 /* MapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapManager.h; sourceTree = "<group>"; };
+		AFB2E7AD1D95301000ECC1D0 /* MapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapManager.m; sourceTree = "<group>"; };
+		AFB2E7AF1D95301000ECC1D0 /* QiniuUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuUploadManager.h; sourceTree = "<group>"; };
+		AFB2E7B01D95301000ECC1D0 /* QiniuUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuUploadManager.m; sourceTree = "<group>"; };
+		AFB2E7B21D95301000ECC1D0 /* UserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefault.h; sourceTree = "<group>"; };
+		AFB2E7B31D95301000ECC1D0 /* UserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefault.m; sourceTree = "<group>"; };
+		E73471291617E390AE842469 /* Pods-QiniuCloudStorge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiniuCloudStorge.release.xcconfig"; path = "Pods/Target Support Files/Pods-QiniuCloudStorge/Pods-QiniuCloudStorge.release.xcconfig"; sourceTree = "<group>"; };
+		F0FA3ED4A0983B1A899C33CA /* libPods-QiniuCloudStorge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QiniuCloudStorge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +109,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				745A6B4F952DDAA06D163BC2 /* libPods-QiniuCloudStorge.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		139058F78032822386000DDD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9E0AB2BB18E49B5D06986DAC /* Pods-QiniuCloudStorge.debug.xcconfig */,
+				E73471291617E390AE842469 /* Pods-QiniuCloudStorge.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		457F6F5B6FF946C2904DDE65 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0FA3ED4A0983B1A899C33CA /* libPods-QiniuCloudStorge.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AFB2E74E1D952E6400ECC1D0 = {
 			isa = PBXGroup;
 			children = (
 				AFB2E7591D952E6400ECC1D0 /* QiniuCloudStorge */,
 				AFB2E7581D952E6400ECC1D0 /* Products */,
+				139058F78032822386000DDD /* Pods */,
+				457F6F5B6FF946C2904DDE65 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +154,12 @@
 		AFB2E7591D952E6400ECC1D0 /* QiniuCloudStorge */ = {
 			isa = PBXGroup;
 			children = (
+				AFB2E7711D95301000ECC1D0 /* Category */,
+				AFB2E7761D95301000ECC1D0 /* Common */,
+				AFB2E7791D95301000ECC1D0 /* Modules */,
+				AFB2E79D1D95301000ECC1D0 /* Network */,
+				AFB2E7A01D95301000ECC1D0 /* ThirdPart */,
+				AFB2E7A41D95301000ECC1D0 /* Utility */,
 				AFB2E75D1D952E6400ECC1D0 /* AppDelegate.h */,
 				AFB2E75E1D952E6400ECC1D0 /* AppDelegate.m */,
 				AFB2E7601D952E6400ECC1D0 /* ViewController.h */,
@@ -79,6 +181,193 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AFB2E7711D95301000ECC1D0 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E7721D95301000ECC1D0 /* UIColor+FD.h */,
+				AFB2E7731D95301000ECC1D0 /* UIColor+FD.m */,
+				AFB2E7741D95301000ECC1D0 /* UIView+FD.h */,
+				AFB2E7751D95301000ECC1D0 /* UIView+FD.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		AFB2E7761D95301000ECC1D0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E7771D95301000ECC1D0 /* WebViewController.h */,
+				AFB2E7781D95301000ECC1D0 /* WebViewController.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		AFB2E7791D95301000ECC1D0 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E77A1D95301000ECC1D0 /* Config */,
+				AFB2E77D1D95301000ECC1D0 /* Container */,
+				AFB2E7801D95301000ECC1D0 /* Image */,
+				AFB2E78B1D95301000ECC1D0 /* More */,
+				AFB2E7901D95301000ECC1D0 /* Nav */,
+				AFB2E7931D95301000ECC1D0 /* Tab */,
+				AFB2E7961D95301000ECC1D0 /* Video */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		AFB2E77A1D95301000ECC1D0 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E77B1D95301000ECC1D0 /* ConfigViewController.h */,
+				AFB2E77C1D95301000ECC1D0 /* ConfigViewController.m */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		AFB2E77D1D95301000ECC1D0 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E77E1D95301000ECC1D0 /* ContainerViewController.h */,
+				AFB2E77F1D95301000ECC1D0 /* ContainerViewController.m */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
+		AFB2E7801D95301000ECC1D0 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E7811D95301000ECC1D0 /* ImageFileDetailCell.h */,
+				AFB2E7821D95301000ECC1D0 /* ImageFileDetailCell.m */,
+				AFB2E7831D95301000ECC1D0 /* ImageFileDetailModel.h */,
+				AFB2E7841D95301000ECC1D0 /* ImageFileDetailModel.m */,
+				AFB2E7851D95301000ECC1D0 /* ImageFileDetailViewController.h */,
+				AFB2E7861D95301000ECC1D0 /* ImageFileDetailViewController.m */,
+				AFB2E7871D95301000ECC1D0 /* ImageFileListViewController.h */,
+				AFB2E7881D95301000ECC1D0 /* ImageFileListViewController.m */,
+				AFB2E7891D95301000ECC1D0 /* ImageViewController.h */,
+				AFB2E78A1D95301000ECC1D0 /* ImageViewController.m */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		AFB2E78B1D95301000ECC1D0 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E78C1D95301000ECC1D0 /* AboutViewController.h */,
+				AFB2E78D1D95301000ECC1D0 /* AboutViewController.m */,
+				AFB2E78E1D95301000ECC1D0 /* MoreViewController.h */,
+				AFB2E78F1D95301000ECC1D0 /* MoreViewController.m */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
+		AFB2E7901D95301000ECC1D0 /* Nav */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E7911D95301000ECC1D0 /* RootNavigationController.h */,
+				AFB2E7921D95301000ECC1D0 /* RootNavigationController.m */,
+			);
+			path = Nav;
+			sourceTree = "<group>";
+		};
+		AFB2E7931D95301000ECC1D0 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E7941D95301000ECC1D0 /* RootTabBarController.h */,
+				AFB2E7951D95301000ECC1D0 /* RootTabBarController.m */,
+			);
+			path = Tab;
+			sourceTree = "<group>";
+		};
+		AFB2E7961D95301000ECC1D0 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E7971D95301000ECC1D0 /* VideoFileDetailViewController.h */,
+				AFB2E7981D95301000ECC1D0 /* VideoFileDetailViewController.m */,
+				AFB2E7991D95301000ECC1D0 /* VideoFileListViewController.h */,
+				AFB2E79A1D95301000ECC1D0 /* VideoFileListViewController.m */,
+				AFB2E79B1D95301000ECC1D0 /* VideoViewController.h */,
+				AFB2E79C1D95301000ECC1D0 /* VideoViewController.m */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
+		AFB2E79D1D95301000ECC1D0 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E79E1D95301000ECC1D0 /* BaseNetworking.h */,
+				AFB2E79F1D95301000ECC1D0 /* BaseNetworking.m */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		AFB2E7A01D95301000ECC1D0 /* ThirdPart */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E7A11D95301000ECC1D0 /* MBProgressHUD */,
+			);
+			path = ThirdPart;
+			sourceTree = "<group>";
+		};
+		AFB2E7A11D95301000ECC1D0 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E7A21D95301000ECC1D0 /* MBProgressHUD.h */,
+				AFB2E7A31D95301000ECC1D0 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		AFB2E7A41D95301000ECC1D0 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E7A51D95301000ECC1D0 /* Helper */,
+				AFB2E7AB1D95301000ECC1D0 /* MapManager */,
+				AFB2E7AE1D95301000ECC1D0 /* UploadManager */,
+				AFB2E7B11D95301000ECC1D0 /* UserDefault */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		AFB2E7A51D95301000ECC1D0 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E7A61D95301000ECC1D0 /* AppDefine.h */,
+				AFB2E7A71D95301000ECC1D0 /* AppHeader.h */,
+				AFB2E7A81D95301000ECC1D0 /* AppHelper.h */,
+				AFB2E7A91D95301000ECC1D0 /* AppHelper.m */,
+				AFB2E7AA1D95301000ECC1D0 /* AppPrefixHeader.pch */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		AFB2E7AB1D95301000ECC1D0 /* MapManager */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E7AC1D95301000ECC1D0 /* MapManager.h */,
+				AFB2E7AD1D95301000ECC1D0 /* MapManager.m */,
+			);
+			path = MapManager;
+			sourceTree = "<group>";
+		};
+		AFB2E7AE1D95301000ECC1D0 /* UploadManager */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E7AF1D95301000ECC1D0 /* QiniuUploadManager.h */,
+				AFB2E7B01D95301000ECC1D0 /* QiniuUploadManager.m */,
+			);
+			path = UploadManager;
+			sourceTree = "<group>";
+		};
+		AFB2E7B11D95301000ECC1D0 /* UserDefault */ = {
+			isa = PBXGroup;
+			children = (
+				AFB2E7B21D95301000ECC1D0 /* UserDefault.h */,
+				AFB2E7B31D95301000ECC1D0 /* UserDefault.m */,
+			);
+			path = UserDefault;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +375,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AFB2E76E1D952E6400ECC1D0 /* Build configuration list for PBXNativeTarget "QiniuCloudStorge" */;
 			buildPhases = (
+				65E6BF16C52A018DE3CF9476 /* [CP] Check Pods Manifest.lock */,
 				AFB2E7531D952E6400ECC1D0 /* Sources */,
 				AFB2E7541D952E6400ECC1D0 /* Frameworks */,
 				AFB2E7551D952E6400ECC1D0 /* Resources */,
+				B49D786E25BC5CCA08C12E77 /* [CP] Embed Pods Frameworks */,
+				5081785C88EEFE2D44B11403 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -146,13 +438,84 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5081785C88EEFE2D44B11403 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QiniuCloudStorge/Pods-QiniuCloudStorge-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		65E6BF16C52A018DE3CF9476 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B49D786E25BC5CCA08C12E77 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QiniuCloudStorge/Pods-QiniuCloudStorge-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AFB2E7531D952E6400ECC1D0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFB2E7CA1D95301000ECC1D0 /* UserDefault.m in Sources */,
+				AFB2E7C11D95301000ECC1D0 /* RootTabBarController.m in Sources */,
+				AFB2E7C51D95301000ECC1D0 /* BaseNetworking.m in Sources */,
+				AFB2E7B51D95301000ECC1D0 /* UIView+FD.m in Sources */,
+				AFB2E7BB1D95301000ECC1D0 /* ImageFileDetailViewController.m in Sources */,
+				AFB2E7B91D95301000ECC1D0 /* ImageFileDetailCell.m in Sources */,
+				AFB2E7B61D95301000ECC1D0 /* WebViewController.m in Sources */,
+				AFB2E7BF1D95301000ECC1D0 /* MoreViewController.m in Sources */,
 				AFB2E7621D952E6400ECC1D0 /* ViewController.m in Sources */,
+				AFB2E7BD1D95301000ECC1D0 /* ImageViewController.m in Sources */,
+				AFB2E7BA1D95301000ECC1D0 /* ImageFileDetailModel.m in Sources */,
+				AFB2E7C21D95301000ECC1D0 /* VideoFileDetailViewController.m in Sources */,
+				AFB2E7C41D95301000ECC1D0 /* VideoViewController.m in Sources */,
+				AFB2E7BC1D95301000ECC1D0 /* ImageFileListViewController.m in Sources */,
+				AFB2E7C91D95301000ECC1D0 /* QiniuUploadManager.m in Sources */,
+				AFB2E7B41D95301000ECC1D0 /* UIColor+FD.m in Sources */,
 				AFB2E75F1D952E6400ECC1D0 /* AppDelegate.m in Sources */,
+				AFB2E7C61D95301000ECC1D0 /* MBProgressHUD.m in Sources */,
+				AFB2E7C81D95301000ECC1D0 /* MapManager.m in Sources */,
+				AFB2E7BE1D95301000ECC1D0 /* AboutViewController.m in Sources */,
+				AFB2E7B71D95301000ECC1D0 /* ConfigViewController.m in Sources */,
+				AFB2E7C01D95301000ECC1D0 /* RootNavigationController.m in Sources */,
+				AFB2E7B81D95301000ECC1D0 /* ContainerViewController.m in Sources */,
+				AFB2E7C71D95301000ECC1D0 /* AppHelper.m in Sources */,
+				AFB2E7C31D95301000ECC1D0 /* VideoFileListViewController.m in Sources */,
 				AFB2E75C1D952E6400ECC1D0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,9 +634,11 @@
 		};
 		AFB2E76F1D952E6400ECC1D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E0AB2BB18E49B5D06986DAC /* Pods-QiniuCloudStorge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4N8C22Y7VD;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/QiniuCloudStorge/Utility/Helper/AppPrefixHeader.pch";
 				INFOPLIST_FILE = QiniuCloudStorge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.fandong.QiniuCloudStorge;
@@ -283,9 +648,11 @@
 		};
 		AFB2E7701D952E6400ECC1D0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E73471291617E390AE842469 /* Pods-QiniuCloudStorge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4N8C22Y7VD;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/QiniuCloudStorge/Utility/Helper/AppPrefixHeader.pch";
 				INFOPLIST_FILE = QiniuCloudStorge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.fandong.QiniuCloudStorge;
@@ -312,6 +679,7 @@
 				AFB2E7701D952E6400ECC1D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

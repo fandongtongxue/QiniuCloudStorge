@@ -1,12 +1,13 @@
 //
 //  AppDelegate.m
-//  QiniuCloudStorge
+//  QiniuDemo
 //
-//  Created by 范东 on 16/9/23.
+//  Created by 范东 on 16/7/21.
 //  Copyright © 2016年 范东. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "ContainerViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[MapManager manager] application:application didFinishLaunchingWithOptions:launchOptions];
+    ContainerViewController *containerVC = [[ContainerViewController alloc]init];
+    self.window.rootViewController = containerVC;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

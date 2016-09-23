@@ -1,8 +1,8 @@
 //
 //  AppDelegate.h
-//  QiniuCloudStorge
+//  Qiniu
 //
-//  Created by 范东 on 16/9/23.
+//  Created by 范东 on 16/8/2.
 //  Copyright © 2016年 范东. All rights reserved.
 //
 
