@@ -11,7 +11,7 @@
 #import "ImageFileDetailModel.h"
 #import "ImageFileDetailViewController.h"
 
-#define kGetFileListUrl @"http://fandong.me/upload/examples/list_file_image.php"
+#define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/Image/list_file_image.php"
 
 static NSString * const cellID = @"imageCellID";
 

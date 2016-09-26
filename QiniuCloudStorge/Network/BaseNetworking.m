@@ -17,7 +17,6 @@
         shareInstance = [[self alloc] init];
     });
     shareInstance.requestContentType = RequestContentTypeJSON;
-    shareInstance.responseContentType = ResponseContentTypeJSON;
     shareInstance.timeoutInterval = 30;
     return shareInstance;
 }
@@ -86,6 +85,7 @@
             break;
             
         default:
+            return [AFHTTPResponseSerializer serializer];
             break;
     }
 }

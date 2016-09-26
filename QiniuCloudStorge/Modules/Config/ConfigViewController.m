@@ -6,7 +6,7 @@
 //  Copyright © 2016年 范东. All rights reserved.
 //
 
-#define kSubmitURL        @"http://fandong.me/submit/submit.php"
+#define kSubmitURL        @"http://fandong.me/App/QiniuCloudStorge/Submit/submit.php"
 #define kConfigTextFieldBaseTag 100
 
 #import "ConfigViewController.h"
@@ -95,8 +95,10 @@
     NSDictionary *dict = @{@"appKey":self.appKeyTextField.text,
                                           @"appSecret":self.appSecretTextField.text,
                                           @"bucketName":self.appBucketTextField.text};
+    [BaseNetworking shareInstance].responseContentType = ResponseContentTypeText;
     [[BaseNetworking shareInstance] POST:kSubmitURL dict:dict succeed:^(id data) {
-        [self showAlert:data];
+        NSString *resultStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        [self showAlert:resultStr];
         if (_finishBlock) {
             _finishBlock();
         }

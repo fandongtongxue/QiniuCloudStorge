@@ -35,7 +35,7 @@
         }
         __weak typeof(self) weakSelf = self;
         [self.configVC setFinishBlock:^{
-            [weakSelf.configVC dismissViewControllerAnimated:YES completion:nil];
+            [weakSelf initRootTabBarVC];
             [weakSelf transitionFromViewController:weakSelf.configVC toViewController:weakSelf.tabBarVC duration:0.25 options:UIViewAnimationOptionAutoreverse animations:nil completion:nil];
         }];
         [self addChildViewController:self.configVC];

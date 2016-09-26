@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, RequestContentType){
 
 typedef NS_ENUM(NSInteger, ResponseContentType){
     ResponseContentTypeJSON,
+    ResponseContentTypeText,
 };
 
 @interface BaseNetworking : NSObject
