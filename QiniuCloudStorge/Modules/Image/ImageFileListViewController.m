@@ -11,7 +11,7 @@
 #import "ImageFileDetailModel.h"
 #import "ImageFileDetailViewController.h"
 
-#define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/list_file_image.php"
+#define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/list_file_image.php"
 
 static NSString * const cellID = @"imageCellID";
 
@@ -57,7 +57,9 @@ static NSString * const cellID = @"imageCellID";
     [manager GET:kGetFileListUrl parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSArray *resultArray = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSArray *resultArray = resultDict[@"data"];
         [weakSelf handleSuccess:resultArray];
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

@@ -105,6 +105,9 @@
             }
         }else{
             [self showAlert:[resultDic objectForKey:@"error"]];
+            if (_finishBlock) {
+                _finishBlock();
+            }
         }
     } failure:^(NSError *error) {
         [self showAlert:[NSString stringWithFormat:@"%@",error]];
