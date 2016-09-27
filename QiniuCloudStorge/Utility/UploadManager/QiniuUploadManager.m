@@ -10,7 +10,7 @@
 #import "AFNetworking.h"
 #import <QiniuSDK.h>
 
-#define kGetTokenUrl @"http://fandong.me/App/QiniuCloudStorge/Token/upload_token.php"
+#define kGetTokenUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/upload_token.php"
 
 @implementation QiniuUploadManager
 
@@ -29,7 +29,8 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [manager GET:kGetTokenUrl parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSString *token = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *token = [dict objectForKey:@"data"];
         successBlock(token);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failBlock(error);

@@ -11,7 +11,7 @@
 #import "ImageFileDetailModel.h"
 #import "VideoFileDetailViewController.h"
 
-#define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/Video/list_file_video.php"
+#define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/list_file_video.php"
 
 static NSString * const cellID = @"videoCellID";
 

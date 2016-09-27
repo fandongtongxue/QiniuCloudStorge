@@ -6,16 +6,16 @@
 //  Copyright © 2016年 范东. All rights reserved.
 //
 
-#define kSubmitURL        @"http://fandong.me/App/QiniuCloudStorge/Submit/submit.php"
+#define kSubmitURL        @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/submit.php"
 #define kConfigTextFieldBaseTag 100
 
 #import "ConfigViewController.h"
 
 @interface ConfigViewController ()<UITextFieldDelegate>
 
-@property (nonatomic, strong) UITextField *appKeyTextField;
-@property (nonatomic, strong) UITextField *appSecretTextField;
-@property (nonatomic, strong) UITextField *appBucketTextField;
+@property (nonatomic, strong) UITextField *accessKeyTextField;
+@property (nonatomic, strong) UITextField *secretKeyTextField;
+@property (nonatomic, strong) UITextField *bucketTextField;
 
 @property (nonatomic, copy) finishBlock finishBlock;
 
@@ -31,40 +31,40 @@
 }
 
 - (void)initSubviews{
-    UITextField *appKeyTextField = [[UITextField alloc]initWithFrame:CGRectMake(20, 64 + 20, kScreenSizeWidth - 40, 40)];
-    appKeyTextField.placeholder = @"输入你的七牛云存储AppKey";
-    appKeyTextField.layer.borderWidth = 1;
-    appKeyTextField.layer.borderColor = [UIColor blackColor].CGColor;
-    appKeyTextField.font = [UIFont systemFontOfSize:15];
-    appKeyTextField.textColor = [UIColor blackColor];
-    appKeyTextField.delegate = self;
-    appKeyTextField.tag = kConfigTextFieldBaseTag;
-    [self.view addSubview:appKeyTextField];
-    self.appKeyTextField = appKeyTextField;
+    UITextField *accessKeyTextField = [[UITextField alloc]initWithFrame:CGRectMake(20, 64 + 20, kScreenSizeWidth - 40, 40)];
+    accessKeyTextField.placeholder = @"输入你的七牛云存储AccessKey";
+    accessKeyTextField.layer.borderWidth = 1;
+    accessKeyTextField.layer.borderColor = [UIColor blackColor].CGColor;
+    accessKeyTextField.font = [UIFont systemFontOfSize:15];
+    accessKeyTextField.textColor = [UIColor blackColor];
+    accessKeyTextField.delegate = self;
+    accessKeyTextField.tag = kConfigTextFieldBaseTag;
+    [self.view addSubview:accessKeyTextField];
+    self.accessKeyTextField = accessKeyTextField;
     
-    UITextField *appSecretTextField = [[UITextField alloc]initWithFrame:CGRectMake(20, CGRectGetMaxY(appKeyTextField.frame) + 20, kScreenSizeWidth - 40, 40)];
-    appSecretTextField.placeholder = @"输入你的七牛云存储AppSecret";
-    appSecretTextField.layer.borderWidth = 1;
-    appSecretTextField.layer.borderColor = [UIColor blackColor].CGColor;
-    appSecretTextField.font = [UIFont systemFontOfSize:15];
-    appSecretTextField.textColor = [UIColor blackColor];
-    appSecretTextField.delegate = self;
-    appSecretTextField.tag = kConfigTextFieldBaseTag + 1;
-    [self.view addSubview:appSecretTextField];
-    self.appSecretTextField = appSecretTextField;
+    UITextField *secretKeyTextField = [[UITextField alloc]initWithFrame:CGRectMake(20, CGRectGetMaxY(accessKeyTextField.frame) + 20, kScreenSizeWidth - 40, 40)];
+    secretKeyTextField.placeholder = @"输入你的七牛云存储SecretKey";
+    secretKeyTextField.layer.borderWidth = 1;
+    secretKeyTextField.layer.borderColor = [UIColor blackColor].CGColor;
+    secretKeyTextField.font = [UIFont systemFontOfSize:15];
+    secretKeyTextField.textColor = [UIColor blackColor];
+    secretKeyTextField.delegate = self;
+    secretKeyTextField.tag = kConfigTextFieldBaseTag + 1;
+    [self.view addSubview:secretKeyTextField];
+    self.secretKeyTextField = secretKeyTextField;
     
-    UITextField *appBucketTextField = [[UITextField alloc]initWithFrame:CGRectMake(20, CGRectGetMaxY(appSecretTextField.frame) + 20, kScreenSizeWidth - 40, 40)];
-    appBucketTextField.placeholder = @"输入你的七牛云存储Bucket";
-    appBucketTextField.layer.borderWidth = 1;
-    appBucketTextField.layer.borderColor = [UIColor blackColor].CGColor;
-    appBucketTextField.font = [UIFont systemFontOfSize:15];
-    appBucketTextField.textColor = [UIColor blackColor];
-    appBucketTextField.delegate = self;
-    appBucketTextField.tag = kConfigTextFieldBaseTag + 2;
-    [self.view addSubview:appBucketTextField];
-    self.appBucketTextField = appBucketTextField;
+    UITextField *bucketTextField = [[UITextField alloc]initWithFrame:CGRectMake(20, CGRectGetMaxY(secretKeyTextField.frame) + 20, kScreenSizeWidth - 40, 40)];
+    bucketTextField.placeholder = @"输入你的七牛云存储Bucket";
+    bucketTextField.layer.borderWidth = 1;
+    bucketTextField.layer.borderColor = [UIColor blackColor].CGColor;
+    bucketTextField.font = [UIFont systemFontOfSize:15];
+    bucketTextField.textColor = [UIColor blackColor];
+    bucketTextField.delegate = self;
+    bucketTextField.tag = kConfigTextFieldBaseTag + 2;
+    [self.view addSubview:bucketTextField];
+    self.bucketTextField = bucketTextField;
     
-    UIButton *confirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(20, CGRectGetMaxY(appBucketTextField.frame) + 20, kScreenSizeWidth - 40, 40)];
+    UIButton *confirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(20, CGRectGetMaxY(bucketTextField.frame) + 20, kScreenSizeWidth - 40, 40)];
     [confirmBtn setTitle:@"提交审核" forState:UIControlStateNormal];
     [confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [confirmBtn setBackgroundColor:[UIColor blackColor]];
@@ -80,27 +80,31 @@
 }
 
 - (void)confirm{
-    if (self.appKeyTextField.text.length == 0) {
+    if (self.accessKeyTextField.text.length == 0) {
         [self showAlert:@"AppKey不能为空"];
         return;
     }
-    if (self.appSecretTextField.text.length == 0) {
+    if (self.secretKeyTextField.text.length == 0) {
         [self showAlert:@"AppSecret不能为空"];
         return;
     }
-    if (self.appBucketTextField.text.length == 0) {
+    if (self.bucketTextField.text.length == 0) {
         [self showAlert:@"BucketName不能为空"];
         return;
     }
-    NSDictionary *dict = @{@"appKey":self.appKeyTextField.text,
-                                          @"appSecret":self.appSecretTextField.text,
-                                          @"bucketName":self.appBucketTextField.text};
+    NSDictionary *dict = @{@"accessKey":self.accessKeyTextField.text,
+                                          @"secretKey":self.secretKeyTextField.text,
+                                          @"bucket":self.bucketTextField.text};
     [BaseNetworking shareInstance].responseContentType = ResponseContentTypeText;
-    [[BaseNetworking shareInstance] POST:kSubmitURL dict:dict succeed:^(id data) {
-        NSString *resultStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        [self showAlert:resultStr];
-        if (_finishBlock) {
-            _finishBlock();
+    [[BaseNetworking shareInstance] GET:kSubmitURL dict:dict succeed:^(id data) {
+        NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        if ([[resultDic objectForKey:@"status"] integerValue] == 1) {
+            [self showAlert:[resultDic objectForKey:@"data"]];
+            if (_finishBlock) {
+                _finishBlock();
+            }
+        }else{
+            [self showAlert:[resultDic objectForKey:@"error"]];
         }
     } failure:^(NSError *error) {
         [self showAlert:[NSString stringWithFormat:@"%@",error]];
