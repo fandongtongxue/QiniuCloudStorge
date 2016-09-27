@@ -640,6 +640,7 @@
 				DEVELOPMENT_TEAM = 4N8C22Y7VD;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiniuCloudStorge/Utility/Helper/AppPrefixHeader.pch";
 				INFOPLIST_FILE = QiniuCloudStorge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.fandong.QiniuCloudStorge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -654,6 +655,7 @@
 				DEVELOPMENT_TEAM = 4N8C22Y7VD;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiniuCloudStorge/Utility/Helper/AppPrefixHeader.pch";
 				INFOPLIST_FILE = QiniuCloudStorge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.fandong.QiniuCloudStorge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
