@@ -65,7 +65,7 @@
     self.bucketTextField = bucketTextField;
     
     UIButton *confirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(20, CGRectGetMaxY(bucketTextField.frame) + 20, kScreenSizeWidth - 40, 40)];
-    [confirmBtn setTitle:@"提交审核" forState:UIControlStateNormal];
+    [confirmBtn setTitle:@"提交" forState:UIControlStateNormal];
     [confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [confirmBtn setBackgroundColor:[UIColor blackColor]];
     confirmBtn.layer.cornerRadius = 5;
@@ -100,14 +100,8 @@
         NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if ([[resultDic objectForKey:@"status"] integerValue] == 1) {
             [self showAlert:[resultDic objectForKey:@"data"]];
-            if (_finishBlock) {
-                _finishBlock();
-            }
         }else{
             [self showAlert:[resultDic objectForKey:@"error"]];
-            if (_finishBlock) {
-                _finishBlock();
-            }
         }
     } failure:^(NSError *error) {
         [self showAlert:[NSString stringWithFormat:@"%@",error]];
