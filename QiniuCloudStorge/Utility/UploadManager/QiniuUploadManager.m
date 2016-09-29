@@ -24,15 +24,14 @@
 }
 
 - (void)getUploadTokenSuccessBlock:(void(^)(NSString *token))successBlock failBlock:(void(^)(NSError *error))failBlock{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    [manager GET:kGetTokenUrl parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSString *token = [dict objectForKey:@"data"];
-        successBlock(token);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    NSDictionary *params = @{@"uuid":[AppHelper uuid]};
+    [[BaseNetworking shareInstance] GET:kGetTokenUrl dict:params succeed:^(id data) {
+        if (data && [data isKindOfClass:[NSDictionary class]] && [[(NSDictionary *)data objectForKey:@"status"] integerValue] == 1) {
+            successBlock([[(NSDictionary *)data objectForKey:@"data"] objectForKey:@"token"]);
+        }else{
+            failBlock([NSError errorWithDomain:@"com.QiniuCloudStorge" code:1 userInfo:@{@"info":@"获取Token失败"}]);
+        }
+    } failure:^(NSError *error) {
         failBlock(error);
     }];
 }
@@ -41,7 +40,11 @@
     QNUploadManager *manager = [[QNUploadManager alloc]init];
     [manager putData:data key:key token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
         NSLog(@"七牛上传完成后字典:%@",resp);
-        successBlock(resp);
+        if (resp) {
+            successBlock(resp);
+        }else{
+            failBlock([NSError errorWithDomain:@"com.QiniuCloudStorge" code:1 userInfo:@{@"info":@"上传失败"}]);
+        }
     } option:nil];
 }
 

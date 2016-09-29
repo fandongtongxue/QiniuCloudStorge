@@ -26,9 +26,9 @@
 
 - (void)initSubVC{
     
-    UITabBarItem *imageItem = [[UITabBarItem alloc]initWithTabBarSystemItem:UITabBarSystemItemRecents tag:0];
-    UITabBarItem *videoItem = [[UITabBarItem alloc]initWithTabBarSystemItem:UITabBarSystemItemContacts tag:1];
-    UITabBarItem *moreItem = [[UITabBarItem alloc]initWithTabBarSystemItem:UITabBarSystemItemMore tag:2];
+    UITabBarItem *imageItem = [[UITabBarItem alloc]initWithTitle:@"图片" image:[UIImage imageNamed:@"tab_img_image"] selectedImage:[UIImage imageNamed:@"tab_img_image"]];
+    UITabBarItem *videoItem = [[UITabBarItem alloc]initWithTitle:@"视频" image:[UIImage imageNamed:@"tab_img_video"] selectedImage:[UIImage imageNamed:@"tab_img_video"]];
+    UITabBarItem *moreItem =  [[UITabBarItem alloc]initWithTitle:@"更多" image:[UIImage imageNamed:@"tab_img_more"] selectedImage:[UIImage imageNamed:@"tab_img_more"]];
     
     ImageViewController *imageVC = [[ImageViewController alloc]init];
     RootNavigationController *imageNav = [[RootNavigationController alloc]initWithRootViewController:imageVC];

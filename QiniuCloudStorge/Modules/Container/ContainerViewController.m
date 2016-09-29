@@ -9,12 +9,13 @@
 #import "ContainerViewController.h"
 #import "ConfigViewController.h"
 #import "RootTabBarController.h"
+#import "CheckViewController.h"
 
 @interface ContainerViewController ()
 
 @property (nonatomic, strong) ConfigViewController *configVC;
 @property (nonatomic, strong) RootTabBarController *tabBarVC;
-
+@property (nonatomic, strong) CheckViewController *checkVC;
 @end
 
 @implementation ContainerViewController
@@ -26,21 +27,29 @@
 }
 
 - (void)initSubVC{
-    if ([AppHelper isConfig]) {
-        [self initRootTabBarVC];
-    }else{
-        if (_configVC == nil) {
-            ConfigViewController *configVC = [[ConfigViewController alloc]init];
-            self.configVC = configVC;
-        }
-        __weak typeof(self) weakSelf = self;
-        [self.configVC setFinishBlock:^{
+    kWSelf;
+    CheckViewController *checkVC = [[CheckViewController alloc]init];
+    [checkVC setFinishCheckBlock:^(BOOL canUse) {
+        if (canUse) {
             [weakSelf initRootTabBarVC];
-            [weakSelf transitionFromViewController:weakSelf.configVC toViewController:weakSelf.tabBarVC duration:0.25 options:UIViewAnimationOptionAutoreverse animations:nil completion:nil];
-        }];
-        [self addChildViewController:self.configVC];
-        [self.view addSubview:self.configVC.view];
-    }
+            [weakSelf transitionFromViewController:weakSelf.checkVC toViewController:weakSelf.tabBarVC duration:0.25 options:UIViewAnimationOptionTransitionNone animations:nil completion:nil];
+        }else{
+            if (_configVC == nil) {
+                ConfigViewController *configVC = [[ConfigViewController alloc]init];
+                weakSelf.configVC = configVC;
+            }
+            __weak typeof(self) weakSelf = self;
+            [self.configVC setFinishSubmitBlock:^{
+                [weakSelf initRootTabBarVC];
+                [weakSelf transitionFromViewController:weakSelf.configVC toViewController:weakSelf.tabBarVC duration:0.25 options:UIViewAnimationOptionTransitionNone animations:nil completion:nil];
+            }];
+            [weakSelf addChildViewController:self.configVC];
+            [weakSelf.view addSubview:self.configVC.view];
+        }
+    }];
+    [self addChildViewController:checkVC];
+    [self.view addSubview:checkVC.view];
+    self.checkVC = checkVC;
 }
 
 - (void)initRootTabBarVC{

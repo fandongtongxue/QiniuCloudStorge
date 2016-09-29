@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		745A6B4F952DDAA06D163BC2 /* libPods-QiniuCloudStorge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0FA3ED4A0983B1A899C33CA /* libPods-QiniuCloudStorge.a */; };
+		AF4788AA1D9CBD8900E9CF24 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4788A91D9CBD8900E9CF24 /* SSKeychain.m */; };
+		AF4788AE1D9CC01200E9CF24 /* CheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4788AD1D9CC01200E9CF24 /* CheckViewController.m */; };
+		AF4788B11D9CF4D400E9CF24 /* UIViewController+FD.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4788B01D9CF4D400E9CF24 /* UIViewController+FD.m */; };
 		AFB2E75C1D952E6400ECC1D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E75B1D952E6400ECC1D0 /* main.m */; };
 		AFB2E75F1D952E6400ECC1D0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E75E1D952E6400ECC1D0 /* AppDelegate.m */; };
 		AFB2E7621D952E6400ECC1D0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7611D952E6400ECC1D0 /* ViewController.m */; };
@@ -41,6 +44,12 @@
 
 /* Begin PBXFileReference section */
 		9E0AB2BB18E49B5D06986DAC /* Pods-QiniuCloudStorge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiniuCloudStorge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QiniuCloudStorge/Pods-QiniuCloudStorge.debug.xcconfig"; sourceTree = "<group>"; };
+		AF4788A81D9CBD8900E9CF24 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		AF4788A91D9CBD8900E9CF24 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
+		AF4788AC1D9CC01200E9CF24 /* CheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewController.h; sourceTree = "<group>"; };
+		AF4788AD1D9CC01200E9CF24 /* CheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckViewController.m; sourceTree = "<group>"; };
+		AF4788AF1D9CF4D400E9CF24 /* UIViewController+FD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+FD.h"; sourceTree = "<group>"; };
+		AF4788B01D9CF4D400E9CF24 /* UIViewController+FD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+FD.m"; sourceTree = "<group>"; };
 		AFB2E7571D952E6400ECC1D0 /* QiniuCloudStorge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiniuCloudStorge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB2E75B1D952E6400ECC1D0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AFB2E75D1D952E6400ECC1D0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -133,6 +142,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AF4788A71D9CBD8900E9CF24 /* SSKeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				AF4788A81D9CBD8900E9CF24 /* SSKeychain.h */,
+				AF4788A91D9CBD8900E9CF24 /* SSKeychain.m */,
+			);
+			path = SSKeyChain;
+			sourceTree = "<group>";
+		};
+		AF4788AB1D9CC00700E9CF24 /* Check */ = {
+			isa = PBXGroup;
+			children = (
+				AF4788AC1D9CC01200E9CF24 /* CheckViewController.h */,
+				AF4788AD1D9CC01200E9CF24 /* CheckViewController.m */,
+			);
+			path = Check;
+			sourceTree = "<group>";
+		};
 		AFB2E74E1D952E6400ECC1D0 = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +215,8 @@
 				AFB2E7731D95301000ECC1D0 /* UIColor+FD.m */,
 				AFB2E7741D95301000ECC1D0 /* UIView+FD.h */,
 				AFB2E7751D95301000ECC1D0 /* UIView+FD.m */,
+				AF4788AF1D9CF4D400E9CF24 /* UIViewController+FD.h */,
+				AF4788B01D9CF4D400E9CF24 /* UIViewController+FD.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -204,6 +233,7 @@
 		AFB2E7791D95301000ECC1D0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				AF4788AB1D9CC00700E9CF24 /* Check */,
 				AFB2E77A1D95301000ECC1D0 /* Config */,
 				AFB2E77D1D95301000ECC1D0 /* Container */,
 				AFB2E7801D95301000ECC1D0 /* Image */,
@@ -321,6 +351,7 @@
 		AFB2E7A41D95301000ECC1D0 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				AF4788A71D9CBD8900E9CF24 /* SSKeyChain */,
 				AFB2E7A51D95301000ECC1D0 /* Helper */,
 				AFB2E7AB1D95301000ECC1D0 /* MapManager */,
 				AFB2E7AE1D95301000ECC1D0 /* UploadManager */,
@@ -504,6 +535,7 @@
 				AFB2E7BA1D95301000ECC1D0 /* ImageFileDetailModel.m in Sources */,
 				AFB2E7C21D95301000ECC1D0 /* VideoFileDetailViewController.m in Sources */,
 				AFB2E7C41D95301000ECC1D0 /* VideoViewController.m in Sources */,
+				AF4788AE1D9CC01200E9CF24 /* CheckViewController.m in Sources */,
 				AFB2E7BC1D95301000ECC1D0 /* ImageFileListViewController.m in Sources */,
 				AFB2E7C91D95301000ECC1D0 /* QiniuUploadManager.m in Sources */,
 				AFB2E7B41D95301000ECC1D0 /* UIColor+FD.m in Sources */,
@@ -514,7 +546,9 @@
 				AFB2E7B71D95301000ECC1D0 /* ConfigViewController.m in Sources */,
 				AFB2E7C01D95301000ECC1D0 /* RootNavigationController.m in Sources */,
 				AFB2E7B81D95301000ECC1D0 /* ContainerViewController.m in Sources */,
+				AF4788AA1D9CBD8900E9CF24 /* SSKeychain.m in Sources */,
 				AFB2E7C71D95301000ECC1D0 /* AppHelper.m in Sources */,
+				AF4788B11D9CF4D400E9CF24 /* UIViewController+FD.m in Sources */,
 				AFB2E7C31D95301000ECC1D0 /* VideoFileListViewController.m in Sources */,
 				AFB2E75C1D952E6400ECC1D0 /* main.m in Sources */,
 			);

@@ -18,4 +18,6 @@
 
 + (BOOL)isConfig;
 
++ (NSString *)uuid;
+
 @end

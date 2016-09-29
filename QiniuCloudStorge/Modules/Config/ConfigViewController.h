@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^finishBlock)();
+typedef void(^finishSubmitBlock)();
 
 @interface ConfigViewController : UIViewController
 
-- (void)setFinishBlock:(finishBlock)block;
+- (void)setFinishSubmitBlock:(finishSubmitBlock)block;
 
 @end

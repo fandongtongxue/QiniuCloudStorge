@@ -17,7 +17,7 @@
 @property (nonatomic, strong) UITextField *secretKeyTextField;
 @property (nonatomic, strong) UITextField *bucketTextField;
 
-@property (nonatomic, copy) finishBlock finishBlock;
+@property (nonatomic, copy) finishSubmitBlock finishSubmitBlock;
 
 @end
 
@@ -94,17 +94,25 @@
     }
     NSDictionary *dict = @{@"accessKey":self.accessKeyTextField.text,
                                           @"secretKey":self.secretKeyTextField.text,
-                                          @"bucket":self.bucketTextField.text};
+                                          @"bucket":self.bucketTextField.text,
+                                          @"uuid":[AppHelper uuid]};
     [BaseNetworking shareInstance].responseContentType = ResponseContentTypeText;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    kWSelf;
     [[BaseNetworking shareInstance] GET:kSubmitURL dict:dict succeed:^(id data) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if ([[resultDic objectForKey:@"status"] integerValue] == 1) {
-            [self showAlert:[resultDic objectForKey:@"data"]];
+            if (_finishSubmitBlock) {
+                _finishSubmitBlock();
+            }
         }else{
-            [self showAlert:[resultDic objectForKey:@"error"]];
+            [weakSelf showAlert:[resultDic objectForKey:@"error"]];
         }
     } failure:^(NSError *error) {
-        [self showAlert:[NSString stringWithFormat:@"%@",error]];
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
+        
     }];
 }
 
@@ -118,21 +126,8 @@
     return YES;
 }
 
-- (void)showAlert:(NSString *)alertString{
-    if (IOS8_OR_LATER) {
-        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:alertString message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alertVC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            [alertVC dismissViewControllerAnimated:YES completion:nil];
-        }]];
-        [self presentViewController:alertVC animated:YES completion:nil];
-    }else{
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:alertString message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alertView show];
-    }
-}
-
-- (void)setFinishBlock:(finishBlock)block{
-    _finishBlock = block;
+- (void)setFinishSubmitBlock:(finishSubmitBlock)block{
+    _finishSubmitBlock = block;
 }
 
 - (void)didReceiveMemoryWarning {

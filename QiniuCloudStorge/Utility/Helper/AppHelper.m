@@ -150,4 +150,16 @@
     return NO;
 }
 
++ (NSString *)uuid{
+    NSString * currentDeviceUUIDStr = [SSKeychain passwordForService:@" "account:@"uuid"];
+    if (currentDeviceUUIDStr == nil || [currentDeviceUUIDStr isEqualToString:@""]){
+        NSUUID * currentDeviceUUID  = [UIDevice currentDevice].identifierForVendor;
+        currentDeviceUUIDStr = currentDeviceUUID.UUIDString;
+        currentDeviceUUIDStr = [currentDeviceUUIDStr stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        currentDeviceUUIDStr = [currentDeviceUUIDStr lowercaseString];
+        [SSKeychain setPassword: currentDeviceUUIDStr forService:@" "account:@"uuid"];
+    }
+    return currentDeviceUUIDStr;
+}
+
 @end

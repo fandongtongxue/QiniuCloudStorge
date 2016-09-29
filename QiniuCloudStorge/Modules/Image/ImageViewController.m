@@ -32,7 +32,7 @@
 
 - (void)initNavigationBar{
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"七牛图片云";
+    self.navigationItem.title = @"图片";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"图片列表" style:UIBarButtonItemStylePlain target:self action:@selector(toFileListVC)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(clearImage)];
 }
@@ -48,7 +48,7 @@
     self.currentImageView = currentImageView;
     
     UIButton *selectImageButton = [[UIButton alloc]initWithFrame:CGRectMake(10, currentImageView.bottom + 10, (kScreenSizeWidth - 30)/2, 40)];
-    [selectImageButton setTitle:@"Select Image" forState:UIControlStateNormal];
+    [selectImageButton setTitle:@"选取图片" forState:UIControlStateNormal];
     [selectImageButton.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
     [selectImageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [selectImageButton setBackgroundColor:[UIColor blackColor]];
@@ -58,7 +58,7 @@
     [self.view addSubview:selectImageButton];
     
     UIButton *uploadImageButton = [[UIButton alloc]initWithFrame:CGRectMake(selectImageButton.right + 10, currentImageView.bottom + 10, (kScreenSizeWidth - 30)/2, 40)];
-    [uploadImageButton setTitle:@"Upload Image" forState:UIControlStateNormal];
+    [uploadImageButton setTitle:@"上传图片" forState:UIControlStateNormal];
     [uploadImageButton.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
     [uploadImageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [uploadImageButton setBackgroundColor:[UIColor blackColor]];
@@ -182,19 +182,6 @@
             break;
         default:
             break;
-    }
-}
-
-- (void)showAlert:(NSString *)alertString{
-    if (IOS8_OR_LATER) {
-        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"上传信息" message:alertString preferredStyle:UIAlertControllerStyleAlert];
-        [alertVC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            [alertVC dismissViewControllerAnimated:YES completion:nil];
-        }]];
-        [self presentViewController:alertVC animated:YES completion:nil];
-    }else{
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"上传信息" message:alertString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alertView show];
     }
 }
 

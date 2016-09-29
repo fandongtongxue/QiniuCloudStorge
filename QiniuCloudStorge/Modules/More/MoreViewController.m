@@ -42,7 +42,7 @@ static NSString * const cellID = @"moreCellID";
 
 - (void)initNavigationBar{
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"七牛更多云";
+    self.navigationItem.title = @"更多";
 }
 
 - (void)initTableView{
@@ -267,19 +267,6 @@ static NSString * const cellID = @"moreCellID";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)showAlert:(NSString *)alertString{
-    if (IOS8_OR_LATER) {
-        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:alertString message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alertVC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            [alertVC dismissViewControllerAnimated:YES completion:nil];
-        }]];
-        [self presentViewController:alertVC animated:YES completion:nil];
-    }else{
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:alertString message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alertView show];
-    }
 }
 
 - (float)fileSizeForPath:(NSString*)path//计算文件夹下文件的总大小

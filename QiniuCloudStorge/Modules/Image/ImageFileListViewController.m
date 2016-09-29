@@ -50,21 +50,21 @@ static NSString * const cellID = @"imageCellID";
 
 - (void)requestData{
     kWSelf;
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-    [manager GET:kGetFileListUrl parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSArray *resultArray = resultDict[@"data"];
-        [weakSelf handleSuccess:resultArray];
+    NSDictionary *params = @{@"uuid":[AppHelper uuid]
+                                               };
+    [[BaseNetworking shareInstance] GET:kGetFileListUrl dict:params succeed:^(id data) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (data && [data isKindOfClass:[NSDictionary class]] && [[(NSDictionary *)data objectForKey:@"status"] integerValue] == 1) {
+            NSDictionary *resultDic = (NSDictionary *)data;
+            NSArray *resultArray = resultDic[@"data"];
+            [weakSelf handleSuccess:resultArray];
+        }else{
+            [self showAlert:@"您所提交的相关信息不正确"];
+        }
+    } failure:^(NSError *error) {
+         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         [self showAlert:[NSString stringWithFormat:@"%@",error]];
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
     }];
 }
 
@@ -108,20 +108,6 @@ static NSString * const cellID = @"imageCellID";
     }
     return _dataArray;
 }
-
-- (void)showAlert:(NSString *)alertString{
-    if (IOS8_OR_LATER) {
-        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"文件列表请求" message:alertString preferredStyle:UIAlertControllerStyleAlert];
-        [alertVC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            [alertVC dismissViewControllerAnimated:YES completion:nil];
-        }]];
-        [self presentViewController:alertVC animated:YES completion:nil];
-    }else{
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"文件列表请求" message:alertString delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alertView show];
-    }
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
