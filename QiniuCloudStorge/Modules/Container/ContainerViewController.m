@@ -37,6 +37,7 @@
             if (_configVC == nil) {
                 ConfigViewController *configVC = [[ConfigViewController alloc]init];
                 weakSelf.configVC = configVC;
+                weakSelf.configVC.type = ConfigVCTypeSubmit;
             }
             __weak typeof(self) weakSelf = self;
             [self.configVC setFinishSubmitBlock:^{

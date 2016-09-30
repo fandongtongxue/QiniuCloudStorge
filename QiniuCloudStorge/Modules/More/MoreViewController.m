@@ -251,7 +251,7 @@ static NSString * const cellID = @"moreCellID";
     // 设置收件人
     [mailCompose setToRecipients:@[@"admin@fandong.me"]];
     // 设置抄送人
-    [mailCompose setCcRecipients:@[@"339002469@qq.com"]];
+    [mailCompose setCcRecipients:@[@"fand@wisenjoy.com"]];
     // 设置密抄送
     [mailCompose setBccRecipients:@[@"fengzhizif@icloud.com"]];
     /**

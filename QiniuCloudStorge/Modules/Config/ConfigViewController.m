@@ -7,6 +7,7 @@
 //
 
 #define kSubmitURL        @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/submit.php"
+#define kReSubmitURL        @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/resubmit.php"
 #define kConfigTextFieldBaseTag 100
 
 #import "ConfigViewController.h"
@@ -18,6 +19,9 @@
 @property (nonatomic, strong) UITextField *bucketTextField;
 
 @property (nonatomic, copy) finishSubmitBlock finishSubmitBlock;
+@property (nonatomic, copy) finishReSubmitBlock finishReSubmitBlock;
+
+@property (nonatomic, copy) NSString *requestUrl;
 
 @end
 
@@ -79,17 +83,25 @@
     [self.view endEditing:YES];
 }
 
+- (void)setType:(ConfigVCType)type{
+    if (type == ConfigVCTypeSubmit) {
+        self.requestUrl = kSubmitURL;
+    }else if (type == ConfigVCTypeReSubmit){
+        self.requestUrl = kReSubmitURL;
+    }
+}
+
 - (void)confirm{
     if (self.accessKeyTextField.text.length == 0) {
-        [self showAlert:@"AppKey不能为空"];
+        [self showAlert:@"AccessKey不能为空"];
         return;
     }
     if (self.secretKeyTextField.text.length == 0) {
-        [self showAlert:@"AppSecret不能为空"];
+        [self showAlert:@"SecretKey不能为空"];
         return;
     }
     if (self.bucketTextField.text.length == 0) {
-        [self showAlert:@"BucketName不能为空"];
+        [self showAlert:@"Bucket不能为空"];
         return;
     }
     NSDictionary *dict = @{@"accessKey":self.accessKeyTextField.text,
@@ -99,12 +111,15 @@
     [BaseNetworking shareInstance].responseContentType = ResponseContentTypeText;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     kWSelf;
-    [[BaseNetworking shareInstance] GET:kSubmitURL dict:dict succeed:^(id data) {
+    [[BaseNetworking shareInstance] GET:self.requestUrl dict:dict succeed:^(id data) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if ([[resultDic objectForKey:@"status"] integerValue] == 1) {
             if (_finishSubmitBlock) {
                 _finishSubmitBlock();
+            }
+            if (_finishReSubmitBlock) {
+                _finishReSubmitBlock();
             }
         }else{
             [weakSelf showAlert:[resultDic objectForKey:@"error"]];
@@ -128,6 +143,10 @@
 
 - (void)setFinishSubmitBlock:(finishSubmitBlock)block{
     _finishSubmitBlock = block;
+}
+
+- (void)setFinishReSubmitBlock:(finishReSubmitBlock)block{
+    _finishReSubmitBlock = block;
 }
 
 - (void)didReceiveMemoryWarning {

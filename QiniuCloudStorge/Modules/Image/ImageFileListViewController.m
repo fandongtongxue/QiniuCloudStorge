@@ -10,6 +10,7 @@
 #import "ImageFileDetailCell.h"
 #import "ImageFileDetailModel.h"
 #import "ImageFileDetailViewController.h"
+#import "ConfigViewController.h"
 
 #define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/list_file_image.php"
 
@@ -60,11 +61,26 @@ static NSString * const cellID = @"imageCellID";
             NSArray *resultArray = resultDic[@"data"];
             [weakSelf handleSuccess:resultArray];
         }else{
-            [self showAlert:@"您所提交的相关信息不正确"];
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"您提交的信息有误,无法获取文件列表" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            [alertVC addAction:[UIAlertAction actionWithTitle:@"重新提交" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                ConfigViewController *configVC = [[ConfigViewController alloc]init];
+                configVC.type = ConfigVCTypeReSubmit;
+                __weak typeof(configVC) weakConfigVC = configVC;
+                [weakSelf.navigationController pushViewController:configVC animated:YES];
+                [configVC setFinishReSubmitBlock:^{
+                    [weakConfigVC.navigationController popToRootViewControllerAnimated:YES];
+                    [self showAlert:@"请重新打开App"];
+                }];
+            }]];
+            [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alertVC dismissViewControllerAnimated:YES completion:nil];
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            }]];
+            [self presentViewController:alertVC animated:YES completion:nil];
         }
     } failure:^(NSError *error) {
          [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        [self showAlert:[NSString stringWithFormat:@"%@",error]];
+        [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
     }];
 }
 
