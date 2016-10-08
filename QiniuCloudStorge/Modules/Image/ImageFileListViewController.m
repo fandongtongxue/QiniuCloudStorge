@@ -11,6 +11,8 @@
 #import "ImageFileDetailModel.h"
 #import "ImageFileDetailViewController.h"
 #import "ConfigViewController.h"
+#import "MSSBrowseDefine.h"
+#import "MSSBrowseCollectionViewCell.h"
 
 #define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/list_file_image.php"
 
@@ -108,10 +110,30 @@ static NSString * const cellID = @"imageCellID";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ImageFileDetailModel *model = self.dataArray[indexPath.row];
-    ImageFileDetailViewController *detailVC = [[ImageFileDetailViewController alloc]init];
-    detailVC.key = model.key;
-    [self.navigationController pushViewController:detailVC animated:YES];
+//    ImageFileDetailModel *model = self.dataArray[indexPath.row];
+//    ImageFileDetailViewController *detailVC = [[ImageFileDetailViewController alloc]init];
+//    detailVC.key = model.key;
+//    [self.navigationController pushViewController:detailVC animated:YES];
+    
+    NSMutableArray *bigUrlArray = [NSMutableArray array];
+    for (ImageFileDetailModel *model in self.dataArray) {
+        [bigUrlArray addObject:[NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+        
+    }
+    // 加载网络图片
+    NSMutableArray *browseItemArray = [[NSMutableArray alloc]init];
+    int i = 0;
+    for(i = 0;i < [self.dataArray count];i++)
+    {
+        UIImageView *imageView = [self.view viewWithTag:i + 100];
+        MSSBrowseModel *browseItem = [[MSSBrowseModel alloc]init];
+        browseItem.bigImageUrl = bigUrlArray[i];// 加载网络图片大图地址
+        browseItem.smallImageView = imageView;// 小图
+        [browseItemArray addObject:browseItem];
+    }
+    MSSBrowseNetworkViewController *bvc = [[MSSBrowseNetworkViewController alloc]initWithBrowseItemArray:browseItemArray currentIndex:indexPath.row];
+    //    bvc.isEqualRatio = NO;// 大图小图不等比时需要设置这个属性（建议等比）
+    [bvc showBrowseViewController];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

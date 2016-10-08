@@ -33,4 +33,8 @@
 
 #define kLocationKey @"kLocationKey"
 
+#define kAliyunAnaliticsKey            @"23464240"
+#define kAliyunAnaliticsSecret        @"f4b5faa3c9abc665ae980e4cfbe30755"
+#define kAliyunAnalitics                   [ALBBMANAnalytics getInstance]
+
 #endif /* AppDefine_h */

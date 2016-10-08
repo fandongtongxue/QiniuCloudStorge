@@ -212,6 +212,7 @@ static NSString * const cellID = @"moreCellID";
                     cell.detailTextLabel.text = @"获取位置中...";
                 });
                 [[MapManager manager] startUpdatingLocationFinishBlock:^(NSString *location) {
+                    [self showAlert:location];
                     cell.detailTextLabel.text = location;
                     [UserDefault saveObject:location ForKey:kLocationKey];
                     [[MapManager manager] stopUpdatingLocation];

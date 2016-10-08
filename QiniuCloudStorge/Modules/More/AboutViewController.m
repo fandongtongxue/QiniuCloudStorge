@@ -45,7 +45,7 @@ static NSString * const cellID = @"AboutCellID";
 }
 
 - (void)requestData{
-    NSArray *dataArray = @[@{@"title":@"新浪微博",@"detail":@"范东同学"}];
+    NSArray *dataArray = @[@{@"title":@"新浪微博",@"detail":@"范东同学"},@{@"title":@"GitHub",@"detail":@"范东同学"}];
     [self.dataArray addObjectsFromArray:dataArray];
     [self.tableView reloadData];
 }
@@ -73,6 +73,7 @@ static NSString * const cellID = @"AboutCellID";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:
         {
@@ -81,7 +82,13 @@ static NSString * const cellID = @"AboutCellID";
             [self.navigationController pushViewController:webVC animated:YES];
         }
             break;
-            
+        case 1:
+        {
+            WebViewController *webVC = [[WebViewController alloc]init];
+            webVC.url = @"http://github.com/fandongtongxue";
+            [self.navigationController pushViewController:webVC animated:YES];
+        }
+            break;
         default:
             break;
     }

@@ -41,6 +41,7 @@
 }
 
 - (void)startBtnAction:(UIButton *)sender{
+    NSLog(@"%@",[AppHelper uuid]);
     kWSelf;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[BaseNetworking shareInstance] GET:kCheckURL dict:@{@"uuid":[AppHelper uuid]} succeed:^(id data) {

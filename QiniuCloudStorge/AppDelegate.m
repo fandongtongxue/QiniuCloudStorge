@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ContainerViewController.h"
+#import <AlicloudMobileAnalitics/ALBBMAN.h>
 
 @interface AppDelegate ()
 
@@ -19,12 +20,25 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[MapManager manager] application:application didFinishLaunchingWithOptions:launchOptions];
+    [self registerAliyunAnalitics];
     ContainerViewController *containerVC = [[ContainerViewController alloc]init];
     self.window.rootViewController = containerVC;
     [self.window makeKeyAndVisible];
     return YES;
 }
 
+- (void)registerAliyunAnalitics{
+    // 获取MAN服务
+    ALBBMANAnalytics *man = [ALBBMANAnalytics getInstance];
+    // 打开调试日志，线上版本建议关闭
+     [man turnOnDebug];
+    // 初始化MAN
+    [man initWithAppKey:kAliyunAnaliticsKey secretKey:kAliyunAnaliticsSecret];
+    // appVersion默认从Info.list的CFBundleShortVersionString字段获取，如果没有指定，可在此调用setAppversion设定
+    // 如果上述两个地方都没有设定，appVersion为"-"
+    // 设置渠道（用以标记该app的分发渠道名称），如果不关心可以不设置即不调用该接口，渠道设置将影响控制台【渠道分析】栏目的报表展现。
+    [man setChannel:@"Pgyer"];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
