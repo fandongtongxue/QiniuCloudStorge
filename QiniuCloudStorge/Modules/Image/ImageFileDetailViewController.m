@@ -33,7 +33,6 @@
 
 - (void)initSubview{
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenSizeWidth, kScreenSizeHeight - kNavigationBarHeight - kStatusBarHeight)];
-    imageView.center = self.view.center;
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     imageView.clipsToBounds = YES;
     imageView.userInteractionEnabled = YES;
@@ -73,13 +72,11 @@
         [UIView animateWithDuration:0.25 animations:^{
             view.transform = CGAffineTransformScale(view.transform, 3, 3);
             _imageViewScale = 2;
-            view.center = self.view.center;
         }];
     }else{
         [UIView animateWithDuration:0.25 animations:^{
             view.transform = CGAffineTransformIdentity;
             _imageViewScale = 1;
-            view.center = self.view.center;
         }];
     }
 }
