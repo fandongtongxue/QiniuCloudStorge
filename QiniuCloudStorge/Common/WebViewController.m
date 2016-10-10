@@ -63,7 +63,7 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    NSLog(@"WebView加载出错:%@",error);
+    DLOG(@"WebView加载出错:%@",error);
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
@@ -82,11 +82,11 @@
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
-    NSLog(@"WKWebView加载出错:%@",error);
+    DLOG(@"WKWebView加载出错:%@",error);
 }
 
 -(void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
-    NSLog(@"WKWebView加载出错:%@",error);
+    DLOG(@"WKWebView加载出错:%@",error);
 }
 
 - (void)didReceiveMemoryWarning {

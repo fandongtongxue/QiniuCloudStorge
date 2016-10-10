@@ -39,7 +39,7 @@
 - (void)upload:(NSData *)data Key:(NSString *)key Token:(NSString *)token SuccessBlock:(void(^)(NSDictionary *info))successBlock failBlock:(void(^)(NSError *error))failBlock{
     QNUploadManager *manager = [[QNUploadManager alloc]init];
     [manager putData:data key:key token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
-        NSLog(@"七牛上传完成后字典:%@",resp);
+        DLOG(@"七牛上传完成后字典:%@",resp);
         if (resp) {
             successBlock(resp);
         }else{

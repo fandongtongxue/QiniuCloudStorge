@@ -21,5 +21,7 @@
 #import "BaseNetworking.h"
 #import "SSKeychain.h"
 #import "UIViewController+FD.h"
+#import "MJDownload.h"
+#import <AVFoundation/AVFoundation.h>
 
 #endif /* AppHeader_h */

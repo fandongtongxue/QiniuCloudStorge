@@ -48,7 +48,7 @@
         
         if (error)
         {
-            NSLog(@"定位Error:{%ld - %@};", (long)error.code, error.localizedDescription);
+            DLOG(@"定位Error:{%ld - %@};", (long)error.code, error.localizedDescription);
             errorBlock(error);
             if (error.code == AMapLocationErrorLocateFailed)
             {
@@ -69,11 +69,11 @@
 #pragma mark - AMapLocationManagerDelegate
 
 - (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error{
-    NSLog(@"定位失败:%@",error);
+    DLOG(@"定位失败:%@",error);
 }
 
 - (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location{
-    NSLog(@"定位信息:{纬度:%f; 经度:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
+    DLOG(@"定位信息:{纬度:%f; 经度:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
 }
 
 - (void)amapLocationManager:(AMapLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{

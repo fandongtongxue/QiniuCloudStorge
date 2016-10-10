@@ -7,6 +7,7 @@
 //
 
 #import "MusicViewController.h"
+#import "MusicFileListViewController.h"
 
 @interface MusicViewController ()
 
@@ -24,15 +25,17 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"音乐";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"音乐列表" style:UIBarButtonItemStylePlain target:self action:@selector(toFileListVC)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(clearImage)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(clearRecord)];
 }
 
-- (void)clearImage{
+- (void)clearRecord{
     
 }
 
 - (void)toFileListVC{
-    
+    MusicFileListViewController *listVC = [[MusicFileListViewController alloc]init];
+    listVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:listVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
