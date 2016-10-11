@@ -121,6 +121,8 @@
             if (_finishReSubmitBlock) {
                 _finishReSubmitBlock();
             }
+            //用户注册会员统计
+            [kAliyunAnalitics userRegister:[AppHelper uuid]];
         }else{
             [weakSelf showAlert:[resultDic objectForKey:@"error"]];
         }

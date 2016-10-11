@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "ContainerViewController.h"
-#import <AlicloudMobileAnalitics/ALBBMAN.h>
 
 @interface AppDelegate ()
 

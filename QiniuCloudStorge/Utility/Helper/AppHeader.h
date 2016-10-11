@@ -23,5 +23,6 @@
 #import "UIViewController+FD.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import <AlicloudMobileAnalitics/ALBBMAN.h>
 
 #endif /* AppHeader_h */
