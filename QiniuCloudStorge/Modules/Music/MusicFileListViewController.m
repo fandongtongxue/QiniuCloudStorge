@@ -112,6 +112,7 @@ static NSString * const cellID = @"musicCellID";
     MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
     [self presentMoviePlayerViewControllerAnimated:playerVC];
     [playerVC.moviePlayer play];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
