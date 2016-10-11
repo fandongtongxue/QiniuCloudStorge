@@ -7,10 +7,9 @@
 //
 
 #import "MusicFileListViewController.h"
-#import "MusicFileDetailCell.h"
+#import "ImageFileDetailCell.h"
 #import "ImageFileDetailModel.h"
 #import "ConfigViewController.h"
-#import "MusicDownloadedListViewController.h"
 
 #define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/list_file_music.php"
 
@@ -36,19 +35,13 @@ static NSString * const cellID = @"musicCellID";
 - (void)initNavigationBar{
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"文件列表";
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"下载列表" style:UIBarButtonItemStylePlain target:self action:@selector(toFileListVC)];
-}
-
-- (void)toFileListVC{
-    MusicDownloadedListViewController *downloadListVC = [[MusicDownloadedListViewController alloc]init];
-    [self.navigationController pushViewController:downloadListVC animated:YES];
 }
 
 - (void)initTableView{
     UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenSizeWidth, kScreenSizeHeight - kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
-    [tableView registerClass:[MusicFileDetailCell class] forCellReuseIdentifier:cellID];
+    [tableView registerClass:[ImageFileDetailCell class] forCellReuseIdentifier:cellID];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:tableView];
@@ -107,15 +100,18 @@ static NSString * const cellID = @"musicCellID";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    MusicFileDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    ImageFileDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     ImageFileDetailModel *model = self.dataArray[indexPath.row];
     cell.model = model;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    MusicFileDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     ImageFileDetailModel *model = self.dataArray[indexPath.row];
+    NSString *videoUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
+    [self presentMoviePlayerViewControllerAnimated:playerVC];
+    [playerVC.moviePlayer play];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
