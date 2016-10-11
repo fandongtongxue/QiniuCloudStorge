@@ -23,5 +23,6 @@
 #import "UIViewController+FD.h"
 #import "MJDownload.h"
 #import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 #endif /* AppHeader_h */

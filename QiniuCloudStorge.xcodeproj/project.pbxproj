@@ -19,6 +19,8 @@
 		AF4788AA1D9CBD8900E9CF24 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4788A91D9CBD8900E9CF24 /* SSKeychain.m */; };
 		AF4788AE1D9CC01200E9CF24 /* CheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4788AD1D9CC01200E9CF24 /* CheckViewController.m */; };
 		AF4788B11D9CF4D400E9CF24 /* UIViewController+FD.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4788B01D9CF4D400E9CF24 /* UIViewController+FD.m */; };
+		AF5A6C581DACD8D700C60505 /* UITabBarController+Autorotate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A6C571DACD8D700C60505 /* UITabBarController+Autorotate.m */; };
+		AF5A6C5B1DACD8EB00C60505 /* UINavigationController+Autorotate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A6C5A1DACD8EB00C60505 /* UINavigationController+Autorotate.m */; };
 		AF77FCB61DAB2FB300ADA0F8 /* MusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF77FCB51DAB2FB300ADA0F8 /* MusicViewController.m */; };
 		AF77FCB91DAB3D3F00ADA0F8 /* MusicFileListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF77FCB81DAB3D3F00ADA0F8 /* MusicFileListViewController.m */; };
 		AF77FCE01DAB5F8600ADA0F8 /* MJDownloadConst.m in Sources */ = {isa = PBXBuildFile; fileRef = AF77FCDB1DAB5F8600ADA0F8 /* MJDownloadConst.m */; };
@@ -47,7 +49,6 @@
 		AFB2E7BF1D95301000ECC1D0 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E78F1D95301000ECC1D0 /* MoreViewController.m */; };
 		AFB2E7C01D95301000ECC1D0 /* RootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7921D95301000ECC1D0 /* RootNavigationController.m */; };
 		AFB2E7C11D95301000ECC1D0 /* RootTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7951D95301000ECC1D0 /* RootTabBarController.m */; };
-		AFB2E7C21D95301000ECC1D0 /* VideoFileDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7981D95301000ECC1D0 /* VideoFileDetailViewController.m */; };
 		AFB2E7C31D95301000ECC1D0 /* VideoFileListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E79A1D95301000ECC1D0 /* VideoFileListViewController.m */; };
 		AFB2E7C41D95301000ECC1D0 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E79C1D95301000ECC1D0 /* VideoViewController.m */; };
 		AFB2E7C51D95301000ECC1D0 /* BaseNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E79F1D95301000ECC1D0 /* BaseNetworking.m */; };
@@ -74,6 +75,10 @@
 		AF4788AD1D9CC01200E9CF24 /* CheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckViewController.m; sourceTree = "<group>"; };
 		AF4788AF1D9CF4D400E9CF24 /* UIViewController+FD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+FD.h"; sourceTree = "<group>"; };
 		AF4788B01D9CF4D400E9CF24 /* UIViewController+FD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+FD.m"; sourceTree = "<group>"; };
+		AF5A6C561DACD8D700C60505 /* UITabBarController+Autorotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+Autorotate.h"; sourceTree = "<group>"; };
+		AF5A6C571DACD8D700C60505 /* UITabBarController+Autorotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+Autorotate.m"; sourceTree = "<group>"; };
+		AF5A6C591DACD8EB00C60505 /* UINavigationController+Autorotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Autorotate.h"; sourceTree = "<group>"; };
+		AF5A6C5A1DACD8EB00C60505 /* UINavigationController+Autorotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Autorotate.m"; sourceTree = "<group>"; };
 		AF77FCB41DAB2FB300ADA0F8 /* MusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicViewController.h; sourceTree = "<group>"; };
 		AF77FCB51DAB2FB300ADA0F8 /* MusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicViewController.m; sourceTree = "<group>"; };
 		AF77FCB71DAB3D3F00ADA0F8 /* MusicFileListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicFileListViewController.h; sourceTree = "<group>"; };
@@ -129,8 +134,6 @@
 		AFB2E7921D95301000ECC1D0 /* RootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationController.m; sourceTree = "<group>"; };
 		AFB2E7941D95301000ECC1D0 /* RootTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabBarController.h; sourceTree = "<group>"; };
 		AFB2E7951D95301000ECC1D0 /* RootTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarController.m; sourceTree = "<group>"; };
-		AFB2E7971D95301000ECC1D0 /* VideoFileDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoFileDetailViewController.h; sourceTree = "<group>"; };
-		AFB2E7981D95301000ECC1D0 /* VideoFileDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoFileDetailViewController.m; sourceTree = "<group>"; };
 		AFB2E7991D95301000ECC1D0 /* VideoFileListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoFileListViewController.h; sourceTree = "<group>"; };
 		AFB2E79A1D95301000ECC1D0 /* VideoFileListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoFileListViewController.m; sourceTree = "<group>"; };
 		AFB2E79B1D95301000ECC1D0 /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
@@ -312,6 +315,10 @@
 				AFB2E7751D95301000ECC1D0 /* UIView+FD.m */,
 				AF4788AF1D9CF4D400E9CF24 /* UIViewController+FD.h */,
 				AF4788B01D9CF4D400E9CF24 /* UIViewController+FD.m */,
+				AF5A6C561DACD8D700C60505 /* UITabBarController+Autorotate.h */,
+				AF5A6C571DACD8D700C60505 /* UITabBarController+Autorotate.m */,
+				AF5A6C591DACD8EB00C60505 /* UINavigationController+Autorotate.h */,
+				AF5A6C5A1DACD8EB00C60505 /* UINavigationController+Autorotate.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -408,8 +415,6 @@
 		AFB2E7961D95301000ECC1D0 /* Video */ = {
 			isa = PBXGroup;
 			children = (
-				AFB2E7971D95301000ECC1D0 /* VideoFileDetailViewController.h */,
-				AFB2E7981D95301000ECC1D0 /* VideoFileDetailViewController.m */,
 				AFB2E7991D95301000ECC1D0 /* VideoFileListViewController.h */,
 				AFB2E79A1D95301000ECC1D0 /* VideoFileListViewController.m */,
 				AFB2E79B1D95301000ECC1D0 /* VideoViewController.h */,
@@ -595,7 +600,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B49D786E25BC5CCA08C12E77 /* [CP] Embed Pods Frameworks */ = {
@@ -636,7 +641,6 @@
 				AFB2E7BD1D95301000ECC1D0 /* ImageViewController.m in Sources */,
 				AF77FCB91DAB3D3F00ADA0F8 /* MusicFileListViewController.m in Sources */,
 				AFB2E7BA1D95301000ECC1D0 /* ImageFileDetailModel.m in Sources */,
-				AFB2E7C21D95301000ECC1D0 /* VideoFileDetailViewController.m in Sources */,
 				AF77FCFA1DAB9F4700ADA0F8 /* MusicFileDetailCell.m in Sources */,
 				AFB2E7C41D95301000ECC1D0 /* VideoViewController.m in Sources */,
 				AF4788AE1D9CC01200E9CF24 /* CheckViewController.m in Sources */,
@@ -647,6 +651,7 @@
 				AFB2E7B41D95301000ECC1D0 /* UIColor+FD.m in Sources */,
 				AFB2E75F1D952E6400ECC1D0 /* AppDelegate.m in Sources */,
 				AFB2E7C61D95301000ECC1D0 /* MBProgressHUD.m in Sources */,
+				AF5A6C581DACD8D700C60505 /* UITabBarController+Autorotate.m in Sources */,
 				AFB2E7C81D95301000ECC1D0 /* MapManager.m in Sources */,
 				AFB2E7BE1D95301000ECC1D0 /* AboutViewController.m in Sources */,
 				AFB2E7B71D95301000ECC1D0 /* ConfigViewController.m in Sources */,
@@ -655,6 +660,7 @@
 				AF4788AA1D9CBD8900E9CF24 /* SSKeychain.m in Sources */,
 				AFB2E7C71D95301000ECC1D0 /* AppHelper.m in Sources */,
 				AF4788B11D9CF4D400E9CF24 /* UIViewController+FD.m in Sources */,
+				AF5A6C5B1DACD8EB00C60505 /* UINavigationController+Autorotate.m in Sources */,
 				AFB2E7C31D95301000ECC1D0 /* VideoFileListViewController.m in Sources */,
 				AFB2E75C1D952E6400ECC1D0 /* main.m in Sources */,
 			);

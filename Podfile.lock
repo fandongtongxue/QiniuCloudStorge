@@ -18,7 +18,6 @@ PODS:
   - AMapLocation (2.1.1):
     - AMapFoundation (~> 1.2)
   - HappyDNS (0.3.10)
-  - KRVideoPlayer (1.0.1)
   - Qiniu (7.1.1):
     - AFNetworking (~> 3)
     - HappyDNS (~> 0.3)
@@ -29,7 +28,6 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - AMapLocation
-  - KRVideoPlayer
   - Qiniu (~> 7.0)
   - SDWebImage (~> 3.8)
 
@@ -38,10 +36,9 @@ SPEC CHECKSUMS:
   AMapFoundation: 95799945466ccabfe1d3d5d9c1d524501c327b90
   AMapLocation: dd203f76b034ef5cb546600f4e1ffad2a3a14072
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
-  KRVideoPlayer: 08918da1b99cae35fd4c15b2ec2b49358d4c985f
   Qiniu: 5e5d7d759d22393bb4b87cdfacf8fab951260f3e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: 806f6d82408badb70d3c2e1e4e12fef09ae68d49
+PODFILE CHECKSUM: e1be8de3ac0fad910414e0ba078038f53c135a05
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.beta.2

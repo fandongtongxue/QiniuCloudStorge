@@ -9,7 +9,6 @@
 #import "VideoFileListViewController.h"
 #import "ImageFileDetailCell.h"
 #import "ImageFileDetailModel.h"
-#import "VideoFileDetailViewController.h"
 #import "ConfigViewController.h"
 
 #define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/list_file_video.php"
@@ -109,9 +108,10 @@ static NSString * const cellID = @"videoCellID";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ImageFileDetailModel *model = self.dataArray[indexPath.row];
-    VideoFileDetailViewController *detailVC = [[VideoFileDetailViewController alloc]init];
-    detailVC.key = model.key;
-    [self.navigationController pushViewController:detailVC animated:YES];
+    NSString *videoUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
+    [self presentMoviePlayerViewControllerAnimated:playerVC];
+    [playerVC.moviePlayer play];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -128,6 +128,23 @@ static NSString * const cellID = @"videoCellID";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)shouldAutorotate{
+    //是否允许转屏
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    //viewController所支持的全部旋转方向
+    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    //viewController初始显示的方向
+    return UIInterfaceOrientationPortrait;
 }
 
 /*
