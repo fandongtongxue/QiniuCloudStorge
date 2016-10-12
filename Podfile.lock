@@ -17,6 +17,7 @@ PODS:
   - AMapFoundation (1.3.0)
   - AMapLocation (2.1.1):
     - AMapFoundation (~> 1.2)
+  - DACircularProgress (2.3.1)
   - HappyDNS (0.3.10)
   - Qiniu (7.1.1):
     - AFNetworking (~> 3)
@@ -28,6 +29,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - AMapLocation
+  - DACircularProgress
   - Qiniu (~> 7.0)
   - SDWebImage (~> 3.8)
 
@@ -35,10 +37,11 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   AMapFoundation: 95799945466ccabfe1d3d5d9c1d524501c327b90
   AMapLocation: dd203f76b034ef5cb546600f4e1ffad2a3a14072
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   Qiniu: 5e5d7d759d22393bb4b87cdfacf8fab951260f3e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: e1be8de3ac0fad910414e0ba078038f53c135a05
+PODFILE CHECKSUM: 47bb682a259183c971c23f68102c06133d69e874
 
 COCOAPODS: 1.1.0.beta.2
