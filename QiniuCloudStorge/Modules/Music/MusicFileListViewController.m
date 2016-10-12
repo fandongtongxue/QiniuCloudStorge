@@ -43,7 +43,7 @@ static NSString * const cellID = @"musicCellID";
     tableView.dataSource = self;
     [tableView registerClass:[ImageFileDetailCell class] forCellReuseIdentifier:cellID];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableView.showsVerticalScrollIndicator = NO;
+    tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:tableView];
     self.tableView = tableView;
 }
@@ -117,6 +117,37 @@ static NSString * const cellID = @"musicCellID";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 100;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    ImageFileDetailModel *model = self.dataArray[indexPath.row];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //删除视频
+        kWSelf;
+        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+        NSDictionary *params = @{@"uuid":[AppHelper uuid],
+                                 @"key":model.key
+                                 };
+        [[BaseNetworking shareInstance] GET:kDeleteFileUrl dict:params succeed:^(id data) {
+            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+            if (data && [data isKindOfClass:[NSDictionary class]] && [[(NSDictionary *)data objectForKey:@"status"] integerValue] == 1) {
+                [self.dataArray removeObjectAtIndex:indexPath.row];
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            }else{
+                
+            }
+        } failure:^(NSError *error) {
+            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+            [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
+        }];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
 }
 
 - (NSMutableArray *)dataArray{
