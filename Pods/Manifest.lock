@@ -25,6 +25,7 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
+  - SVWebViewController (1.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - DACircularProgress
   - Qiniu (~> 7.0)
   - SDWebImage (~> 3.8)
+  - SVWebViewController
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -41,7 +43,8 @@ SPEC CHECKSUMS:
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   Qiniu: 5e5d7d759d22393bb4b87cdfacf8fab951260f3e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SVWebViewController: c36dda7326e81fcae0abf5d02bf7bbf7e41be901
 
-PODFILE CHECKSUM: 47bb682a259183c971c23f68102c06133d69e874
+PODFILE CHECKSUM: 41765aae28281772708e2180202c096ace1b0129
 
 COCOAPODS: 1.1.0.beta.2

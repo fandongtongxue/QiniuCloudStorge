@@ -7,7 +7,7 @@
 //
 
 #import "AboutViewController.h"
-#import "WebViewController.h"
+#import <SVWebViewController/SVWebViewController.h>
 
 static NSString * const cellID = @"AboutCellID";
 
@@ -77,16 +77,16 @@ static NSString * const cellID = @"AboutCellID";
     switch (indexPath.row) {
         case 0:
         {
-            WebViewController *webVC = [[WebViewController alloc]init];
-            webVC.url = @"http://weibo.com/fengzhizif2010";
-            [self.navigationController pushViewController:webVC animated:YES];
+            NSURL *URL = [NSURL URLWithString:@"http://weibo.com/fengzhizif2010"];
+            SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
+            [self presentViewController:webViewController animated:YES completion:NULL];
         }
             break;
         case 1:
         {
-            WebViewController *webVC = [[WebViewController alloc]init];
-            webVC.url = @"http://github.com/fandongtongxue";
-            [self.navigationController pushViewController:webVC animated:YES];
+            NSURL *URL = [NSURL URLWithString:@"http://github.com/fandongtongxue"];
+            SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
+            [self presentViewController:webViewController animated:YES completion:NULL];
         }
             break;
         default:
