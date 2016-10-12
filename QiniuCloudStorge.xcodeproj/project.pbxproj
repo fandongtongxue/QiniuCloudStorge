@@ -21,6 +21,8 @@
 		AF4788B11D9CF4D400E9CF24 /* UIViewController+FD.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4788B01D9CF4D400E9CF24 /* UIViewController+FD.m */; };
 		AF5A6C581DACD8D700C60505 /* UITabBarController+Autorotate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A6C571DACD8D700C60505 /* UITabBarController+Autorotate.m */; };
 		AF5A6C5B1DACD8EB00C60505 /* UINavigationController+Autorotate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A6C5A1DACD8EB00C60505 /* UINavigationController+Autorotate.m */; };
+		AF70F1C01DADFA3700932AF7 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF70F1BE1DADFA3700932AF7 /* Fabric.framework */; };
+		AF70F1C11DADFA3700932AF7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF70F1BF1DADFA3700932AF7 /* Crashlytics.framework */; };
 		AF77FCB61DAB2FB300ADA0F8 /* MusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF77FCB51DAB2FB300ADA0F8 /* MusicViewController.m */; };
 		AF77FCB91DAB3D3F00ADA0F8 /* MusicFileListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF77FCB81DAB3D3F00ADA0F8 /* MusicFileListViewController.m */; };
 		AFB2E75C1D952E6400ECC1D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E75B1D952E6400ECC1D0 /* main.m */; };
@@ -73,6 +75,8 @@
 		AF5A6C571DACD8D700C60505 /* UITabBarController+Autorotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+Autorotate.m"; sourceTree = "<group>"; };
 		AF5A6C591DACD8EB00C60505 /* UINavigationController+Autorotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Autorotate.h"; sourceTree = "<group>"; };
 		AF5A6C5A1DACD8EB00C60505 /* UINavigationController+Autorotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Autorotate.m"; sourceTree = "<group>"; };
+		AF70F1BE1DADFA3700932AF7 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		AF70F1BF1DADFA3700932AF7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		AF77FCB41DAB2FB300ADA0F8 /* MusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicViewController.h; sourceTree = "<group>"; };
 		AF77FCB51DAB2FB300ADA0F8 /* MusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicViewController.m; sourceTree = "<group>"; };
 		AF77FCB71DAB3D3F00ADA0F8 /* MusicFileListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicFileListViewController.h; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF1E5FC41DA8D135006481B6 /* CoreTelephony.framework in Frameworks */,
+				AF70F1C01DADFA3700932AF7 /* Fabric.framework in Frameworks */,
 				AF1E5FC21DA8D12B006481B6 /* SystemConfiguration.framework in Frameworks */,
 				AF1E5FC01DA8D126006481B6 /* libresolv.tbd in Frameworks */,
 				AF1E5FBE1DA8D11A006481B6 /* libz.tbd in Frameworks */,
@@ -152,6 +157,7 @@
 				745A6B4F952DDAA06D163BC2 /* libPods-QiniuCloudStorge.a in Frameworks */,
 				AF1E5F971DA89143006481B6 /* AlicloudUtils.framework in Frameworks */,
 				AF1E5F991DA89143006481B6 /* UTMini.framework in Frameworks */,
+				AF70F1C11DADFA3700932AF7 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +402,8 @@
 		AFB2E7A01D95301000ECC1D0 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				AF70F1BE1DADFA3700932AF7 /* Fabric.framework */,
+				AF70F1BF1DADFA3700932AF7 /* Crashlytics.framework */,
 				AF1E5F911DA89143006481B6 /* AliyunAnalitics */,
 				AFB2E7A11D95301000ECC1D0 /* MBProgressHUD */,
 			);
@@ -475,6 +483,7 @@
 				AFB2E7551D952E6400ECC1D0 /* Resources */,
 				B49D786E25BC5CCA08C12E77 /* [CP] Embed Pods Frameworks */,
 				5081785C88EEFE2D44B11403 /* [CP] Copy Pods Resources */,
+				AF70F1BD1DADFA1F00932AF7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -562,6 +571,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		AF70F1BD1DADFA1F00932AF7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./QiniuCloudStorge/ThirdPart/Fabric.framework/run 3395bcbe61c3e806040c407466db66810d8d05c1 d8946820b85f610d6e306a2727f2401c170cc8cd596523005ab05a9e7f59b4f2";
 		};
 		B49D786E25BC5CCA08C12E77 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -741,6 +763,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QiniuCloudStorge/ThirdPart/AliyunAnalitics",
+					"$(PROJECT_DIR)/QiniuCloudStorge/ThirdPart",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiniuCloudStorge/Utility/Helper/AppPrefixHeader.pch";
 				INFOPLIST_FILE = QiniuCloudStorge/Info.plist;
@@ -780,6 +803,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QiniuCloudStorge/ThirdPart/AliyunAnalitics",
+					"$(PROJECT_DIR)/QiniuCloudStorge/ThirdPart",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiniuCloudStorge/Utility/Helper/AppPrefixHeader.pch";
 				INFOPLIST_FILE = QiniuCloudStorge/Info.plist;

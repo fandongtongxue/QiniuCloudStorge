@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "ContainerViewController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -20,6 +22,7 @@
     // Override point for customization after application launch.
     [[MapManager manager] application:application didFinishLaunchingWithOptions:launchOptions];
     [self registerAliyunAnalitics];
+    [Fabric with:@[[Crashlytics class]]];
     ContainerViewController *containerVC = [[ContainerViewController alloc]init];
     self.window.rootViewController = containerVC;
     [self.window makeKeyAndVisible];
