@@ -24,5 +24,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <AlicloudMobileAnalitics/ALBBMAN.h>
+#import "WebViewController.h"
 
 #endif /* AppHeader_h */

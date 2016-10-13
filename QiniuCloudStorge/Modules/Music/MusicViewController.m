@@ -22,6 +22,7 @@
     // Do any additional setup after loading the view.
     [self initNavigationBar];
     [self initSubViews];
+    [self configRecordSession];
 }
 
 - (void)initNavigationBar{
@@ -76,6 +77,14 @@
 }
 - (void)uploadRecord{
     
+}
+
+//设置音频会话
+- (void)configRecordSession{
+    AVAudioSession *audioSession=[AVAudioSession sharedInstance];
+    //设置为播放和录音状态，以便可以在录制完之后播放录音
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [audioSession setActive:YES error:nil];
 }
 
 - (void)didReceiveMemoryWarning {

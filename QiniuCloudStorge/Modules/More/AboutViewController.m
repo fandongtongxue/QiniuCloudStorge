@@ -7,7 +7,6 @@
 //
 
 #import "AboutViewController.h"
-#import <SVWebViewController/SVWebViewController.h>
 
 static NSString * const cellID = @"AboutCellID";
 
@@ -31,6 +30,12 @@ static NSString * const cellID = @"AboutCellID";
 - (void)initNavigationBar{
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"关于作者";
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"0xffde00"];
+    self.navigationController.navigationBar.translucent = NO;
+    // 导航栏文字颜色、大小
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:18]}];
+    // 设置导航栏左右按钮颜色
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
 }
 
 - (void)initTableView{
@@ -77,16 +82,16 @@ static NSString * const cellID = @"AboutCellID";
     switch (indexPath.row) {
         case 0:
         {
-            NSURL *URL = [NSURL URLWithString:@"http://weibo.com/fengzhizif2010"];
-            SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
-            [self presentViewController:webViewController animated:YES completion:NULL];
+            WebViewController *webViewController = [[WebViewController alloc]init];
+            webViewController.url = @"http://weibo.com/fengzhizif2010";
+            [self.navigationController pushViewController:webViewController animated:YES];
         }
             break;
         case 1:
         {
-            NSURL *URL = [NSURL URLWithString:@"http://github.com/fandongtongxue"];
-            SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:URL];
-            [self presentViewController:webViewController animated:YES completion:NULL];
+            WebViewController *webViewController = [[WebViewController alloc]init];
+            webViewController.url = @"http://github.com/fandongtongxue";
+            [self.navigationController pushViewController:webViewController animated:YES];
         }
             break;
         default:
@@ -99,6 +104,10 @@ static NSString * const cellID = @"AboutCellID";
         _dataArray = [[NSMutableArray alloc]init];
     }
     return _dataArray;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning {

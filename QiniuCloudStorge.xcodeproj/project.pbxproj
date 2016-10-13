@@ -20,6 +20,7 @@
 		AF4788B11D9CF4D400E9CF24 /* UIViewController+FD.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4788B01D9CF4D400E9CF24 /* UIViewController+FD.m */; };
 		AF5A6C581DACD8D700C60505 /* UITabBarController+Autorotate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A6C571DACD8D700C60505 /* UITabBarController+Autorotate.m */; };
 		AF5A6C5B1DACD8EB00C60505 /* UINavigationController+Autorotate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A6C5A1DACD8EB00C60505 /* UINavigationController+Autorotate.m */; };
+		AF5B5F811DAF4C1800F46039 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5B5F801DAF4C1800F46039 /* WebViewController.m */; };
 		AF70F1C01DADFA3700932AF7 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF70F1BE1DADFA3700932AF7 /* Fabric.framework */; };
 		AF70F1C11DADFA3700932AF7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF70F1BF1DADFA3700932AF7 /* Crashlytics.framework */; };
 		AF70F1C91DAE07FC00932AF7 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = AF70F1C81DAE07FC00932AF7 /* SSKeychain.m */; };
@@ -114,6 +115,8 @@
 		AF5A6C571DACD8D700C60505 /* UITabBarController+Autorotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+Autorotate.m"; sourceTree = "<group>"; };
 		AF5A6C591DACD8EB00C60505 /* UINavigationController+Autorotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Autorotate.h"; sourceTree = "<group>"; };
 		AF5A6C5A1DACD8EB00C60505 /* UINavigationController+Autorotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Autorotate.m"; sourceTree = "<group>"; };
+		AF5B5F7F1DAF4C1800F46039 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		AF5B5F801DAF4C1800F46039 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		AF70F1BE1DADFA3700932AF7 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		AF70F1BF1DADFA3700932AF7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		AF70F1C71DAE07FC00932AF7 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
@@ -461,6 +464,8 @@
 		AFB2E7761D95301000ECC1D0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				AF5B5F7F1DAF4C1800F46039 /* WebViewController.h */,
+				AF5B5F801DAF4C1800F46039 /* WebViewController.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -817,6 +822,7 @@
 				AF77FCB61DAB2FB300ADA0F8 /* MusicViewController.m in Sources */,
 				AF70F2511DAE244700932AF7 /* MWPhotoBrowser.m in Sources */,
 				AFB2E7BF1D95301000ECC1D0 /* MoreViewController.m in Sources */,
+				AF5B5F811DAF4C1800F46039 /* WebViewController.m in Sources */,
 				AF70F2501DAE244700932AF7 /* MWPhoto.m in Sources */,
 				AFB2E7BD1D95301000ECC1D0 /* ImageViewController.m in Sources */,
 				AF77FCB91DAB3D3F00ADA0F8 /* MusicFileListViewController.m in Sources */,
