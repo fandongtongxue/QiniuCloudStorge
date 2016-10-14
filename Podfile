@@ -4,7 +4,8 @@ pod "Qiniu", "~> 7.0"
 pod 'AFNetworking', '~> 3.0'
 pod 'SDWebImage', '~>3.8'
 pod 'AMapLocation'
-pod 'DACircularProgress'
+pod 'MWPhotoBrowser'
+pod 'MBProgressHUD'
 target 'QiniuCloudStorge' do
   # Uncomment this line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!

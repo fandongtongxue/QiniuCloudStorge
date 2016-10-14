@@ -128,7 +128,7 @@ static NSString * const cellID = @"moreCellID";
                 // Do something useful in the background and update the HUD periodically.
                 dispatch_async(dispatch_get_main_queue(), ^{
                     hud.mode = MBProgressHUDModeIndeterminate;
-                    hud.label.text = @"清除缓存中...";
+                    hud.labelText = @"清除缓存中...";
                 });
                 sleep(1);
                 [[SDImageCache sharedImageCache] clearDisk];
@@ -137,13 +137,13 @@ static NSString * const cellID = @"moreCellID";
                     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
                     hud.customView = imageView;
                     hud.mode = MBProgressHUDModeCustomView;
-                    hud.label.text = @"清除完成";
+                    hud.labelText = @"清除完成";
                 });
                 sleep(1);
                 [[SDImageCache sharedImageCache] calculateSizeWithCompletionBlock:^(NSUInteger fileCount, NSUInteger totalSize) {
                     cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2fMB",(float)totalSize/1024/1024];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [hud hideAnimated:YES];
+                        [hud hide:YES];
                         _canCleanImage = NO;
                     });
                 }];
@@ -162,7 +162,7 @@ static NSString * const cellID = @"moreCellID";
                 // Do something useful in the background and update the HUD periodically.
                 dispatch_async(dispatch_get_main_queue(), ^{
                     hud.mode = MBProgressHUDModeIndeterminate;
-                    hud.label.text = @"清除缓存中...";
+                    hud.labelText = @"清除缓存中...";
                 });
                 sleep(1);
                 [[SDImageCache sharedImageCache] clearDisk];
@@ -171,14 +171,14 @@ static NSString * const cellID = @"moreCellID";
                     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
                     hud.customView = imageView;
                     hud.mode = MBProgressHUDModeCustomView;
-                    hud.label.text = @"清除完成";
+                    hud.labelText = @"清除完成";
                 });
                 sleep(1);
                 NSString *localFilePath = [NSHomeDirectory() stringByAppendingPathComponent:kVideoDetailLocalPrefix];
                 [[NSFileManager defaultManager] removeItemAtPath:localFilePath error:nil];
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2fMB",[self fileSizeForPath:localFilePath]];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [hud hideAnimated:YES];
+                    [hud hide:YES];
                     _canCleanVideo = NO;
                 });
                 
@@ -208,7 +208,7 @@ static NSString * const cellID = @"moreCellID";
                 // Do something useful in the background and update the HUD periodically.
                 dispatch_async(dispatch_get_main_queue(), ^{
                     hud.mode = MBProgressHUDModeIndeterminate;
-                    hud.label.text = @"获取位置中...";
+                    hud.labelText = @"获取位置中...";
                     cell.detailTextLabel.text = @"获取位置中...";
                 });
                 [[MapManager manager] startUpdatingLocationFinishBlock:^(NSString *location) {
@@ -218,7 +218,7 @@ static NSString * const cellID = @"moreCellID";
                     [[MapManager manager] stopUpdatingLocation];
                     sleep(1);
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [hud hideAnimated:YES];
+                        [hud hide:YES];
                     });
                 } ErrorBlock:^(NSError *error) {
                     [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
@@ -226,7 +226,7 @@ static NSString * const cellID = @"moreCellID";
                     cell.detailTextLabel.text = @"未获取";
                     [[MapManager manager] stopUpdatingLocation];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [hud hideAnimated:YES];
+                        [hud hide:YES];
                     });
                 }];
             });
