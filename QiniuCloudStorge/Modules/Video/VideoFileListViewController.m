@@ -10,7 +10,6 @@
 #import "ImageFileDetailCell.h"
 #import "ImageFileDetailModel.h"
 #import "ConfigViewController.h"
-#import "VideoPlayerViewController.h"
 
 #define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/list_file_video.php"
 
@@ -113,9 +112,6 @@ static NSString * const cellID = @"videoCellID";
     MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
     [self presentMoviePlayerViewControllerAnimated:playerVC];
     [playerVC.moviePlayer play];
-//    VideoPlayerViewController *playerVC = [[VideoPlayerViewController alloc]init];
-//    playerVC.url = videoUrl;
-//    [self.navigationController pushViewController:playerVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -50,7 +50,6 @@
 		AFB2E7CA1D95301000ECC1D0 /* UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E7B31D95301000ECC1D0 /* UserDefault.m */; };
 		AFFC61801DB0682900591933 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFFC617E1DB0682900591933 /* Crashlytics.framework */; };
 		AFFC61811DB0682900591933 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFFC617F1DB0682900591933 /* Fabric.framework */; };
-		AFFC618C1DB0786C00591933 /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFC618B1DB0786C00591933 /* VideoPlayerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,8 +129,6 @@
 		AFB2E7B31D95301000ECC1D0 /* UserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefault.m; sourceTree = "<group>"; };
 		AFFC617E1DB0682900591933 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		AFFC617F1DB0682900591933 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		AFFC618A1DB0786C00591933 /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
-		AFFC618B1DB0786C00591933 /* VideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
 		E73471291617E390AE842469 /* Pods-QiniuCloudStorge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiniuCloudStorge.release.xcconfig"; path = "Pods/Target Support Files/Pods-QiniuCloudStorge/Pods-QiniuCloudStorge.release.xcconfig"; sourceTree = "<group>"; };
 		F0FA3ED4A0983B1A899C33CA /* libPods-QiniuCloudStorge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QiniuCloudStorge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -376,8 +373,6 @@
 				AFB2E79A1D95301000ECC1D0 /* VideoFileListViewController.m */,
 				AFB2E79B1D95301000ECC1D0 /* VideoViewController.h */,
 				AFB2E79C1D95301000ECC1D0 /* VideoViewController.m */,
-				AFFC618A1DB0786C00591933 /* VideoPlayerViewController.h */,
-				AFFC618B1DB0786C00591933 /* VideoPlayerViewController.m */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -612,7 +607,6 @@
 				AFB2E7C41D95301000ECC1D0 /* VideoViewController.m in Sources */,
 				AF4788AE1D9CC01200E9CF24 /* CheckViewController.m in Sources */,
 				AFB2E7BC1D95301000ECC1D0 /* ImageFileListViewController.m in Sources */,
-				AFFC618C1DB0786C00591933 /* VideoPlayerViewController.m in Sources */,
 				AFB2E7C91D95301000ECC1D0 /* QiniuUploadManager.m in Sources */,
 				AFB2E7B41D95301000ECC1D0 /* UIColor+FD.m in Sources */,
 				AFB2E75F1D952E6400ECC1D0 /* AppDelegate.m in Sources */,
