@@ -21,7 +21,6 @@
 @property (nonatomic, strong) MPMoviePlayerController *player;
 @property (nonatomic, strong) NSData *data;
 @property (nonatomic, copy) NSString *key;
-@property (nonatomic, assign) BOOL isUploading;
 
 @end
 
@@ -38,7 +37,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"视频";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"视频列表" style:UIBarButtonItemStylePlain target:self action:@selector(toFileListVC)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(clearImage)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"上传列表" style:UIBarButtonItemStylePlain target:self action:@selector(toUploadListVC)];
 }
 
 - (void)initSubViews{
@@ -73,23 +72,14 @@
 }
 
 - (void)toFileListVC{
-    if (_isUploading) {
-        [self showAlert:@"上传视频中..."];
-        return;
-    }
     VideoFileListViewController *videoListVC = [[VideoFileListViewController alloc]init];
     videoListVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:videoListVC animated:YES];
 }
 
-- (void)clearImage{
-    if (_isUploading) {
-        [self showAlert:@"上传视频中..."];
-        return;
-    }
-    self.currentImageView.image = nil;
-    self.currentImage = nil;
-}
+//- (void)toUploadListVC{
+//    
+//}
 
 -(void)selectVideo{
     kWSelf;
@@ -173,21 +163,31 @@
     if (!self.currentImage) {
         [self showAlert:@"请先选择需要上传的视频"];
     }else{
-        _isUploading = YES;
-        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Set the annular determinate mode to show task progress.
+        hud.mode = MBProgressHUDModeAnnularDeterminate;
+        hud.labelText = @"上传中";
+        
         [[QiniuUploadManager manager] getUploadTokenSuccessBlock:^(NSString *token) {
             [[QiniuUploadManager manager] upload:self.data Key:self.key Token:token SuccessBlock:^(NSDictionary *info) {
-                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                _isUploading = NO;
+                [hud hide:YES];
+                self.currentImage = nil;
+                self.currentImageView.image = nil;
             } failBlock:^(NSError *error) {
                 [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
-                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                _isUploading = NO;
+               [hud hide:YES];
+            } ProgressBlock:^(float percent) {
+                DLOG(@"上传进度:%f",percent);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Instead we could have also passed a reference to the HUD
+                    // to the HUD to myProgressTask as a method parameter.
+                    [MBProgressHUD HUDForView:self.navigationController.view].progress = percent;
+                });
             }];
         } failBlock:^(NSError *error) {
             [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
-            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-            _isUploading = NO;
+            [hud hide:YES];
         }];
     }
 }

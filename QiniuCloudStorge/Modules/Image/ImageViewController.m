@@ -15,7 +15,6 @@
 @property (nonatomic, strong) UIImage *currentImage;
 @property (nonatomic, strong) UIImageView *currentImageView;
 @property (nonatomic, copy) NSString *key;
-@property (nonatomic, assign) BOOL isUploading;
 
 @end
 
@@ -34,7 +33,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"图片";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"图片列表" style:UIBarButtonItemStylePlain target:self action:@selector(toFileListVC)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(clearImage)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"上传列表" style:UIBarButtonItemStylePlain target:self action:@selector(toUploadListVC)];
 }
 
 - (void)initSubViews{
@@ -103,41 +102,42 @@
     if (!self.currentImage) {
         [self showAlert:@"请先选择需要上传的图片"];
     }else{
-        _isUploading = YES;
-        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Set the annular determinate mode to show task progress.
+        hud.mode = MBProgressHUDModeAnnularDeterminate;
+        hud.labelText = @"上传中";
+        
         [[QiniuUploadManager manager] getUploadTokenSuccessBlock:^(NSString *token) {
             NSData *data = UIImageJPEGRepresentation(self.currentImage, 1.0);
             [[QiniuUploadManager manager] upload:data Key:self.key Token:token SuccessBlock:^(NSDictionary *info) {
-                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                _isUploading = NO;
+                [hud hide:YES];
+                self.currentImage = nil;
+                self.currentImageView.image = nil;
             } failBlock:^(NSError *error) {
                 [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
-                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                _isUploading = NO;
+                [hud hide:YES];
+            } ProgressBlock:^(float percent) {
+                DLOG(@"上传进度:%f",percent);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Instead we could have also passed a reference to the HUD
+                    // to the HUD to myProgressTask as a method parameter.
+                    [MBProgressHUD HUDForView:self.navigationController.view].progress = percent;
+                });
             }];
-            
         } failBlock:^(NSError *error) {
             [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
-            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-            _isUploading = NO;
+            [hud hide:YES];
         }];
     }
 }
 
-- (void)clearImage{
-    if (_isUploading) {
-        [self showAlert:@"上传图片中..."];
-        return;
-    }
-    self.currentImage = nil;
-    self.currentImageView.image = nil;
-}
+//- (void)toUploadListVC{
+//    
+//}
 
 - (void)toFileListVC{
-    if (_isUploading) {
-        [self showAlert:@"上传图片中..."];
-        return;
-    }
     ImageFileListViewController *imageFileListVC = [[ImageFileListViewController alloc]init];
     imageFileListVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:imageFileListVC animated:YES];

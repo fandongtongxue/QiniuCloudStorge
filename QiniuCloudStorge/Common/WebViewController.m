@@ -9,9 +9,8 @@
 #import "WebViewController.h"
 #import <WebKit/WebKit.h>
 
-@interface WebViewController ()<UIWebViewDelegate,WKUIDelegate,WKNavigationDelegate>
+@interface WebViewController ()<WKUIDelegate,WKNavigationDelegate>
 
-@property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) WKWebView *wkWebView;
 
 @end
@@ -33,30 +32,9 @@
     WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc]init];
     WKWebView *wkWebView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, kScreenSizeWidth, kScreenSizeHeight - kNavigationBarHeight - kStatusBarHeight) configuration:configuration];
     [wkWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
+    wkWebView.UIDelegate = self;
+    wkWebView.navigationDelegate = self;
     [self.view addSubview:wkWebView];
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    return YES;
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    if (title.length > 0) {
-        self.title = title;
-    }
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    DLOG(@"WebView加载出错:%@",error);
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{

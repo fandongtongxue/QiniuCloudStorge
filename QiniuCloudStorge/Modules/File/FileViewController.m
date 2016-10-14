@@ -38,7 +38,7 @@ static NSString * const cellID = @"fileCellID";
 
 - (void)initNavigationBar{
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"音乐";
+    self.title = @"文件";
 }
 
 - (void)initTableView{
