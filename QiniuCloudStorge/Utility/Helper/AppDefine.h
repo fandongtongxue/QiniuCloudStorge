@@ -20,9 +20,9 @@
 #define kScreenSizeHeight                    ([[UIScreen mainScreen] bounds].size.height)
 #define kScreenSizeWidth                     ([[UIScreen mainScreen] bounds].size.width)
 
-#define kNavigationBarHeight 44
-#define kStatusBarHeight     20
-#define kBottomBarHeight     49
+#define kNavigationBarHeight  44
+#define kStatusBarHeight         [[UIApplication sharedApplication] statusBarFrame].size.height
+#define kBottomBarHeight       49
 
 #define kAppVersion                          ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])
 

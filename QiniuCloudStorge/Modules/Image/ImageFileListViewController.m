@@ -89,6 +89,15 @@ static NSString * const cellID = @"imageCellID";
         ImageFileDetailModel *model = [ImageFileDetailModel modelWithDict:resultArray[i]];
         [self.dataArray addObject:model];
     }
+    NSMutableArray *photos = [[NSMutableArray alloc] init];
+    NSMutableArray *thumbs = [[NSMutableArray alloc] init];
+    for (ImageFileDetailModel *model in self.dataArray) {
+        NSString *imageUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imageUrl]]];
+        [thumbs addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imageUrl]]];
+    }
+    self.photos = photos;
+    self.thumbs = thumbs;
     [self.tableView reloadData];
 }
 
@@ -109,21 +118,13 @@ static NSString * const cellID = @"imageCellID";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     // Browser
-    NSMutableArray *photos = [[NSMutableArray alloc] init];
-    NSMutableArray *thumbs = [[NSMutableArray alloc] init];
     BOOL displayActionButton = YES;
     BOOL displaySelectionButtons = NO;
     BOOL displayNavArrows = NO;
     BOOL enableGrid = YES;
     BOOL startOnGrid = NO;
     BOOL autoPlayOnAppear = NO;
-    for (ImageFileDetailModel *model in self.dataArray) {
-        NSString *imageUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-         [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imageUrl]]];
-         [thumbs addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imageUrl]]];
-    }
-    self.photos = photos;
-    self.thumbs = thumbs;
+    
     // Create browser
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     browser.displayActionButton = displayActionButton;
@@ -140,7 +141,7 @@ static NSString * const cellID = @"imageCellID";
     // Reset selections
     if (displaySelectionButtons) {
         _selections = [NSMutableArray new];
-        for (int i = 0; i < photos.count; i++) {
+        for (int i = 0; i < self.photos.count; i++) {
             [_selections addObject:[NSNumber numberWithBool:NO]];
         }
     }

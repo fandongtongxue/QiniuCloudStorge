@@ -1,40 +1,44 @@
 //
-//  ImageFileListViewController.m
-//  Qiniu
+//  FileViewController.m
+//  QiniuCloudStorge
 //
-//  Created by 范东 on 16/8/12.
+//  Created by 范东 on 16/10/14.
 //  Copyright © 2016年 范东. All rights reserved.
 //
 
-#import "MusicFileListViewController.h"
+#import "FileViewController.h"
+#import "ConfigViewController.h"
 #import "ImageFileDetailCell.h"
 #import "ImageFileDetailModel.h"
-#import "ConfigViewController.h"
 
-#define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/list_file_music.php"
+#define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/list_file.php"
 
-static NSString * const cellID = @"musicCellID";
+static NSString * const cellID = @"fileCellID";
 
-@interface MusicFileListViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface FileViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
 
-@implementation MusicFileListViewController
+@implementation FileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initNavigationBar];
     [self initTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self requestData];
 }
 
 - (void)initNavigationBar{
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"文件列表";
+    self.title = @"音乐";
 }
 
 - (void)initTableView{
@@ -84,6 +88,7 @@ static NSString * const cellID = @"musicCellID";
 }
 
 - (void)handleSuccess:(NSArray *)resultArray{
+    [self.dataArray removeAllObjects];
     for (NSInteger i = 0; i<resultArray.count; i++) {
         ImageFileDetailModel *model = [ImageFileDetailModel modelWithDict:resultArray[i]];
         [self.dataArray addObject:model];
@@ -107,12 +112,7 @@ static NSString * const cellID = @"musicCellID";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ImageFileDetailModel *model = self.dataArray[indexPath.row];
-    NSString *videoUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
-    [self presentMoviePlayerViewControllerAnimated:playerVC];
-    [playerVC.moviePlayer play];
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+//    ImageFileDetailModel *model = self.dataArray[indexPath.row];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -163,13 +163,13 @@ static NSString * const cellID = @"musicCellID";
 }
 
 /*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

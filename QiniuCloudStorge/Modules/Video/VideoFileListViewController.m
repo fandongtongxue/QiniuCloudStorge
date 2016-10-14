@@ -49,6 +49,9 @@ static NSString * const cellID = @"videoCellID";
 }
 
 - (void)requestData{
+    if (![AFNetworkReachabilityManager manager].reachable) {
+        //本地列表
+    }
     kWSelf;
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
     NSDictionary *params = @{@"uuid":[AppHelper uuid]
@@ -108,10 +111,21 @@ static NSString * const cellID = @"videoCellID";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ImageFileDetailModel *model = self.dataArray[indexPath.row];
+    //网络路径
     NSString *videoUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
-    [self presentMoviePlayerViewControllerAnimated:playerVC];
-    [playerVC.moviePlayer play];
+    //本地路径
+    NSString *videoCacheDir = [NSHomeDirectory() stringByAppendingPathComponent:kVideoDetailLocalPrefix];
+    NSString *lastPathComponent = [NSString stringWithFormat:@"%@.mov", model.key];
+    NSString *videoPath = [videoCacheDir stringByAppendingPathComponent:lastPathComponent];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:videoPath]) {
+        MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:videoPath]];
+        [self presentMoviePlayerViewControllerAnimated:playerVC];
+        [playerVC.moviePlayer play];
+    }else{
+        MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
+        [self presentMoviePlayerViewControllerAnimated:playerVC];
+        [playerVC.moviePlayer play];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -12,6 +12,7 @@
 #import "ImageViewController.h"
 #import "MoreViewController.h"
 #import "RootNavigationController.h"
+#import "FileViewController.h"
 
 @interface RootTabBarController ()
 
@@ -30,6 +31,7 @@
     UITabBarItem *imageItem = [[UITabBarItem alloc]initWithTitle:@"图片" image:[UIImage imageNamed:@"tab_img_image"] selectedImage:[UIImage imageNamed:@"tab_img_image"]];
     UITabBarItem *musicItem = [[UITabBarItem alloc]initWithTitle:@"音乐" image:[UIImage imageNamed:@"tab_img_music"] selectedImage:[UIImage imageNamed:@"tab_img_music"]];
     UITabBarItem *videoItem = [[UITabBarItem alloc]initWithTitle:@"视频" image:[UIImage imageNamed:@"tab_img_video"] selectedImage:[UIImage imageNamed:@"tab_img_video"]];
+    UITabBarItem *fileItem = [[UITabBarItem alloc]initWithTitle:@"文件" image:[UIImage imageNamed:@"tab_img_file"] selectedImage:[UIImage imageNamed:@"tab_img_file"]];
     UITabBarItem *moreItem =  [[UITabBarItem alloc]initWithTitle:@"更多" image:[UIImage imageNamed:@"tab_img_more"] selectedImage:[UIImage imageNamed:@"tab_img_more"]];
     
     ImageViewController *imageVC = [[ImageViewController alloc]init];
@@ -44,11 +46,15 @@
     RootNavigationController *videoNav = [[RootNavigationController alloc]initWithRootViewController:videoVC];
     videoNav.tabBarItem = videoItem;
     
+    FileViewController *fileVC = [[FileViewController alloc]init];
+    RootNavigationController *fileNav = [[RootNavigationController alloc]initWithRootViewController:fileVC];
+    fileNav.tabBarItem = fileItem;
+    
     MoreViewController *moreVC = [[MoreViewController alloc]init];
     RootNavigationController *moreNav = [[RootNavigationController alloc]initWithRootViewController:moreVC];
     moreNav.tabBarItem = moreItem;
     
-    self.viewControllers = @[imageNav,musicNav,videoNav,moreNav];
+    self.viewControllers = @[imageNav,musicNav,videoNav,fileNav,moreNav];
     
     self.selectedIndex = 0;
 }
