@@ -8,10 +8,8 @@
 
 #import "ImageFileDetailCell.h"
 #import "ImageFileDetailModel.h"
-#import <DownloadButton/PKDownloadButton.h>
-#import "MJDownload.h"
 
-@interface ImageFileDetailCell ()<PKDownloadButtonDelegate>
+@interface ImageFileDetailCell ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *detailLabel;
