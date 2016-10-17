@@ -6,6 +6,7 @@ pod 'SDWebImage', '~>3.8'
 pod 'AMapLocation'
 pod 'MWPhotoBrowser'
 pod 'MBProgressHUD'
+pod "DownloadButton"
 target 'QiniuCloudStorge' do
   # Uncomment this line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!

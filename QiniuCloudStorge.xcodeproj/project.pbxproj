@@ -50,6 +50,9 @@
 		AFFC61801DB0682900591933 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFFC617E1DB0682900591933 /* Crashlytics.framework */; };
 		AFFC61811DB0682900591933 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFFC617F1DB0682900591933 /* Fabric.framework */; };
 		AFFC61901DB0B71100591933 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFC618F1DB0B71100591933 /* FileViewController.m */; };
+		AFFC619A1DB0DD2800591933 /* MJDownloadConst.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFC61951DB0DD2800591933 /* MJDownloadConst.m */; };
+		AFFC619B1DB0DD2800591933 /* MJDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFC61971DB0DD2800591933 /* MJDownloadManager.m */; };
+		AFFC619C1DB0DD2800591933 /* NSString+MJDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFC61991DB0DD2800591933 /* NSString+MJDownload.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +132,13 @@
 		AFFC617F1DB0682900591933 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		AFFC618E1DB0B71100591933 /* FileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
 		AFFC618F1DB0B71100591933 /* FileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileViewController.m; sourceTree = "<group>"; };
+		AFFC61931DB0DD2800591933 /* MJDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJDownload.h; sourceTree = "<group>"; };
+		AFFC61941DB0DD2800591933 /* MJDownloadConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJDownloadConst.h; sourceTree = "<group>"; };
+		AFFC61951DB0DD2800591933 /* MJDownloadConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJDownloadConst.m; sourceTree = "<group>"; };
+		AFFC61961DB0DD2800591933 /* MJDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJDownloadManager.h; sourceTree = "<group>"; };
+		AFFC61971DB0DD2800591933 /* MJDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJDownloadManager.m; sourceTree = "<group>"; };
+		AFFC61981DB0DD2800591933 /* NSString+MJDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJDownload.h"; sourceTree = "<group>"; };
+		AFFC61991DB0DD2800591933 /* NSString+MJDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJDownload.m"; sourceTree = "<group>"; };
 		E73471291617E390AE842469 /* Pods-QiniuCloudStorge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiniuCloudStorge.release.xcconfig"; path = "Pods/Target Support Files/Pods-QiniuCloudStorge/Pods-QiniuCloudStorge.release.xcconfig"; sourceTree = "<group>"; };
 		F0FA3ED4A0983B1A899C33CA /* libPods-QiniuCloudStorge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QiniuCloudStorge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -388,6 +398,7 @@
 		AFB2E7A01D95301000ECC1D0 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				AFFC61921DB0DD2800591933 /* MJDownload */,
 				AFFC617D1DB0682900591933 /* Fabric */,
 				AFA5A8E81DB06560002BA405 /* AliyunAnalitics */,
 				AF70F1C61DAE07FC00932AF7 /* SSKeyChain */,
@@ -461,6 +472,20 @@
 				AFFC618F1DB0B71100591933 /* FileViewController.m */,
 			);
 			path = File;
+			sourceTree = "<group>";
+		};
+		AFFC61921DB0DD2800591933 /* MJDownload */ = {
+			isa = PBXGroup;
+			children = (
+				AFFC61931DB0DD2800591933 /* MJDownload.h */,
+				AFFC61941DB0DD2800591933 /* MJDownloadConst.h */,
+				AFFC61951DB0DD2800591933 /* MJDownloadConst.m */,
+				AFFC61961DB0DD2800591933 /* MJDownloadManager.h */,
+				AFFC61971DB0DD2800591933 /* MJDownloadManager.m */,
+				AFFC61981DB0DD2800591933 /* NSString+MJDownload.h */,
+				AFFC61991DB0DD2800591933 /* NSString+MJDownload.m */,
+			);
+			path = MJDownload;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -602,8 +627,10 @@
 			files = (
 				AFB2E7CA1D95301000ECC1D0 /* UserDefault.m in Sources */,
 				AFB2E7C11D95301000ECC1D0 /* RootTabBarController.m in Sources */,
+				AFFC619C1DB0DD2800591933 /* NSString+MJDownload.m in Sources */,
 				AFB2E7C51D95301000ECC1D0 /* BaseNetworking.m in Sources */,
 				AFB2E7B51D95301000ECC1D0 /* UIView+FD.m in Sources */,
+				AFFC619A1DB0DD2800591933 /* MJDownloadConst.m in Sources */,
 				AFB2E7B91D95301000ECC1D0 /* ImageFileDetailCell.m in Sources */,
 				AF70F1C91DAE07FC00932AF7 /* SSKeychain.m in Sources */,
 				AF77FCB61DAB2FB300ADA0F8 /* MusicViewController.m in Sources */,
@@ -617,6 +644,7 @@
 				AFB2E7BC1D95301000ECC1D0 /* ImageFileListViewController.m in Sources */,
 				AFB2E7C91D95301000ECC1D0 /* QiniuUploadManager.m in Sources */,
 				AFB2E7B41D95301000ECC1D0 /* UIColor+FD.m in Sources */,
+				AFFC619B1DB0DD2800591933 /* MJDownloadManager.m in Sources */,
 				AFB2E75F1D952E6400ECC1D0 /* AppDelegate.m in Sources */,
 				AF5A6C581DACD8D700C60505 /* UITabBarController+Autorotate.m in Sources */,
 				AFB2E7C81D95301000ECC1D0 /* MapManager.m in Sources */,

@@ -8,8 +8,10 @@
 
 #import "ImageFileDetailCell.h"
 #import "ImageFileDetailModel.h"
+#import <DownloadButton/PKDownloadButton.h>
+#import "MJDownload.h"
 
-@interface ImageFileDetailCell ()
+@interface ImageFileDetailCell ()<PKDownloadButtonDelegate>
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *detailLabel;
@@ -44,12 +46,14 @@
     [self.contentView addSubview:detailLabel];
     self.detailLabel = detailLabel;
     
+    
     UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 99.5, kScreenSizeWidth, 0.5)];
     line.backgroundColor = [UIColor lightGrayColor];
     [self.contentView addSubview:line];
 }
 
 - (void)setModel:(ImageFileDetailModel *)model{
+    _model = model;
     self.titleLabel.text = [NSString stringWithFormat:@"文件名: %@",model.key];
     self.detailLabel.text = [NSString stringWithFormat:@"文件大小: %@",[AppHelper fileSize:[NSString stringWithFormat:@"%@",model.fsize]]];
 }
