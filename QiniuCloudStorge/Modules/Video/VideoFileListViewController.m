@@ -19,6 +19,7 @@ static NSString * const cellID = @"videoCellID";
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, copy) NSMutableString *marker;
 
 @end
 
@@ -29,7 +30,7 @@ static NSString * const cellID = @"videoCellID";
     // Do any additional setup after loading the view.
     [self initNavigationBar];
     [self initTableView];
-    [self requestData];
+    [self initRefreshUI];
 }
 
 - (void)initNavigationBar{
@@ -48,20 +49,44 @@ static NSString * const cellID = @"videoCellID";
     self.tableView = tableView;
 }
 
-- (void)requestData{
-    if (![AFNetworkReachabilityManager manager].reachable) {
-        //本地列表
-    }
+- (void)initRefreshUI{
+    kWSelf;
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [_marker setString:@""];
+        [weakSelf.dataArray removeAllObjects];
+        [weakSelf requestFirstPageData];
+    }];
+    self.tableView.mj_header = header;
+    
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf requestMoreData];
+    }];
+    self.tableView.mj_footer = footer;
+    [self.tableView.mj_header beginRefreshing];
+}
+
+- (void)requestFirstPageData{
     kWSelf;
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-    NSDictionary *params = @{@"uuid":[AppHelper uuid]
-                             };
+    NSDictionary *params = @{@"uuid":[AppHelper uuid],
+                             @"marker":self.marker};
     [[BaseNetworking shareInstance] GET:kGetFileListUrl dict:params succeed:^(id data) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        [self.tableView.mj_header endRefreshing];
         if (data && [data isKindOfClass:[NSDictionary class]] && [[(NSDictionary *)data objectForKey:@"status"] integerValue] == 1) {
             NSDictionary *resultDic = (NSDictionary *)data;
-            NSArray *resultArray = resultDic[@"data"];
-            [weakSelf handleSuccess:resultArray];
+            NSArray *resultArray = resultDic[@"data"][@"data"];
+            if ([resultDic[@"data"][@"marker"] isKindOfClass:[NSString class]] && resultDic[@"data"][@"marker"] !=NULL) {
+                [weakSelf.marker setString:resultDic[@"data"][@"marker"]];
+            }
+            for (NSInteger i = 0; i<resultArray.count; i++) {
+                ImageFileDetailModel *model = [ImageFileDetailModel modelWithDict:resultArray[i]];
+                [weakSelf.dataArray addObject:model];
+            }
+            if (resultArray.count < 10) {
+                self.tableView.mj_footer.state = MJRefreshStateNoMoreData;
+            }
+            [weakSelf.tableView reloadData];
         }else{
             UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"您提交的信息有误,无法获取文件列表" message:nil preferredStyle:UIAlertControllerStyleAlert];
             [alertVC addAction:[UIAlertAction actionWithTitle:@"重新提交" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -71,27 +96,67 @@ static NSString * const cellID = @"videoCellID";
                 [weakSelf.navigationController pushViewController:configVC animated:YES];
                 [configVC setFinishReSubmitBlock:^{
                     [weakConfigVC.navigationController popToRootViewControllerAnimated:YES];
-                    [self showAlert:@"请重新打开App"];
+                    [weakSelf showAlert:@"请重新打开App"];
                 }];
             }]];
             [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 [alertVC dismissViewControllerAnimated:YES completion:nil];
                 [weakSelf.navigationController popViewControllerAnimated:YES];
             }]];
-            [self presentViewController:alertVC animated:YES completion:nil];
+            [weakSelf presentViewController:alertVC animated:YES completion:nil];
         }
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        [self.tableView.mj_header endRefreshing];
         [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
     }];
 }
 
-- (void)handleSuccess:(NSArray *)resultArray{
-    for (NSInteger i = 0; i<resultArray.count; i++) {
-        ImageFileDetailModel *model = [ImageFileDetailModel modelWithDict:resultArray[i]];
-        [self.dataArray addObject:model];
-    }
-    [self.tableView reloadData];
+- (void)requestMoreData{
+    kWSelf;
+    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+    NSDictionary *params = @{@"uuid":[AppHelper uuid],
+                             @"marker":self.marker};
+    [[BaseNetworking shareInstance] GET:kGetFileListUrl dict:params succeed:^(id data) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        [self.tableView.mj_footer endRefreshing];
+        if (data && [data isKindOfClass:[NSDictionary class]] && [[(NSDictionary *)data objectForKey:@"status"] integerValue] == 1) {
+            NSDictionary *resultDic = (NSDictionary *)data;
+            NSArray *resultArray = resultDic[@"data"][@"data"];
+            if ([resultDic[@"data"][@"marker"] isKindOfClass:[NSString class]] && resultDic[@"data"][@"marker"] !=NULL) {
+                [weakSelf.marker setString:resultDic[@"data"][@"marker"]];
+            }
+            for (NSInteger i = 0; i<resultArray.count; i++) {
+                ImageFileDetailModel *model = [ImageFileDetailModel modelWithDict:resultArray[i]];
+                [weakSelf.dataArray addObject:model];
+            }
+            if (resultArray.count < 10) {
+                self.tableView.mj_footer.state = MJRefreshStateNoMoreData;
+            }
+            [weakSelf.tableView reloadData];
+        }else{
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"您提交的信息有误,无法获取文件列表" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            [alertVC addAction:[UIAlertAction actionWithTitle:@"重新提交" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                ConfigViewController *configVC = [[ConfigViewController alloc]init];
+                configVC.type = ConfigVCTypeReSubmit;
+                __weak typeof(configVC) weakConfigVC = configVC;
+                [weakSelf.navigationController pushViewController:configVC animated:YES];
+                [configVC setFinishReSubmitBlock:^{
+                    [weakConfigVC.navigationController popToRootViewControllerAnimated:YES];
+                    [weakSelf showAlert:@"请重新打开App"];
+                }];
+            }]];
+            [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alertVC dismissViewControllerAnimated:YES completion:nil];
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            }]];
+            [weakSelf presentViewController:alertVC animated:YES completion:nil];
+        }
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        [self.tableView.mj_footer endRefreshing];
+        [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -168,6 +233,13 @@ static NSString * const cellID = @"videoCellID";
         _dataArray = [[NSMutableArray alloc]init];
     }
     return _dataArray;
+}
+
+- (NSMutableString *)marker{
+    if (!_marker) {
+        _marker = [[NSMutableString alloc]init];
+    }
+    return _marker;
 }
 
 - (void)didReceiveMemoryWarning {

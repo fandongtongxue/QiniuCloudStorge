@@ -25,5 +25,6 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AlicloudMobileAnalitics/ALBBMAN.h>
 #import "WebViewController.h"
+#import <MJRefresh/MJRefresh.h>
 
 #endif /* AppHeader_h */
