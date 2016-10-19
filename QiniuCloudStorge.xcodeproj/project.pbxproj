@@ -19,6 +19,8 @@
 		AF5B5F811DAF4C1800F46039 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5B5F801DAF4C1800F46039 /* WebViewController.m */; };
 		AF70F1C91DAE07FC00932AF7 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = AF70F1C81DAE07FC00932AF7 /* SSKeychain.m */; };
 		AF77FCB61DAB2FB300ADA0F8 /* MusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF77FCB51DAB2FB300ADA0F8 /* MusicViewController.m */; };
+		AF8797EC1DB755BB008FA8F9 /* MusicPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8797EB1DB755BB008FA8F9 /* MusicPlayerViewController.m */; };
+		AF8797F81DB7653F008FA8F9 /* MusicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8797F71DB7653F008FA8F9 /* MusicModel.m */; };
 		AFA5A8ED1DB06560002BA405 /* AlicloudMobileAnalitics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA5A8E91DB06560002BA405 /* AlicloudMobileAnalitics.framework */; };
 		AFA5A8EE1DB06560002BA405 /* AlicloudUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA5A8EA1DB06560002BA405 /* AlicloudUtils.framework */; };
 		AFA5A8EF1DB06560002BA405 /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA5A8EB1DB06560002BA405 /* UTDID.framework */; };
@@ -72,6 +74,10 @@
 		AF70F1C81DAE07FC00932AF7 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		AF77FCB41DAB2FB300ADA0F8 /* MusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicViewController.h; sourceTree = "<group>"; };
 		AF77FCB51DAB2FB300ADA0F8 /* MusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicViewController.m; sourceTree = "<group>"; };
+		AF8797EA1DB755BB008FA8F9 /* MusicPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPlayerViewController.h; sourceTree = "<group>"; };
+		AF8797EB1DB755BB008FA8F9 /* MusicPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPlayerViewController.m; sourceTree = "<group>"; };
+		AF8797F61DB7653F008FA8F9 /* MusicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicModel.h; sourceTree = "<group>"; };
+		AF8797F71DB7653F008FA8F9 /* MusicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicModel.m; sourceTree = "<group>"; };
 		AFA5A8E91DB06560002BA405 /* AlicloudMobileAnalitics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlicloudMobileAnalitics.framework; sourceTree = "<group>"; };
 		AFA5A8EA1DB06560002BA405 /* AlicloudUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlicloudUtils.framework; sourceTree = "<group>"; };
 		AFA5A8EB1DB06560002BA405 /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
@@ -199,6 +205,10 @@
 			children = (
 				AF77FCB41DAB2FB300ADA0F8 /* MusicViewController.h */,
 				AF77FCB51DAB2FB300ADA0F8 /* MusicViewController.m */,
+				AF8797EA1DB755BB008FA8F9 /* MusicPlayerViewController.h */,
+				AF8797EB1DB755BB008FA8F9 /* MusicPlayerViewController.m */,
+				AF8797F61DB7653F008FA8F9 /* MusicModel.h */,
+				AF8797F71DB7653F008FA8F9 /* MusicModel.m */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -611,6 +621,7 @@
 				AF5B5F811DAF4C1800F46039 /* WebViewController.m in Sources */,
 				AFB2E7BD1D95301000ECC1D0 /* ImageViewController.m in Sources */,
 				AFB2E7BA1D95301000ECC1D0 /* ImageFileDetailModel.m in Sources */,
+				AF8797EC1DB755BB008FA8F9 /* MusicPlayerViewController.m in Sources */,
 				AFFC61901DB0B71100591933 /* FileViewController.m in Sources */,
 				AFB2E7C41D95301000ECC1D0 /* VideoViewController.m in Sources */,
 				AF4788AE1D9CC01200E9CF24 /* CheckViewController.m in Sources */,
@@ -623,6 +634,7 @@
 				AFB2E7BE1D95301000ECC1D0 /* AboutViewController.m in Sources */,
 				AFB2E7B71D95301000ECC1D0 /* ConfigViewController.m in Sources */,
 				AFB2E7C01D95301000ECC1D0 /* RootNavigationController.m in Sources */,
+				AF8797F81DB7653F008FA8F9 /* MusicModel.m in Sources */,
 				AFB2E7B81D95301000ECC1D0 /* ContainerViewController.m in Sources */,
 				AFB2E7C71D95301000ECC1D0 /* AppHelper.m in Sources */,
 				AF4788B11D9CF4D400E9CF24 /* UIViewController+FD.m in Sources */,

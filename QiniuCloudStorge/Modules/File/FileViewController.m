@@ -33,11 +33,6 @@ static NSString * const cellID = @"fileCellID";
     [self initRefreshUI];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.tableView.mj_header beginRefreshing];
-}
-
 - (void)initNavigationBar{
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"文件";
@@ -72,11 +67,9 @@ static NSString * const cellID = @"fileCellID";
 
 - (void)requestFirstPageData{
     kWSelf;
-    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
     NSDictionary *params = @{@"uuid":[AppHelper uuid],
                              @"marker":self.marker};
     [[BaseNetworking shareInstance] GET:kGetFileListUrl dict:params succeed:^(id data) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         [self.tableView.mj_header endRefreshing];
         if (data && [data isKindOfClass:[NSDictionary class]] && [[(NSDictionary *)data objectForKey:@"status"] integerValue] == 1) {
             NSDictionary *resultDic = (NSDictionary *)data;
@@ -111,7 +104,6 @@ static NSString * const cellID = @"fileCellID";
             [weakSelf presentViewController:alertVC animated:YES completion:nil];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         [self.tableView.mj_header endRefreshing];
         [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
     }];
@@ -119,11 +111,9 @@ static NSString * const cellID = @"fileCellID";
 
 - (void)requestMoreData{
     kWSelf;
-    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
     NSDictionary *params = @{@"uuid":[AppHelper uuid],
                              @"marker":self.marker};
     [[BaseNetworking shareInstance] GET:kGetFileListUrl dict:params succeed:^(id data) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         [self.tableView.mj_footer endRefreshing];
         if (data && [data isKindOfClass:[NSDictionary class]] && [[(NSDictionary *)data objectForKey:@"status"] integerValue] == 1) {
             NSDictionary *resultDic = (NSDictionary *)data;
@@ -158,7 +148,6 @@ static NSString * const cellID = @"fileCellID";
             [weakSelf presentViewController:alertVC animated:YES completion:nil];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         [self.tableView.mj_footer endRefreshing];
         [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
     }];

@@ -10,6 +10,7 @@
 #import "ImageFileDetailCell.h"
 #import "ImageFileDetailModel.h"
 #import "ConfigViewController.h"
+#import "MusicPlayerViewController.h"
 
 #define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/list_file_music.php"
 
@@ -31,11 +32,6 @@ static NSString * const cellID = @"musicCellID";
     [self initNavigationBar];
     [self initTableView];
     [self initRefreshUI];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)initNavigationBar{
@@ -72,11 +68,9 @@ static NSString * const cellID = @"musicCellID";
 
 - (void)requestFirstPageData{
     kWSelf;
-    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
     NSDictionary *params = @{@"uuid":[AppHelper uuid],
                              @"marker":self.marker};
     [[BaseNetworking shareInstance] GET:kGetFileListUrl dict:params succeed:^(id data) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         [self.tableView.mj_header endRefreshing];
         if (data && [data isKindOfClass:[NSDictionary class]] && [[(NSDictionary *)data objectForKey:@"status"] integerValue] == 1) {
             NSDictionary *resultDic = (NSDictionary *)data;
@@ -111,7 +105,6 @@ static NSString * const cellID = @"musicCellID";
             [weakSelf presentViewController:alertVC animated:YES completion:nil];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         [self.tableView.mj_header endRefreshing];
         [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
     }];
@@ -119,11 +112,9 @@ static NSString * const cellID = @"musicCellID";
 
 - (void)requestMoreData{
     kWSelf;
-    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
     NSDictionary *params = @{@"uuid":[AppHelper uuid],
                              @"marker":self.marker};
     [[BaseNetworking shareInstance] GET:kGetFileListUrl dict:params succeed:^(id data) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         [self.tableView.mj_footer endRefreshing];
         if (data && [data isKindOfClass:[NSDictionary class]] && [[(NSDictionary *)data objectForKey:@"status"] integerValue] == 1) {
             NSDictionary *resultDic = (NSDictionary *)data;
@@ -158,7 +149,6 @@ static NSString * const cellID = @"musicCellID";
             [weakSelf presentViewController:alertVC animated:YES completion:nil];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         [self.tableView.mj_footer endRefreshing];
         [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
     }];
@@ -182,11 +172,16 @@ static NSString * const cellID = @"musicCellID";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ImageFileDetailModel *model = self.dataArray[indexPath.row];
-    NSString *videoUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
-    [self presentMoviePlayerViewControllerAnimated:playerVC];
-    [playerVC.moviePlayer play];
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+//    NSString *videoUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//    MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
+//    [self presentMoviePlayerViewControllerAnimated:playerVC];
+//    [playerVC.moviePlayer play];
+//    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    MusicPlayerViewController *playerVC = [[MusicPlayerViewController alloc]init];
+    playerVC.key = model.key;
+    playerVC.hidesBottomBarWhenPushed = YES;
+    [[self navigationController] pushViewController:playerVC
+                                           animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

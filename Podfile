@@ -7,6 +7,7 @@ pod 'AMapLocation'
 pod 'MWPhotoBrowser'
 pod 'MBProgressHUD'
 pod 'MJRefresh'
+pod 'DOUAudioStreamer', '0.2.11'
 target 'QiniuCloudStorge' do
   # Uncomment this line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
