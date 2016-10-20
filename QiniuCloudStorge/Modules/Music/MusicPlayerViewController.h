@@ -10,6 +10,8 @@
 
 @interface MusicPlayerViewController : UIViewController
 
-@property (nonatomic, strong) NSString *key;
+@property (nonatomic, copy) NSString *key;
+@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, strong) NSArray *modelsArray;
 
 @end

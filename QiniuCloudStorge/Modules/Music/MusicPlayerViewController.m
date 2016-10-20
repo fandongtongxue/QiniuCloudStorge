@@ -10,31 +10,31 @@
 #import <DOUAudioStreamer/DOUAudioStreamer.h>
 #import <DOUAudioStreamer/DOUAudioVisualizer.h>
 #import "MusicModel.h"
+#import "ImageFileDetailModel.h"
 
 static void *kStatusKVOKey = &kStatusKVOKey;
 static void *kDurationKVOKey = &kDurationKVOKey;
 static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 
-@interface MusicPlayerViewController (){
-@private
-    UILabel *_titleLabel;
-    UILabel *_statusLabel;
-    UILabel *_miscLabel;
-    
-    UIButton *_buttonPlayPause;
-    UIButton *_buttonStop;
-    
-    UISlider *_progressSlider;
-    
-    UILabel *_volumeLabel;
-    UISlider *_volumeSlider;
-    
-    NSUInteger _currentTrackIndex;
-    NSTimer *_timer;
-    
-    DOUAudioStreamer *_streamer;
-    DOUAudioVisualizer *_audioVisualizer;
-}
+@interface MusicPlayerViewController ()
+
+@property (nonatomic, strong) UILabel *titleLabel;
+//@property (nonatomic, strong) UILabel *statusLabel;
+//@property (nonatomic, strong) UILabel *miscLabel;
+@property (nonatomic, strong) UIButton *playBtn;
+@property (nonatomic, strong) UIButton *playPreBtn;
+@property (nonatomic, strong) UIButton *playNextBtn;
+@property (nonatomic, strong) UIButton *stopBtn;
+@property (nonatomic, strong) UISlider *progressSlider;
+@property (nonatomic, strong) UIImageView *volumeImageView;
+@property (nonatomic, strong) UISlider *volumeSlider;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) DOUAudioStreamer *streamer;
+@property (nonatomic, strong) DOUAudioVisualizer *visualizer;
+@property (nonatomic, strong) UIProgressView *progressView;
+@property (nonatomic, assign) NSInteger currentTrackIndex;
+@property (nonatomic, strong) NSMutableArray *tracks;
+
 @end
 
 @implementation MusicPlayerViewController
@@ -47,58 +47,98 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [view setBackgroundColor:[UIColor whiteColor]];
+    [view setBackgroundColor:[UIColor blackColor]];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0, CGRectGetWidth([view bounds]), 30.0)];
-    [_titleLabel setFont:[UIFont systemFontOfSize:20.0]];
-    [_titleLabel setTextColor:[UIColor blackColor]];
-    [_titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [_titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
-    [view addSubview:_titleLabel];
+    UIButton *closeBtn = [[UIButton alloc]initWithFrame:CGRectMake(kScreenSizeWidth - 40 , 28, 32, 32)];
+    [closeBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_dismiss"] forState:UIControlStateNormal];
+    [closeBtn setBackgroundColor:[UIColor blackColor]];
+    [closeBtn addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:closeBtn];
     
-    _statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY([_titleLabel frame]) + 10.0, CGRectGetWidth([view bounds]), 30.0)];
-    [_statusLabel setFont:[UIFont systemFontOfSize:16.0]];
-    [_statusLabel setTextColor:[UIColor colorWithWhite:0.4 alpha:1.0]];
-    [_statusLabel setTextAlignment:NSTextAlignmentCenter];
-    [_statusLabel setLineBreakMode:NSLineBreakByTruncatingTail];
-    [view addSubview:_statusLabel];
+    UIImageView *volumeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(8.0, CGRectGetMaxY([closeBtn frame]) + 10.0, 32.0, 32.0)];
+    [volumeImageView setImage:[UIImage imageNamed:@"music_img_vol"]];
+    [view addSubview:volumeImageView];
+    self.volumeImageView = volumeImageView;
     
-    _miscLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY([_statusLabel frame]) + 10.0, CGRectGetWidth([view bounds]), 20.0)];
-    [_miscLabel setFont:[UIFont systemFontOfSize:10.0]];
-    [_miscLabel setTextColor:[UIColor colorWithWhite:0.5 alpha:1.0]];
-    [_miscLabel setTextAlignment:NSTextAlignmentCenter];
-    [_miscLabel setLineBreakMode:NSLineBreakByTruncatingTail];
-    [view addSubview:_miscLabel];
+    UISlider *volumeSlider = [[UISlider alloc] initWithFrame:CGRectMake(CGRectGetMaxX([self.volumeImageView frame]) + 8, CGRectGetMinY([self.volumeImageView frame]), CGRectGetWidth([view bounds]) - CGRectGetMaxX([self.volumeImageView frame]) - 10.0 - 20.0, 40.0)];
+    volumeSlider.centerY = self.volumeImageView.centerY;
+    [volumeSlider addTarget:self action:@selector(_actionSliderVolume:) forControlEvents:UIControlEventValueChanged];
+    [view addSubview:volumeSlider];
+    self.volumeSlider = volumeSlider;
     
-    _buttonPlayPause = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_buttonPlayPause setFrame:CGRectMake(80.0, CGRectGetMaxY([_miscLabel frame]) + 10.0, 60.0, 20.0)];
-    [_buttonPlayPause setTitle:@"Play" forState:UIControlStateNormal];
-    [_buttonPlayPause addTarget:self action:@selector(_actionPlayPause:) forControlEvents:UIControlEventTouchDown];
-    [view addSubview:_buttonPlayPause];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(self.volumeSlider.frame), CGRectGetWidth([view bounds]), 30.0)];
+    [titleLabel setFont:[UIFont systemFontOfSize:20.0]];
+    [titleLabel setTextColor:[UIColor colorWithWhite:0.4 alpha:1.0]];
+    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
+    [view addSubview:titleLabel];
+    self.titleLabel = titleLabel;
     
-    _buttonStop = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_buttonStop setFrame:CGRectMake(round((CGRectGetWidth([view bounds]) - 60.0) / 2.0), CGRectGetMaxY([_buttonPlayPause frame]) + 10.0, 60.0, 20.0)];
-    [_buttonStop setTitle:@"Stop" forState:UIControlStateNormal];
-    [_buttonStop addTarget:self action:@selector(_actionStop:) forControlEvents:UIControlEventTouchDown];
-    [view addSubview:_buttonStop];
+//    UILabel *statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY([self.titleLabel frame]) + 10.0, CGRectGetWidth([view bounds]), 30.0)];
+//    [statusLabel setFont:[UIFont systemFontOfSize:16.0]];
+//    [statusLabel setTextColor:[UIColor colorWithWhite:0.4 alpha:1.0]];
+//    [statusLabel setTextAlignment:NSTextAlignmentCenter];
+//    [statusLabel setLineBreakMode:NSLineBreakByTruncatingTail];
+//    [view addSubview:statusLabel];
+//    self.statusLabel = statusLabel;
+//    
+//    UILabel *miscLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY([self.statusLabel frame]) + 10.0, CGRectGetWidth([view bounds]), 20.0)];
+//    [miscLabel setFont:[UIFont systemFontOfSize:10.0]];
+//    [miscLabel setTextColor:[UIColor colorWithWhite:0.5 alpha:1.0]];
+//    [miscLabel setTextAlignment:NSTextAlignmentCenter];
+//    [miscLabel setLineBreakMode:NSLineBreakByTruncatingTail];
+//    [view addSubview:miscLabel];
+//    self.miscLabel = miscLabel;
     
-    _progressSlider = [[UISlider alloc] initWithFrame:CGRectMake(20.0, CGRectGetMaxY([_buttonStop frame]) + 10.0, CGRectGetWidth([view bounds]) - 20.0 * 2.0, 40.0)];
-    [_progressSlider addTarget:self action:@selector(_actionSliderProgress:) forControlEvents:UIControlEventValueChanged];
-    [view addSubview:_progressSlider];
+    DOUAudioVisualizer *visualizer = [[DOUAudioVisualizer alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY([self.titleLabel frame]) + 10.0, CGRectGetWidth([view bounds]), 200)];
+    [visualizer setBackgroundColor:[UIColor colorWithRed:239.0 / 255.0 green:244.0 / 255.0 blue:240.0 / 255.0 alpha:1.0]];
+    [view addSubview:visualizer];
+    self.visualizer = visualizer;
     
-    _volumeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, CGRectGetMaxY([_progressSlider frame]) + 10.0, 80.0, 40.0)];
-    [_volumeLabel setText:@"Volume:"];
-    [view addSubview:_volumeLabel];
+    UISlider *progressSlider = [[UISlider alloc] initWithFrame:CGRectMake(20.0, CGRectGetMaxY([self.visualizer frame]) + 10.0, CGRectGetWidth([view bounds]) - 20.0 * 2.0, 40.0)];
+    [progressSlider addTarget:self action:@selector(_actionSliderProgress:) forControlEvents:UIControlEventValueChanged];
+    [view addSubview:progressSlider];
+    self.progressSlider = progressSlider;
     
-    _volumeSlider = [[UISlider alloc] initWithFrame:CGRectMake(CGRectGetMaxX([_volumeLabel frame]) + 10.0, CGRectGetMinY([_volumeLabel frame]), CGRectGetWidth([view bounds]) - CGRectGetMaxX([_volumeLabel frame]) - 10.0 - 20.0, 40.0)];
-    [_volumeSlider addTarget:self action:@selector(_actionSliderVolume:) forControlEvents:UIControlEventValueChanged];
-    [view addSubview:_volumeSlider];
+    UIButton *playBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [playBtn setFrame:CGRectMake(80.0, CGRectGetMaxY([self.progressSlider frame]) + 10.0, 32.0, 32.0)];
+    playBtn.centerX = view.centerX;
+    [playBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_play"] forState:UIControlStateNormal];
+    [playBtn addTarget:self action:@selector(_actionPlayPause:) forControlEvents:UIControlEventTouchDown];
+    [view addSubview:playBtn];
+    self.playBtn = playBtn;
     
-    _audioVisualizer = [[DOUAudioVisualizer alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY([_volumeSlider frame]), CGRectGetWidth([view bounds]), CGRectGetHeight([view bounds]) - CGRectGetMaxY([_volumeSlider frame]))];
-    [_audioVisualizer setBackgroundColor:[UIColor colorWithRed:239.0 / 255.0 green:244.0 / 255.0 blue:240.0 / 255.0 alpha:1.0]];
-    [view addSubview:_audioVisualizer];
+    UIButton *playPreBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [playPreBtn setFrame:CGRectMake(playBtn.left - 50, CGRectGetMaxY([self.progressSlider frame]) + 10.0, 32.0, 32.0)];
+    [playPreBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_pre"] forState:UIControlStateNormal];
+    [playPreBtn addTarget:self action:@selector(_actionPlayPre:) forControlEvents:UIControlEventTouchDown];
+    [view addSubview:playPreBtn];
+    self.playPreBtn = playPreBtn;
+    
+    UIButton *playNextBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [playNextBtn setFrame:CGRectMake(playBtn.right  + 18, CGRectGetMaxY([self.progressSlider frame]) + 10.0, 32.0, 32.0)];
+    [playNextBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_next"] forState:UIControlStateNormal];
+    [playNextBtn addTarget:self action:@selector(_actionPlayNext:) forControlEvents:UIControlEventTouchDown];
+    [view addSubview:playNextBtn];
+    self.playNextBtn = playNextBtn;
+    
+//    UIButton *stopBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+//    [stopBtn setFrame:CGRectMake(round((CGRectGetWidth([view bounds]) - 60.0) / 2.0), CGRectGetMaxY([self.playBtn frame]) + 10.0, 32.0, 32.0)];
+//    [stopBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_stop"] forState:UIControlStateNormal];
+//    [stopBtn addTarget:self action:@selector(_actionStop:) forControlEvents:UIControlEventTouchDown];
+//    [view addSubview:stopBtn];
+//    self.stopBtn = stopBtn;
+    
+    UIProgressView *progressView = [[UIProgressView alloc]initWithFrame:CGRectMake(0, kScreenSizeHeight - 5, kScreenSizeWidth, 5)];
+    progressView.progress = 0;
+    [view addSubview:progressView];
+    self.progressView = progressView;
     
     [self setView:view];
+}
+
+- (void)dismiss{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)_cancelStreamer
@@ -116,9 +156,7 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 {
     [self _cancelStreamer];
     
-    MusicModel *model = [[MusicModel alloc]init];
-    model.audioFileURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[self.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-    model.title = self.key;
+    MusicModel *model = [self.tracks objectAtIndex:_currentTrackIndex];
     NSString *title = [NSString stringWithFormat:@"%@", model.title];
     [_titleLabel setText:title];
     
@@ -135,7 +173,12 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 
 - (void)_setupHintForStreamer
 {
+    NSUInteger nextIndex = _currentTrackIndex + 1;
+    if (nextIndex >= [_tracks count]) {
+        nextIndex = 0;
+    }
     
+    [DOUAudioStreamer setHintWithAudioFile:[_tracks objectAtIndex:nextIndex]];
 }
 
 - (void)_timerAction:(id)timer
@@ -152,38 +195,40 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 {
     switch ([_streamer status]) {
         case DOUAudioStreamerPlaying:
-            [_statusLabel setText:@"playing"];
-            [_buttonPlayPause setTitle:@"Pause" forState:UIControlStateNormal];
+//            [_statusLabel setText:@"playing"];
+            [_playBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_pause"] forState:UIControlStateNormal];
             break;
             
         case DOUAudioStreamerPaused:
-            [_statusLabel setText:@"paused"];
-            [_buttonPlayPause setTitle:@"Play" forState:UIControlStateNormal];
+//            [_statusLabel setText:@"paused"];
+            [_playBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_play"] forState:UIControlStateNormal];
             break;
             
         case DOUAudioStreamerIdle:
-            [_statusLabel setText:@"idle"];
-            [_buttonPlayPause setTitle:@"Play" forState:UIControlStateNormal];
+//            [_statusLabel setText:@"idle"];
+            [_playBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_play"] forState:UIControlStateNormal];
             break;
             
         case DOUAudioStreamerFinished:
-            [_statusLabel setText:@"finished"];
+//            [_statusLabel setText:@"finished"];
             break;
             
         case DOUAudioStreamerBuffering:
-            [_statusLabel setText:@"buffering"];
+//            [_statusLabel setText:@"buffering"];
             break;
             
         case DOUAudioStreamerError:
-            [_statusLabel setText:@"error"];
+//            [_statusLabel setText:@"error"];
             break;
     }
 }
 
 - (void)_updateBufferingStatus
 {
-    [_miscLabel setText:[NSString stringWithFormat:@"Received %.2f/%.2f MB (%.2f %%), Speed %.2f MB/s", (double)[_streamer receivedLength] / 1024 / 1024, (double)[_streamer expectedLength] / 1024 / 1024, [_streamer bufferingRatio] * 100.0, (double)[_streamer downloadSpeed] / 1024 / 1024]];
-    
+//    [_miscLabel setText:[NSString stringWithFormat:@"Received %.2f/%.2f MB (%.2f %%), Speed %.2f MB/s", (double)[_streamer receivedLength] / 1024 / 1024, (double)[_streamer expectedLength] / 1024 / 1024, [_streamer bufferingRatio] * 100.0, (double)[_streamer downloadSpeed] / 1024 / 1024]];
+    double progress = (double)[_streamer receivedLength] / (double)[_streamer expectedLength];
+    NSString *progressStr = [NSString stringWithFormat:@"%.2f",progress];
+    [self.progressView setProgress:progressStr.floatValue animated:YES];
     if ([_streamer bufferingRatio] >= 1.0) {
         NSLog(@"sha256: %@", [_streamer sha256]);
     }
@@ -244,10 +289,24 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
     }
 }
 
-- (void)_actionStop:(id)sender
+- (void)_actionPlayPre:(id)sender
 {
-    [_streamer stop];
+    
 }
+
+- (void)_actionPlayNext:(id)sender
+{
+    if (++_currentTrackIndex >= [_tracks count]) {
+        _currentTrackIndex = 0;
+    }
+    
+    [self _resetStreamer];
+}
+
+//- (void)_actionStop:(id)sender
+//{
+//    [_streamer stop];
+//}
 
 - (void)_actionSliderProgress:(id)sender
 {
@@ -257,6 +316,26 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 - (void)_actionSliderVolume:(id)sender
 {
     [DOUAudioStreamer setVolume:[_volumeSlider value]];
+}
+
+- (NSMutableArray *)tracks{
+    if (_tracks == nil) {
+        _tracks = [[NSMutableArray alloc]init];
+        for (ImageFileDetailModel *model in self.modelsArray) {
+            MusicModel *musicModel = [[MusicModel alloc]init];
+            musicModel.audioFileURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+            NSArray *stringArray = [self.key componentsSeparatedByString:@"."];
+            NSString *string = stringArray[0];
+            NSString *newString = [string substringFromIndex:8];
+            musicModel.title = newString;
+            [_tracks addObject:musicModel];
+        }
+    }
+    return _tracks;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning {

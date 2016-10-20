@@ -179,9 +179,10 @@ static NSString * const cellID = @"musicCellID";
 //    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     MusicPlayerViewController *playerVC = [[MusicPlayerViewController alloc]init];
     playerVC.key = model.key;
+    playerVC.modelsArray = self.dataArray;
+    playerVC.index = indexPath.row;
     playerVC.hidesBottomBarWhenPushed = YES;
-    [[self navigationController] pushViewController:playerVC
-                                           animated:YES];
+    [self presentViewController:playerVC animated:YES completion:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
