@@ -23,6 +23,8 @@
     [[MapManager manager] application:application didFinishLaunchingWithOptions:launchOptions];
     [self registerAliyunAnalitics];
     [Fabric with:@[[Crashlytics class]]];
+    NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@",@"58081a9d"];
+    [IFlySpeechUtility createUtility:initString];
     ContainerViewController *containerVC = [[ContainerViewController alloc]init];
     self.window.rootViewController = containerVC;
     [self.window makeKeyAndVisible];

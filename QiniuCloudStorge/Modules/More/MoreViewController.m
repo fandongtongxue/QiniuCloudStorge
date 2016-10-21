@@ -9,6 +9,7 @@
 #import "MoreViewController.h"
 #import <MessageUI/MessageUI.h>
 #import "AboutViewController.h"
+#import "VoiceRecognizeViewController.h"
 
 static NSString * const cellID = @"moreCellID";
 
@@ -83,12 +84,14 @@ static NSString * const cellID = @"moreCellID";
             location = @"未获取";
         }
         NSDictionary *locationDict = @{@"title":@"您的位置",@"detail":location};
+        NSDictionary *voiceDict = @{@"title":@"语音速记",@"detail":@""};
         [weakSelf.dataArray addObject:imageDict];
         [weakSelf.dataArray addObject:videoDict];
         [weakSelf.dataArray addObject:feedDict];
         [weakSelf.dataArray addObject:aboutDict];
         [weakSelf.dataArray addObject:versionDict];
         [weakSelf.dataArray addObject:locationDict];
+        [weakSelf.dataArray addObject:voiceDict];
         [weakSelf.tableView reloadData];
     }];
 }
@@ -231,6 +234,13 @@ static NSString * const cellID = @"moreCellID";
                 }];
             });
             
+        }
+            break;
+        case 6:
+        {
+            VoiceRecognizeViewController *voiceVC = [[VoiceRecognizeViewController alloc]init];
+            voiceVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:voiceVC animated:YES];
         }
             break;
         default:

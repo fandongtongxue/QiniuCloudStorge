@@ -12,6 +12,12 @@
 		AF1E5FC01DA8D126006481B6 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E5FBF1DA8D126006481B6 /* libresolv.tbd */; };
 		AF1E5FC21DA8D12B006481B6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E5FC11DA8D12B006481B6 /* SystemConfiguration.framework */; };
 		AF1E5FC41DA8D135006481B6 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E5FC31DA8D135006481B6 /* CoreTelephony.framework */; };
+		AF30C8A01DB8CB8900297A65 /* VoiceRecognizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF30C89F1DB8CB8900297A65 /* VoiceRecognizeViewController.m */; };
+		AF30C8A31DB8CFA700297A65 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF30C8A21DB8CFA700297A65 /* iflyMSC.framework */; };
+		AF30C8A51DB8CFD100297A65 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF30C8A41DB8CFD100297A65 /* AVFoundation.framework */; };
+		AF30C8A71DB8CFE400297A65 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF30C8A61DB8CFE400297A65 /* AudioToolbox.framework */; };
+		AF30C8A91DB8CFEC00297A65 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF30C8A81DB8CFEC00297A65 /* CoreGraphics.framework */; };
+		AF30C8AB1DB8D48400297A65 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF30C8AA1DB8D48400297A65 /* AddressBook.framework */; };
 		AF4788AE1D9CC01200E9CF24 /* CheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4788AD1D9CC01200E9CF24 /* CheckViewController.m */; };
 		AF4788B11D9CF4D400E9CF24 /* UIViewController+FD.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4788B01D9CF4D400E9CF24 /* UIViewController+FD.m */; };
 		AF5A6C581DACD8D700C60505 /* UITabBarController+Autorotate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A6C571DACD8D700C60505 /* UITabBarController+Autorotate.m */; };
@@ -60,6 +66,13 @@
 		AF1E5FBF1DA8D126006481B6 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		AF1E5FC11DA8D12B006481B6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AF1E5FC31DA8D135006481B6 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		AF30C89E1DB8CB8900297A65 /* VoiceRecognizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceRecognizeViewController.h; sourceTree = "<group>"; };
+		AF30C89F1DB8CB8900297A65 /* VoiceRecognizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceRecognizeViewController.m; sourceTree = "<group>"; };
+		AF30C8A21DB8CFA700297A65 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
+		AF30C8A41DB8CFD100297A65 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		AF30C8A61DB8CFE400297A65 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		AF30C8A81DB8CFEC00297A65 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AF30C8AA1DB8D48400297A65 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		AF4788AC1D9CC01200E9CF24 /* CheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewController.h; sourceTree = "<group>"; };
 		AF4788AD1D9CC01200E9CF24 /* CheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckViewController.m; sourceTree = "<group>"; };
 		AF4788AF1D9CF4D400E9CF24 /* UIViewController+FD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+FD.h"; sourceTree = "<group>"; };
@@ -144,6 +157,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF30C8AB1DB8D48400297A65 /* AddressBook.framework in Frameworks */,
+				AF30C8A91DB8CFEC00297A65 /* CoreGraphics.framework in Frameworks */,
+				AF30C8A71DB8CFE400297A65 /* AudioToolbox.framework in Frameworks */,
+				AF30C8A51DB8CFD100297A65 /* AVFoundation.framework in Frameworks */,
+				AF30C8A31DB8CFA700297A65 /* iflyMSC.framework in Frameworks */,
 				AF1E5FC41DA8D135006481B6 /* CoreTelephony.framework in Frameworks */,
 				AF1E5FC21DA8D12B006481B6 /* SystemConfiguration.framework in Frameworks */,
 				AFA5A8F01DB06560002BA405 /* UTMini.framework in Frameworks */,
@@ -173,6 +191,10 @@
 		457F6F5B6FF946C2904DDE65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF30C8AA1DB8D48400297A65 /* AddressBook.framework */,
+				AF30C8A81DB8CFEC00297A65 /* CoreGraphics.framework */,
+				AF30C8A61DB8CFE400297A65 /* AudioToolbox.framework */,
+				AF30C8A41DB8CFD100297A65 /* AVFoundation.framework */,
 				AF1E5FC31DA8D135006481B6 /* CoreTelephony.framework */,
 				AF1E5FC11DA8D12B006481B6 /* SystemConfiguration.framework */,
 				AF1E5FBF1DA8D126006481B6 /* libresolv.tbd */,
@@ -180,6 +202,14 @@
 				F0FA3ED4A0983B1A899C33CA /* libPods-QiniuCloudStorge.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AF30C8A11DB8CFA700297A65 /* XFyun */ = {
+			isa = PBXGroup;
+			children = (
+				AF30C8A21DB8CFA700297A65 /* iflyMSC.framework */,
+			);
+			path = XFyun;
 			sourceTree = "<group>";
 		};
 		AF4788AB1D9CC00700E9CF24 /* Check */ = {
@@ -353,6 +383,8 @@
 				AFB2E78D1D95301000ECC1D0 /* AboutViewController.m */,
 				AFB2E78E1D95301000ECC1D0 /* MoreViewController.h */,
 				AFB2E78F1D95301000ECC1D0 /* MoreViewController.m */,
+				AF30C89E1DB8CB8900297A65 /* VoiceRecognizeViewController.h */,
+				AF30C89F1DB8CB8900297A65 /* VoiceRecognizeViewController.m */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -398,6 +430,7 @@
 		AFB2E7A01D95301000ECC1D0 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				AF30C8A11DB8CFA700297A65 /* XFyun */,
 				AFFC617D1DB0682900591933 /* Fabric */,
 				AFA5A8E81DB06560002BA405 /* AliyunAnalitics */,
 				AF70F1C61DAE07FC00932AF7 /* SSKeyChain */,
@@ -630,6 +663,7 @@
 				AFB2E7B41D95301000ECC1D0 /* UIColor+FD.m in Sources */,
 				AFB2E75F1D952E6400ECC1D0 /* AppDelegate.m in Sources */,
 				AF5A6C581DACD8D700C60505 /* UITabBarController+Autorotate.m in Sources */,
+				AF30C8A01DB8CB8900297A65 /* VoiceRecognizeViewController.m in Sources */,
 				AFB2E7C81D95301000ECC1D0 /* MapManager.m in Sources */,
 				AFB2E7BE1D95301000ECC1D0 /* AboutViewController.m in Sources */,
 				AFB2E7B71D95301000ECC1D0 /* ConfigViewController.m in Sources */,
@@ -762,11 +796,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = JTU49PP896;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QiniuCloudStorge/ThirdPart/AliyunAnalitics",
 					"$(PROJECT_DIR)/QiniuCloudStorge/ThirdPart",
 					"$(PROJECT_DIR)/QiniuCloudStorge/ThirdPart/Fabric",
+					"$(PROJECT_DIR)/QiniuCloudStorge/ThirdPart/XFyun",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiniuCloudStorge/Utility/Helper/AppPrefixHeader.pch";
 				INFOPLIST_FILE = QiniuCloudStorge/Info.plist;
@@ -801,11 +837,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = JTU49PP896;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QiniuCloudStorge/ThirdPart/AliyunAnalitics",
 					"$(PROJECT_DIR)/QiniuCloudStorge/ThirdPart",
 					"$(PROJECT_DIR)/QiniuCloudStorge/ThirdPart/Fabric",
+					"$(PROJECT_DIR)/QiniuCloudStorge/ThirdPart/XFyun",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiniuCloudStorge/Utility/Helper/AppPrefixHeader.pch";
 				INFOPLIST_FILE = QiniuCloudStorge/Info.plist;
