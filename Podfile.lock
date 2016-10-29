@@ -32,6 +32,7 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
+  - WebViewJavascriptBridge (5.0.5)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -42,6 +43,7 @@ DEPENDENCIES:
   - MWPhotoBrowser
   - Qiniu (~> 7.0)
   - SDWebImage (~> 3.8)
+  - WebViewJavascriptBridge (~> 5.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -55,7 +57,8 @@ SPEC CHECKSUMS:
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
   Qiniu: 5e5d7d759d22393bb4b87cdfacf8fab951260f3e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  WebViewJavascriptBridge: a4d502315f1b8d9a51cd6a9174147ed567ec3bc5
 
-PODFILE CHECKSUM: 7164cb0f46d128cdf94545d82b093ec74903b31a
+PODFILE CHECKSUM: a4c9a55bb408307e8e3c1b3ff32403a381d7534c
 
 COCOAPODS: 1.1.0.beta.2

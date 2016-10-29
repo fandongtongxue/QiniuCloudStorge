@@ -292,7 +292,11 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 
 - (void)_actionPlayPre:(id)sender
 {
+    if (--_currentTrackIndex <= 0) {
+        _currentTrackIndex = 0;
+    }
     
+    [self _resetStreamer];
 }
 
 - (void)_actionPlayNext:(id)sender
