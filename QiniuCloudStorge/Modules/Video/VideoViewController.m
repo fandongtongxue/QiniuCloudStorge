@@ -226,23 +226,6 @@
     }
 }
 
-- (BOOL)shouldAutorotate{
-    //是否允许转屏
-    return NO;
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    //viewController所支持的全部旋转方向
-    return UIInterfaceOrientationMaskPortrait;
-}
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    //viewController初始显示的方向
-    return UIInterfaceOrientationPortrait;
-}
-
 /*
 #pragma mark - Navigation
 
