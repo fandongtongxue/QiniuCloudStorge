@@ -84,6 +84,9 @@ static NSString * const cellID = @"musicCellID";
             }
             if (resultArray.count < 10) {
                 self.tableView.mj_footer.state = MJRefreshStateNoMoreData;
+                if (resultArray.count == 0) {
+                     [JDStatusBarNotification showWithStatus:@"暂无文件" dismissAfter:1.5 styleName:JDStatusBarStyleDark];
+                }
             }
             [weakSelf.tableView reloadData];
         }else{

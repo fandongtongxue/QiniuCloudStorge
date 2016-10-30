@@ -28,5 +28,6 @@
 #import <MJRefresh/MJRefresh.h>
 #import "iflyMSC/IFlySpeechUtility.h"
 #import "UIButton+EnlargeEdge.h"
+#import <JDStatusBarNotification/JDStatusBarNotification.h>
 
 #endif /* AppHeader_h */

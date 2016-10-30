@@ -9,6 +9,7 @@ pod 'MBProgressHUD'
 pod 'MJRefresh'
 pod 'DOUAudioStreamer', '0.2.11'
 pod 'WebViewJavascriptBridge', '~> 5.0'
+pod 'JDStatusBarNotification'
 target 'QiniuCloudStorge' do
   # Uncomment this line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
