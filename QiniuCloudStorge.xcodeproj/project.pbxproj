@@ -75,6 +75,7 @@
 		AFA5A8EE1DB06560002BA405 /* AlicloudUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA5A8EA1DB06560002BA405 /* AlicloudUtils.framework */; };
 		AFA5A8EF1DB06560002BA405 /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA5A8EB1DB06560002BA405 /* UTDID.framework */; };
 		AFA5A8F01DB06560002BA405 /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA5A8EC1DB06560002BA405 /* UTMini.framework */; };
+		AFAA2D351DC593700090E8E6 /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAA2D341DC593700090E8E6 /* ISRDataHelper.m */; };
 		AFB2E75C1D952E6400ECC1D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E75B1D952E6400ECC1D0 /* main.m */; };
 		AFB2E75F1D952E6400ECC1D0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E75E1D952E6400ECC1D0 /* AppDelegate.m */; };
 		AFB2E7651D952E6400ECC1D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB2E7631D952E6400ECC1D0 /* Main.storyboard */; };
@@ -205,6 +206,8 @@
 		AFA5A8EA1DB06560002BA405 /* AlicloudUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlicloudUtils.framework; sourceTree = "<group>"; };
 		AFA5A8EB1DB06560002BA405 /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
 		AFA5A8EC1DB06560002BA405 /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
+		AFAA2D331DC593700090E8E6 /* ISRDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISRDataHelper.h; sourceTree = "<group>"; };
+		AFAA2D341DC593700090E8E6 /* ISRDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISRDataHelper.m; sourceTree = "<group>"; };
 		AFB2E7571D952E6400ECC1D0 /* QiniuCloudStorge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiniuCloudStorge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB2E75B1D952E6400ECC1D0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AFB2E75D1D952E6400ECC1D0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -320,6 +323,8 @@
 		AF30C8A11DB8CFA700297A65 /* XFyun */ = {
 			isa = PBXGroup;
 			children = (
+				AFAA2D331DC593700090E8E6 /* ISRDataHelper.h */,
+				AFAA2D341DC593700090E8E6 /* ISRDataHelper.m */,
 				AF30C8A21DB8CFA700297A65 /* iflyMSC.framework */,
 			);
 			path = XFyun;
@@ -878,6 +883,7 @@
 				AFB2E7C11D95301000ECC1D0 /* RootTabBarController.m in Sources */,
 				AFB2E7C51D95301000ECC1D0 /* BaseNetworking.m in Sources */,
 				AFB2E7B51D95301000ECC1D0 /* UIView+FD.m in Sources */,
+				AFAA2D351DC593700090E8E6 /* ISRDataHelper.m in Sources */,
 				AF6BF6231DB9BFA200070652 /* ReaderThumbsView.m in Sources */,
 				AFB2E7B91D95301000ECC1D0 /* ImageFileDetailCell.m in Sources */,
 				AF70F1C91DAE07FC00932AF7 /* SSKeychain.m in Sources */,

@@ -11,6 +11,7 @@
 #import "iflyMSC/IFlyRecognizerView.h"
 #import "iflyMSC/IFlySpeechConstant.h"
 #import "iflyMSC/IFlySpeechError.h"
+#import "ISRDataHelper.h"
 
 @interface VoiceRecognizeViewController ()<IFlyRecognizerViewDelegate>
 
@@ -51,7 +52,6 @@
     resultTextView.layer.borderWidth = 0.5;
     resultTextView.font = [UIFont systemFontOfSize:15];
     resultTextView.text = @"";
-    resultTextView.editable = NO;
     [self.view addSubview:resultTextView];
     self.resultTextView = resultTextView;
 }
@@ -67,7 +67,12 @@
  */
 - (void)onResult:(NSArray *)resultArray isLast:(BOOL) isLast;{
     NSDictionary *dict = resultArray[0];
-    [self.resultTextView setText:[self.resultTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@",dict]]];
+    NSMutableString *resultString = [[NSMutableString alloc] init];
+    for (NSString *key in dict) {
+        [resultString appendFormat:@"%@",key];
+    }
+    NSString *resultJson = [ISRDataHelper stringFromJson:resultString];
+    [self.resultTextView setText:[self.resultTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@",resultJson]]];
 }
 
 /*识别会话错误返回代理
