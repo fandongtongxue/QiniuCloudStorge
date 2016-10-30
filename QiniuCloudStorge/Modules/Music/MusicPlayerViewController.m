@@ -11,6 +11,7 @@
 #import <DOUAudioStreamer/DOUAudioVisualizer.h>
 #import "MusicModel.h"
 #import "ImageFileDetailModel.h"
+#import "FXBlurView.h"
 
 static void *kStatusKVOKey = &kStatusKVOKey;
 static void *kDurationKVOKey = &kDurationKVOKey;
@@ -26,12 +27,12 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 @property (nonatomic, strong) UIButton *playNextBtn;
 @property (nonatomic, strong) UIButton *stopBtn;
 @property (nonatomic, strong) UISlider *progressSlider;
-@property (nonatomic, strong) UIImageView *volumeImageView;
-@property (nonatomic, strong) UISlider *volumeSlider;
+//@property (nonatomic, strong) UIImageView *volumeImageView;
+//@property (nonatomic, strong) UISlider *volumeSlider;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) DOUAudioStreamer *streamer;
 @property (nonatomic, strong) DOUAudioVisualizer *visualizer;
-@property (nonatomic, strong) UIProgressView *progressView;
+//@property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, assign) NSInteger currentTrackIndex;
 @property (nonatomic, strong) NSMutableArray *tracks;
 
@@ -47,27 +48,28 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 
 - (void)loadView
 {
-    UIView *view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [view setBackgroundColor:[UIColor blackColor]];
+    FXBlurView *view = [[FXBlurView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [view setDynamic:YES];
     
-    UIButton *closeBtn = [[UIButton alloc]initWithFrame:CGRectMake(kScreenSizeWidth - 40 , 28, 32, 32)];
-    [closeBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_dismiss"] forState:UIControlStateNormal];
-    [closeBtn setBackgroundColor:[UIColor blackColor]];
+    UIButton *closeBtn = [[UIButton alloc]initWithFrame:CGRectMake(kScreenSizeWidth - 40 , 30, 22.5, 13.5)];
+    [closeBtn setEnlargeEdge:20];
+    [closeBtn setBackgroundImage:[UIImage imageNamed:@"arrow_down"] forState:UIControlStateNormal];
+    [closeBtn setBackgroundColor:view.backgroundColor];
     [closeBtn addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:closeBtn];
     
-    UIImageView *volumeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(8.0, CGRectGetMaxY([closeBtn frame]) + 10.0, 32.0, 32.0)];
-    [volumeImageView setImage:[UIImage imageNamed:@"music_img_vol"]];
-    [view addSubview:volumeImageView];
-    self.volumeImageView = volumeImageView;
+//    UIImageView *volumeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(8.0, CGRectGetMaxY([closeBtn frame]) + 10.0, 32.0, 32.0)];
+//    [volumeImageView setImage:[UIImage imageNamed:@"music_img_vol"]];
+//    [view addSubview:volumeImageView];
+//    self.volumeImageView = volumeImageView;
+//    
+//    UISlider *volumeSlider = [[UISlider alloc] initWithFrame:CGRectMake(CGRectGetMaxX([self.volumeImageView frame]) + 8, CGRectGetMinY([self.volumeImageView frame]), CGRectGetWidth([view bounds]) - CGRectGetMaxX([self.volumeImageView frame]) - 10.0 - 20.0, 40.0)];
+//    volumeSlider.centerY = self.volumeImageView.centerY;
+//    [volumeSlider addTarget:self action:@selector(_actionSliderVolume:) forControlEvents:UIControlEventValueChanged];
+//    [view addSubview:volumeSlider];
+//    self.volumeSlider = volumeSlider;
     
-    UISlider *volumeSlider = [[UISlider alloc] initWithFrame:CGRectMake(CGRectGetMaxX([self.volumeImageView frame]) + 8, CGRectGetMinY([self.volumeImageView frame]), CGRectGetWidth([view bounds]) - CGRectGetMaxX([self.volumeImageView frame]) - 10.0 - 20.0, 40.0)];
-    volumeSlider.centerY = self.volumeImageView.centerY;
-    [volumeSlider addTarget:self action:@selector(_actionSliderVolume:) forControlEvents:UIControlEventValueChanged];
-    [view addSubview:volumeSlider];
-    self.volumeSlider = volumeSlider;
-    
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(self.volumeSlider.frame), CGRectGetWidth([view bounds]), 30.0)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, CGRectGetMaxY(closeBtn.frame) + 20.0, CGRectGetWidth([view bounds]) - 40.0, 30.0)];
     [titleLabel setFont:[UIFont systemFontOfSize:20.0]];
     [titleLabel setTextColor:[UIColor colorWithWhite:0.4 alpha:1.0]];
     [titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -91,8 +93,8 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 //    [view addSubview:miscLabel];
 //    self.miscLabel = miscLabel;
     
-    DOUAudioVisualizer *visualizer = [[DOUAudioVisualizer alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY([self.titleLabel frame]) + 10.0, CGRectGetWidth([view bounds]), 200)];
-    [visualizer setBackgroundColor:[UIColor colorWithRed:239.0 / 255.0 green:244.0 / 255.0 blue:240.0 / 255.0 alpha:1.0]];
+    DOUAudioVisualizer *visualizer = [[DOUAudioVisualizer alloc] initWithFrame:CGRectMake(40.0, CGRectGetMaxY([self.titleLabel frame]) + 10.0, CGRectGetWidth([view bounds]) - 80.0, CGRectGetWidth([view bounds]) - 80.0)];
+    [visualizer setBackgroundColor:view.backgroundColor];
     [view addSubview:visualizer];
     self.visualizer = visualizer;
     
@@ -102,23 +104,27 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
     self.progressSlider = progressSlider;
     
     UIButton *playBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [playBtn setFrame:CGRectMake(80.0, CGRectGetMaxY([self.progressSlider frame]) + 10.0, 32.0, 32.0)];
+    [playBtn setFrame:CGRectMake(80.0, CGRectGetMaxY([self.progressSlider frame]) + 10.0, 60.0, 60.0)];
     playBtn.centerX = view.centerX;
-    [playBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_play"] forState:UIControlStateNormal];
+    [playBtn setBackgroundImage:[UIImage imageNamed:@"big_play_button"] forState:UIControlStateNormal];
     [playBtn addTarget:self action:@selector(_actionPlayPause:) forControlEvents:UIControlEventTouchDown];
     [view addSubview:playBtn];
     self.playBtn = playBtn;
     
     UIButton *playPreBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [playPreBtn setFrame:CGRectMake(playBtn.left - 50, CGRectGetMaxY([self.progressSlider frame]) + 10.0, 32.0, 32.0)];
-    [playPreBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_pre"] forState:UIControlStateNormal];
+    [playPreBtn setFrame:CGRectMake(0.0, CGRectGetMaxY([self.progressSlider frame]) + 10.0, 20.0, 28.0)];
+    playPreBtn.right = playBtn.left - 25;
+    playPreBtn.centerY = self.playBtn.centerY;
+    [playPreBtn setBackgroundImage:[UIImage imageNamed:@"prev_song"] forState:UIControlStateNormal];
     [playPreBtn addTarget:self action:@selector(_actionPlayPre:) forControlEvents:UIControlEventTouchDown];
     [view addSubview:playPreBtn];
     self.playPreBtn = playPreBtn;
     
     UIButton *playNextBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [playNextBtn setFrame:CGRectMake(playBtn.right  + 18, CGRectGetMaxY([self.progressSlider frame]) + 10.0, 32.0, 32.0)];
-    [playNextBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_next"] forState:UIControlStateNormal];
+    [playNextBtn setFrame:CGRectMake(0, CGRectGetMaxY([self.progressSlider frame]) + 10.0, 20.0, 28.0)];
+    playNextBtn.left = self.playBtn.right + 25;
+    playNextBtn.centerY = self.playBtn.centerY;
+    [playNextBtn setBackgroundImage:[UIImage imageNamed:@"next_song"] forState:UIControlStateNormal];
     [playNextBtn addTarget:self action:@selector(_actionPlayNext:) forControlEvents:UIControlEventTouchDown];
     [view addSubview:playNextBtn];
     self.playNextBtn = playNextBtn;
@@ -130,10 +136,10 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 //    [view addSubview:stopBtn];
 //    self.stopBtn = stopBtn;
     
-    UIProgressView *progressView = [[UIProgressView alloc]initWithFrame:CGRectMake(0, kScreenSizeHeight - 5, kScreenSizeWidth, 5)];
-    progressView.progress = 0;
-    [view addSubview:progressView];
-    self.progressView = progressView;
+//    UIProgressView *progressView = [[UIProgressView alloc]initWithFrame:CGRectMake(0, kScreenSizeHeight - 5, kScreenSizeWidth, 5)];
+//    progressView.progress = 0;
+//    [view addSubview:progressView];
+//    self.progressView = progressView;
     
     [self setView:view];
 }
@@ -197,17 +203,17 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
     switch ([_streamer status]) {
         case DOUAudioStreamerPlaying:
 //            [_statusLabel setText:@"playing"];
-            [_playBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_pause"] forState:UIControlStateNormal];
+            [_playBtn setBackgroundImage:[UIImage imageNamed:@"big_pause_button"] forState:UIControlStateNormal];
             break;
             
         case DOUAudioStreamerPaused:
 //            [_statusLabel setText:@"paused"];
-            [_playBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_play"] forState:UIControlStateNormal];
+            [_playBtn setBackgroundImage:[UIImage imageNamed:@"big_play_button"] forState:UIControlStateNormal];
             break;
             
         case DOUAudioStreamerIdle:
 //            [_statusLabel setText:@"idle"];
-            [_playBtn setBackgroundImage:[UIImage imageNamed:@"music_btn_play"] forState:UIControlStateNormal];
+            [_playBtn setBackgroundImage:[UIImage imageNamed:@"big_play_button"] forState:UIControlStateNormal];
             break;
             
         case DOUAudioStreamerFinished:
@@ -227,9 +233,9 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 - (void)_updateBufferingStatus
 {
 //    [_miscLabel setText:[NSString stringWithFormat:@"Received %.2f/%.2f MB (%.2f %%), Speed %.2f MB/s", (double)[_streamer receivedLength] / 1024 / 1024, (double)[_streamer expectedLength] / 1024 / 1024, [_streamer bufferingRatio] * 100.0, (double)[_streamer downloadSpeed] / 1024 / 1024]];
-    double progress = (double)[_streamer receivedLength] / (double)[_streamer expectedLength];
-    NSString *progressStr = [NSString stringWithFormat:@"%.2f",progress];
-    [self.progressView setProgress:progressStr.floatValue animated:YES];
+//    double progress = (double)[_streamer receivedLength] / (double)[_streamer expectedLength];
+//    NSString *progressStr = [NSString stringWithFormat:@"%.2f",progress];
+//    [self.progressView setProgress:progressStr.floatValue animated:YES];
     if ([_streamer bufferingRatio] >= 1.0) {
         NSLog(@"sha256: %@", [_streamer sha256]);
     }
@@ -267,7 +273,7 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
     [self _resetStreamer];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(_timerAction:) userInfo:nil repeats:YES];
-    [_volumeSlider setValue:[DOUAudioStreamer volume]];
+//    [_volumeSlider setValue:[DOUAudioStreamer volume]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -295,7 +301,6 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
     if (--_currentTrackIndex <= 0) {
         _currentTrackIndex = 0;
     }
-    
     [self _resetStreamer];
 }
 
@@ -304,7 +309,6 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
     if (++_currentTrackIndex >= [_tracks count]) {
         _currentTrackIndex = 0;
     }
-    
     [self _resetStreamer];
 }
 
@@ -318,10 +322,10 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
     [_streamer setCurrentTime:[_streamer duration] * [_progressSlider value]];
 }
 
-- (void)_actionSliderVolume:(id)sender
-{
-    [DOUAudioStreamer setVolume:[_volumeSlider value]];
-}
+//- (void)_actionSliderVolume:(id)sender
+//{
+//    [DOUAudioStreamer setVolume:[_volumeSlider value]];
+//}
 
 - (NSMutableArray *)tracks{
     if (_tracks == nil) {
@@ -346,6 +350,23 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)shouldAutorotate{
+    //是否允许转屏
+    return NO;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    //viewController所支持的全部旋转方向
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    //viewController初始显示的方向
+    return UIInterfaceOrientationPortrait;
 }
 
 /*

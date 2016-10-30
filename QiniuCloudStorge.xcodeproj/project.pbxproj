@@ -71,11 +71,13 @@
 		AF77FCB61DAB2FB300ADA0F8 /* MusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF77FCB51DAB2FB300ADA0F8 /* MusicViewController.m */; };
 		AF8797EC1DB755BB008FA8F9 /* MusicPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8797EB1DB755BB008FA8F9 /* MusicPlayerViewController.m */; };
 		AF8797F81DB7653F008FA8F9 /* MusicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8797F71DB7653F008FA8F9 /* MusicModel.m */; };
+		AF8F82961DC5CC0B002107C9 /* UIButton+EnlargeEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8F82951DC5CC0B002107C9 /* UIButton+EnlargeEdge.m */; };
 		AFA5A8ED1DB06560002BA405 /* AlicloudMobileAnalitics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA5A8E91DB06560002BA405 /* AlicloudMobileAnalitics.framework */; };
 		AFA5A8EE1DB06560002BA405 /* AlicloudUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA5A8EA1DB06560002BA405 /* AlicloudUtils.framework */; };
 		AFA5A8EF1DB06560002BA405 /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA5A8EB1DB06560002BA405 /* UTDID.framework */; };
 		AFA5A8F01DB06560002BA405 /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA5A8EC1DB06560002BA405 /* UTMini.framework */; };
 		AFAA2D351DC593700090E8E6 /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAA2D341DC593700090E8E6 /* ISRDataHelper.m */; };
+		AFAA2D971DC5C6410090E8E6 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAA2D961DC5C6410090E8E6 /* FXBlurView.m */; };
 		AFB2E75C1D952E6400ECC1D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E75B1D952E6400ECC1D0 /* main.m */; };
 		AFB2E75F1D952E6400ECC1D0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB2E75E1D952E6400ECC1D0 /* AppDelegate.m */; };
 		AFB2E7651D952E6400ECC1D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB2E7631D952E6400ECC1D0 /* Main.storyboard */; };
@@ -202,12 +204,16 @@
 		AF8797EB1DB755BB008FA8F9 /* MusicPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPlayerViewController.m; sourceTree = "<group>"; };
 		AF8797F61DB7653F008FA8F9 /* MusicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicModel.h; sourceTree = "<group>"; };
 		AF8797F71DB7653F008FA8F9 /* MusicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicModel.m; sourceTree = "<group>"; };
+		AF8F82941DC5CC0B002107C9 /* UIButton+EnlargeEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+EnlargeEdge.h"; sourceTree = "<group>"; };
+		AF8F82951DC5CC0B002107C9 /* UIButton+EnlargeEdge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+EnlargeEdge.m"; sourceTree = "<group>"; };
 		AFA5A8E91DB06560002BA405 /* AlicloudMobileAnalitics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlicloudMobileAnalitics.framework; sourceTree = "<group>"; };
 		AFA5A8EA1DB06560002BA405 /* AlicloudUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlicloudUtils.framework; sourceTree = "<group>"; };
 		AFA5A8EB1DB06560002BA405 /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
 		AFA5A8EC1DB06560002BA405 /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
 		AFAA2D331DC593700090E8E6 /* ISRDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISRDataHelper.h; sourceTree = "<group>"; };
 		AFAA2D341DC593700090E8E6 /* ISRDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISRDataHelper.m; sourceTree = "<group>"; };
+		AFAA2D951DC5C6410090E8E6 /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		AFAA2D961DC5C6410090E8E6 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
 		AFB2E7571D952E6400ECC1D0 /* QiniuCloudStorge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiniuCloudStorge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB2E75B1D952E6400ECC1D0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AFB2E75D1D952E6400ECC1D0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -459,6 +465,15 @@
 			path = AliyunAnalitics;
 			sourceTree = "<group>";
 		};
+		AFAA2D941DC5C6410090E8E6 /* FXBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				AFAA2D951DC5C6410090E8E6 /* FXBlurView.h */,
+				AFAA2D961DC5C6410090E8E6 /* FXBlurView.m */,
+			);
+			path = FXBlurView;
+			sourceTree = "<group>";
+		};
 		AFB2E74E1D952E6400ECC1D0 = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +523,8 @@
 		AFB2E7711D95301000ECC1D0 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				AF8F82941DC5CC0B002107C9 /* UIButton+EnlargeEdge.h */,
+				AF8F82951DC5CC0B002107C9 /* UIButton+EnlargeEdge.m */,
 				AFB2E7721D95301000ECC1D0 /* UIColor+FD.h */,
 				AFB2E7731D95301000ECC1D0 /* UIColor+FD.m */,
 				AFB2E7741D95301000ECC1D0 /* UIView+FD.h */,
@@ -638,6 +655,7 @@
 		AFB2E7A01D95301000ECC1D0 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				AFAA2D941DC5C6410090E8E6 /* FXBlurView */,
 				AF6BF5BA1DB9BFA200070652 /* Reader */,
 				AF30C8A11DB8CFA700297A65 /* XFyun */,
 				AFFC617D1DB0682900591933 /* Fabric */,
@@ -904,6 +922,7 @@
 				AFB2E7B41D95301000ECC1D0 /* UIColor+FD.m in Sources */,
 				AF6BF61F1DB9BFA200070652 /* ReaderThumbFetch.m in Sources */,
 				AF6BF6211DB9BFA200070652 /* ReaderThumbRender.m in Sources */,
+				AFAA2D971DC5C6410090E8E6 /* FXBlurView.m in Sources */,
 				AFB2E75F1D952E6400ECC1D0 /* AppDelegate.m in Sources */,
 				AF6BF6251DB9BFA200070652 /* ReaderViewController.m in Sources */,
 				AF6BF6241DB9BFA200070652 /* ReaderThumbView.m in Sources */,
@@ -925,6 +944,7 @@
 				AF6BF61A1DB9BFA200070652 /* ReaderDocument.m in Sources */,
 				AF6BF6181DB9BFA200070652 /* ReaderContentTile.m in Sources */,
 				AF4788B11D9CF4D400E9CF24 /* UIViewController+FD.m in Sources */,
+				AF8F82961DC5CC0B002107C9 /* UIButton+EnlargeEdge.m in Sources */,
 				AFBA23091DC515D40073C05D /* ExampleWKWebViewController.m in Sources */,
 				AF6BF6281DB9BFA200070652 /* UIXToolbarView.m in Sources */,
 				AF6BF6151DB9BFA200070652 /* CGPDFDocument.m in Sources */,
