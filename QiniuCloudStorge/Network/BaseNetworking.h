@@ -62,4 +62,14 @@ typedef NS_ENUM(NSInteger, ResponseContentType){
 - (void)POST:(NSString *)URLString dict:(id)dict succeed:(void (^)(id data))succeed failure:(void (^)(NSError *error))failure;
 
 
+/**
+ *下载文件
+ 
+ * @param URLString 下载地址
+ * @param path 目标路径
+ * @param percentBlock 百分比回调
+ */
+- (void)download:(NSString *)URLString TargetPath:(NSString *)path percentBlock:(void (^)(float percent))percentBlock;
+
+
 @end

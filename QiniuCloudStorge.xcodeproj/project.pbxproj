@@ -768,8 +768,8 @@
 				TargetAttributes = {
 					AFB2E7561D952E6400ECC1D0 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = JTU49PP896;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = F9N98X7P4L;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1021,7 +1021,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1063,7 +1063,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1076,7 +1076,7 @@
 			baseConfigurationReference = 9E0AB2BB18E49B5D06986DAC /* Pods-QiniuCloudStorge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JTU49PP896;
+				DEVELOPMENT_TEAM = F9N98X7P4L;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1109,6 +1109,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.fandong.QiniuCloudStorge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "683f29e5-d7d8-43e6-abad-5bfa8619999c";
+				PROVISIONING_PROFILE_SPECIFIER = QiniuCloudStorge;
 			};
 			name = Debug;
 		};
@@ -1117,7 +1119,7 @@
 			baseConfigurationReference = E73471291617E390AE842469 /* Pods-QiniuCloudStorge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JTU49PP896;
+				DEVELOPMENT_TEAM = F9N98X7P4L;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1149,6 +1151,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.fandong.QiniuCloudStorge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "683f29e5-d7d8-43e6-abad-5bfa8619999c";
+				PROVISIONING_PROFILE_SPECIFIER = QiniuCloudStorge;
 			};
 			name = Release;
 		};

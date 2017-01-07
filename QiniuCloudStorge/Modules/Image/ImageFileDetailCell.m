@@ -44,7 +44,6 @@
     [self.contentView addSubview:detailLabel];
     self.detailLabel = detailLabel;
     
-    
     UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 99.5, kScreenSizeWidth, 0.5)];
     line.backgroundColor = [UIColor lightGrayColor];
     [self.contentView addSubview:line];

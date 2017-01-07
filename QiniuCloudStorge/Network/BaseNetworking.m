@@ -67,6 +67,18 @@
     }];
 }
 
+- (void)download:(NSString *)URLString TargetPath:(NSString *)path percentBlock:(void (^)(float))percentBlock{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:URLString parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        DLOG(@"总大小%lld 已完成大小%lld",downloadProgress.totalUnitCount, downloadProgress.completedUnitCount);
+        percentBlock((float)downloadProgress.completedUnitCount / (float)downloadProgress.totalUnitCount);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        DLOG(@"下载成功:%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        DLOG(@"下载失败:%@",error);
+    }];
+}
+
 - (AFHTTPRequestSerializer *)requestSerializerWithType:(RequestContentType)type{
     switch (type) {
         case RequestContentTypeJSON:
@@ -91,7 +103,7 @@
 }
 
 - (NSSet *)acceptableContentTypes{
-    return [NSSet setWithObjects:@"application/json", @"text/html", @"text/json",nil];
+    return [NSSet setWithObjects:@"application/json", @"text/html", @"text/json",@"image/jpeg",nil];
 }
 
 - (AFSecurityPolicy *)customSecurityPolicy{
