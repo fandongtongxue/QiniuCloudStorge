@@ -6,8 +6,8 @@
 //  Copyright © 2016年 范东. All rights reserved.
 //
 
-#define kSubmitURL        @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/submit.php"
-#define kReSubmitURL        @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/resubmit.php"
+#define kSubmitURL        @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/submit.php"
+#define kReSubmitURL        @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/resubmit.php"
 #define kConfigTextFieldBaseTag 100
 
 #import "ConfigViewController.h"

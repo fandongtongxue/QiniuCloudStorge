@@ -28,8 +28,8 @@
 
 #define kSystemVersion                       [[[UIDevice currentDevice] systemVersion] floatValue]
 
-#define kFileDetailUrlPrefix @"http://7xqh0l.dl1.z0.glb.clouddn.com/"
-#define kDeleteFileUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/deleteFile.php"
+#define kFileDetailUrlPrefix @"http://oht4nlntk.bkt.clouddn.com/"
+#define kDeleteFileUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/deleteFile.php"
 #define kVideoDetailLocalPrefix @"Library/Caches/UploadVideo/"
 
 #define kLocationKey @"kLocationKey"

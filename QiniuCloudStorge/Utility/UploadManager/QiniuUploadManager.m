@@ -10,7 +10,7 @@
 #import "AFNetworking.h"
 #import <QiniuSDK.h>
 
-#define kGetTokenUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/upload_token.php"
+#define kGetTokenUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/upload_token.php"
 
 @implementation QiniuUploadManager
 

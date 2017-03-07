@@ -12,7 +12,7 @@
 #import "ConfigViewController.h"
 #import "MusicPlayerViewController.h"
 
-#define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/list_file_music.php"
+#define kGetFileListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_music.php"
 
 static NSString * const cellID = @"musicCellID";
 

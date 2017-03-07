@@ -8,7 +8,7 @@
 
 #import "CheckViewController.h"
 
-#define kCheckURL        @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/check.php"
+#define kCheckURL        @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/check.php"
 
 @interface CheckViewController ()
 

@@ -12,7 +12,7 @@
 #import "ConfigViewController.h"
 #import "MWPhotoBrowser.h"
 
-#define kGetFileListUrl @"http://fandong.me/App/QiniuCloudStorge/php-sdk-master/examples/list_file_image.php"
+#define kGetFileListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_image.php"
 
 static NSString * const cellID = @"imageCellID";
 
