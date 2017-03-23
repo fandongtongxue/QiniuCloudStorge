@@ -172,7 +172,11 @@ static NSString * const cellID = @"fileCellID";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    ImageFileDetailModel *model = self.dataArray[indexPath.row];
+    ImageFileDetailModel *model = self.dataArray[indexPath.row];
+    NSString *fileUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    WebViewController *webVC = [[WebViewController alloc]init];
+    webVC.url = fileUrl;
+    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
