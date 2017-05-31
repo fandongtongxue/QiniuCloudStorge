@@ -176,6 +176,7 @@ static NSString * const cellID = @"fileCellID";
     NSString *fileUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     WebViewController *webVC = [[WebViewController alloc]init];
     webVC.url = fileUrl;
+    webVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webVC animated:YES];
 }
 
