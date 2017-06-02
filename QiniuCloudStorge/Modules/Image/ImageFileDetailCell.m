@@ -66,6 +66,7 @@
         make.left.equalTo(self.contentView.mas_left);
         make.right.equalTo(self.contentView.mas_right);
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-0.5);
+        make.height.mas_equalTo(0.5);
     }];
 }
 
