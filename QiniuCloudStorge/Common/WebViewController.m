@@ -30,11 +30,15 @@
 
 - (void)initWebView{
     WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc]init];
-    WKWebView *wkWebView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, kScreenSizeWidth, kScreenSizeHeight - kNavigationBarHeight - kStatusBarHeight) configuration:configuration];
+    WKWebView *wkWebView = [[WKWebView alloc]initWithFrame:CGRectZero configuration:configuration];
     [wkWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
     wkWebView.UIDelegate = self;
     wkWebView.navigationDelegate = self;
     [self.view addSubview:wkWebView];
+    
+    [wkWebView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{

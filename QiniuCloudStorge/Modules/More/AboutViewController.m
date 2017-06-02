@@ -7,7 +7,6 @@
 //
 
 #import "AboutViewController.h"
-#import "ExampleWKWebViewController.h"
 
 static NSString * const cellID = @"AboutCellID";
 
@@ -40,7 +39,7 @@ static NSString * const cellID = @"AboutCellID";
 }
 
 - (void)initTableView{
-    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenSizeWidth, kScreenSizeHeight - kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -48,10 +47,13 @@ static NSString * const cellID = @"AboutCellID";
     tableView.scrollEnabled = NO;
     [self.view addSubview:tableView];
     self.tableView = tableView;
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 
 - (void)requestData{
-    NSArray *dataArray = @[@{@"title":@"新浪微博",@"detail":@"范东同学"},@{@"title":@"GitHub",@"detail":@"范东同学"},@{@"title":@"JS交互测试",@"detail":@"范东同学"}];
+    NSArray *dataArray = @[@{@"title":@"新浪微博",@"detail":@"范东同学"},@{@"title":@"GitHub",@"detail":@"范东同学"}];
     [self.dataArray addObjectsFromArray:dataArray];
     [self.tableView reloadData];
 }
@@ -93,13 +95,6 @@ static NSString * const cellID = @"AboutCellID";
             WebViewController *webViewController = [[WebViewController alloc]init];
             webViewController.url = @"http://github.com/fandongtongxue";
             [self.navigationController pushViewController:webViewController animated:YES];
-        }
-            break;
-        case 2:
-        {
-            ExampleWKWebViewController* WKWebViewExampleController = [[ExampleWKWebViewController alloc] init];
-            WKWebViewExampleController.title = @"WKWebView";
-            [self.navigationController pushViewController:WKWebViewExampleController animated:YES];
         }
             break;
         default:

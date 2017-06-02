@@ -40,7 +40,7 @@ static NSString * const cellID = @"musicCellID";
 }
 
 - (void)initTableView{
-    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenSizeWidth, kScreenSizeHeight - kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     [tableView registerClass:[ImageFileDetailCell class] forCellReuseIdentifier:cellID];
@@ -48,6 +48,10 @@ static NSString * const cellID = @"musicCellID";
     tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:tableView];
     self.tableView = tableView;
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 
 - (void)initRefreshUI{
@@ -175,17 +179,17 @@ static NSString * const cellID = @"musicCellID";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ImageFileDetailModel *model = self.dataArray[indexPath.row];
-//    NSString *videoUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//    MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
-//    [self presentMoviePlayerViewControllerAnimated:playerVC];
-//    [playerVC.moviePlayer play];
-//    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-    MusicPlayerViewController *playerVC = [[MusicPlayerViewController alloc]init];
-    playerVC.key = model.key;
-    playerVC.modelsArray = self.dataArray;
-    playerVC.index = indexPath.row;
-    playerVC.hidesBottomBarWhenPushed = YES;
-    [self presentViewController:playerVC animated:YES completion:nil];
+    NSString *videoUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
+    [self presentMoviePlayerViewControllerAnimated:playerVC];
+    [playerVC.moviePlayer play];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+//    MusicPlayerViewController *playerVC = [[MusicPlayerViewController alloc]init];
+//    playerVC.key = model.key;
+//    playerVC.modelsArray = self.dataArray;
+//    playerVC.index = indexPath.row;
+//    playerVC.hidesBottomBarWhenPushed = YES;
+//    [self presentViewController:playerVC animated:YES completion:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

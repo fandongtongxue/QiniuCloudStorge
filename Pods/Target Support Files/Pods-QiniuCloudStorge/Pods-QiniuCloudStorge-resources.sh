@@ -80,12 +80,10 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "$PODS_CONFIGURATION_BUILD_DIR/KRVideoPlayer/KRVideoPlayer.bundle"
   install_resource "MJRefresh/MJRefresh/MJRefresh.bundle"
   install_resource "$PODS_CONFIGURATION_BUILD_DIR/MWPhotoBrowser/MWPhotoBrowser.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "$PODS_CONFIGURATION_BUILD_DIR/KRVideoPlayer/KRVideoPlayer.bundle"
   install_resource "MJRefresh/MJRefresh/MJRefresh.bundle"
   install_resource "$PODS_CONFIGURATION_BUILD_DIR/MWPhotoBrowser/MWPhotoBrowser.bundle"
 fi

@@ -31,22 +31,42 @@
 }
 
 - (void)initSubViews{
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 15, kScreenSizeWidth - 40, 50)];
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectZero];
     titleLabel.font = [UIFont systemFontOfSize:15];
     titleLabel.numberOfLines = 0;
     titleLabel.textColor = [UIColor blackColor];
     [self.contentView addSubview:titleLabel];
     self.titleLabel = titleLabel;
     
-    UILabel *detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, titleLabel.bottom, kScreenSizeWidth - 40, 20)];
+    UILabel *detailLabel = [[UILabel alloc]initWithFrame:CGRectZero];
     detailLabel.font = [UIFont systemFontOfSize:15];
     detailLabel.textColor = [UIColor blackColor];
     [self.contentView addSubview:detailLabel];
     self.detailLabel = detailLabel;
     
-    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 99.5, kScreenSizeWidth, 0.5)];
+    UIView *line = [[UIView alloc]initWithFrame:CGRectZero];
     line.backgroundColor = [UIColor lightGrayColor];
     [self.contentView addSubview:line];
+    
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_left).offset(20);
+        make.top.equalTo(self.contentView.mas_top).offset(15);
+        make.right.equalTo(self.contentView.mas_right).offset(-20);
+        make.height.mas_equalTo(50);
+    }];
+    
+    [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_left).offset(20);
+        make.top.equalTo(self.titleLabel.mas_bottom);
+        make.right.equalTo(self.contentView.mas_right).offset(-20);
+        make.height.mas_equalTo(20);
+    }];
+    
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_left);
+        make.right.equalTo(self.contentView.mas_right);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-0.5);
+    }];
 }
 
 - (void)setModel:(ImageFileDetailModel *)model{

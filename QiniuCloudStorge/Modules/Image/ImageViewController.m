@@ -25,6 +25,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     [self initNavigationBar];
     [self initSubViews];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarOrientationDidChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
 
 #pragma mark - UI
@@ -37,8 +38,7 @@
 }
 
 - (void)initSubViews{
-    
-    UIImageView *currentImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, kScreenSizeWidth - 20, kScreenSizeHeight - 10 - 10 - 10 - 40 - kBottomBarHeight - kStatusBarHeight - kNavigationBarHeight)];
+    UIImageView *currentImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
     currentImageView.layer.borderColor = [UIColor blackColor].CGColor;
     currentImageView.layer.borderWidth = 1;
     currentImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -46,7 +46,14 @@
     [self.view addSubview:currentImageView];
     self.currentImageView = currentImageView;
     
-    UIButton *selectImageButton = [[UIButton alloc]initWithFrame:CGRectMake(10, currentImageView.bottom + 10, (kScreenSizeWidth - 30)/2, 40)];
+    [self.currentImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(10);
+        make.right.equalTo(self.view.mas_right).offset(-10);
+        make.top.equalTo(self.view.mas_top).offset(10);
+        make.bottom.equalTo(self.view.mas_bottom).offset(- 10 - 10 - 40 - kBottomBarHeight);
+    }];
+    
+    UIButton *selectImageButton = [[UIButton alloc]initWithFrame:CGRectZero];
     [selectImageButton setTitle:@"选取图片" forState:UIControlStateNormal];
     [selectImageButton.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
     [selectImageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -56,7 +63,7 @@
     [selectImageButton addTarget:self action:@selector(selectImage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:selectImageButton];
     
-    UIButton *uploadImageButton = [[UIButton alloc]initWithFrame:CGRectMake(selectImageButton.right + 10, currentImageView.bottom + 10, (kScreenSizeWidth - 30)/2, 40)];
+    UIButton *uploadImageButton = [[UIButton alloc]initWithFrame:CGRectZero];
     [uploadImageButton setTitle:@"上传图片" forState:UIControlStateNormal];
     [uploadImageButton.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
     [uploadImageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -65,10 +72,24 @@
     uploadImageButton.clipsToBounds = YES;
     [uploadImageButton addTarget:self action:@selector(uploadImage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:uploadImageButton];
+    
+    [selectImageButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(10);
+        make.top.equalTo(self.currentImageView.mas_bottom).offset(10);
+        make.right.equalTo(uploadImageButton.mas_left).offset(-10);
+        make.height.mas_equalTo(40);
+        make.width.mas_equalTo(uploadImageButton.mas_width);
+    }];
+    [uploadImageButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(selectImageButton.mas_right).offset(10);
+        make.top.equalTo(self.currentImageView.mas_bottom).offset(10);
+        make.right.equalTo(self.view.mas_right).offset(-10);
+        make.height.mas_equalTo(40);
+        make.width.mas_equalTo(selectImageButton.mas_width);
+    }];
 }
 
 #pragma mark - Action
-
 -(void)selectImage{
     kWSelf;
     if (IOS8_OR_LATER) {
@@ -133,9 +154,9 @@
     }
 }
 
-//- (void)toUploadListVC{
-//    
-//}
+- (void)statusBarOrientationDidChange:(NSNotification *)noti{
+    [self.view layoutSubviews];
+}
 
 - (void)toFileListVC{
     ImageFileListViewController *imageFileListVC = [[ImageFileListViewController alloc]init];

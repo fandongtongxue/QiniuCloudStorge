@@ -46,7 +46,7 @@
     //asr_audio_path保存录音文件名，如不再需要，设置value为nil表示取消，默认目录是documents
     [_iflyRecognizerView setParameter:@"asrview.pcm " forKey:[IFlySpeechConstant ASR_AUDIO_PATH]];
     
-    UITextView *resultTextView = [[UITextView alloc]initWithFrame:CGRectMake(10, 10, kScreenSizeWidth - 20, kScreenSizeHeight - kStatusBarHeight - kNavigationBarHeight - 20)];
+    UITextView *resultTextView = [[UITextView alloc]initWithFrame:CGRectZero];
     resultTextView.backgroundColor = [UIColor whiteColor];
     resultTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     resultTextView.layer.borderWidth = 0.5;
@@ -54,6 +54,12 @@
     resultTextView.text = @"";
     [self.view addSubview:resultTextView];
     self.resultTextView = resultTextView;
+    [self.resultTextView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(10);
+        make.right.equalTo(self.view.mas_right).offset(-10);
+        make.top.equalTo(self.view.mas_top).offset(10);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-10);
+    }];
 }
 
 - (void)startRecoginze:(UIButton *)sender{

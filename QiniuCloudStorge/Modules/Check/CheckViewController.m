@@ -28,7 +28,7 @@
 }
 
 - (void)initSubviews{
-    UIButton *startBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 200, 50)];
+    UIButton *startBtn = [[UIButton alloc]initWithFrame:CGRectZero];
     [startBtn setTitle:@"开始使用" forState:UIControlStateNormal];
     [startBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [startBtn setBackgroundColor:[UIColor blackColor]];
@@ -38,6 +38,11 @@
     [startBtn addTarget:self action:@selector(startBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:startBtn];
     self.startBtn = startBtn;
+    [self.startBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.width.mas_equalTo(200);
+        make.height.mas_equalTo(50);
+    }];
 }
 
 - (void)startBtnAction:(UIButton *)sender{

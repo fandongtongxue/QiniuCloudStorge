@@ -35,47 +35,82 @@
 }
 
 - (void)initSubviews{
-    UITextField *accessKeyTextField = [[UITextField alloc]initWithFrame:CGRectMake(20, 64 + 20, kScreenSizeWidth - 40, 40)];
-    accessKeyTextField.placeholder = @"输入你的七牛云存储AccessKey";
+    UITextField *accessKeyTextField = [[UITextField alloc]initWithFrame:CGRectZero];
+    accessKeyTextField.placeholder = @"     输入你的七牛云存储AccessKey";
     accessKeyTextField.layer.borderWidth = 1;
     accessKeyTextField.layer.borderColor = [UIColor blackColor].CGColor;
     accessKeyTextField.font = [UIFont systemFontOfSize:15];
     accessKeyTextField.textColor = [UIColor blackColor];
     accessKeyTextField.delegate = self;
     accessKeyTextField.tag = kConfigTextFieldBaseTag;
+    accessKeyTextField.layer.cornerRadius = 20;
+    accessKeyTextField.clipsToBounds = YES;
+    accessKeyTextField.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:accessKeyTextField];
     self.accessKeyTextField = accessKeyTextField;
     
-    UITextField *secretKeyTextField = [[UITextField alloc]initWithFrame:CGRectMake(20, CGRectGetMaxY(accessKeyTextField.frame) + 20, kScreenSizeWidth - 40, 40)];
-    secretKeyTextField.placeholder = @"输入你的七牛云存储SecretKey";
+    [self.accessKeyTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(20);
+        make.top.equalTo(self.view.mas_top).offset(kStatusBarHeight + kNavigationBarHeight + 20);
+        make.right.equalTo(self.view.mas_right).offset(-20);
+        make.height.mas_equalTo(40);
+    }];
+    
+    UITextField *secretKeyTextField = [[UITextField alloc]initWithFrame:CGRectZero];
+    secretKeyTextField.placeholder = @"     输入你的七牛云存储SecretKey";
     secretKeyTextField.layer.borderWidth = 1;
     secretKeyTextField.layer.borderColor = [UIColor blackColor].CGColor;
     secretKeyTextField.font = [UIFont systemFontOfSize:15];
     secretKeyTextField.textColor = [UIColor blackColor];
     secretKeyTextField.delegate = self;
     secretKeyTextField.tag = kConfigTextFieldBaseTag + 1;
+    secretKeyTextField.layer.cornerRadius = 20;
+    secretKeyTextField.clipsToBounds = YES;
+    secretKeyTextField.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:secretKeyTextField];
     self.secretKeyTextField = secretKeyTextField;
     
-    UITextField *bucketTextField = [[UITextField alloc]initWithFrame:CGRectMake(20, CGRectGetMaxY(secretKeyTextField.frame) + 20, kScreenSizeWidth - 40, 40)];
-    bucketTextField.placeholder = @"输入你的七牛云存储Bucket";
+    [self.secretKeyTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(20);
+        make.top.equalTo(self.accessKeyTextField.mas_bottom).offset(20);
+        make.right.equalTo(self.view.mas_right).offset(-20);
+        make.height.mas_equalTo(40);
+    }];
+    
+    UITextField *bucketTextField = [[UITextField alloc]initWithFrame:CGRectZero];
+    bucketTextField.placeholder = @"     输入你的七牛云存储Bucket";
     bucketTextField.layer.borderWidth = 1;
     bucketTextField.layer.borderColor = [UIColor blackColor].CGColor;
     bucketTextField.font = [UIFont systemFontOfSize:15];
     bucketTextField.textColor = [UIColor blackColor];
     bucketTextField.delegate = self;
     bucketTextField.tag = kConfigTextFieldBaseTag + 2;
+    bucketTextField.layer.cornerRadius = 20;
+    bucketTextField.clipsToBounds = YES;
+    bucketTextField.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:bucketTextField];
     self.bucketTextField = bucketTextField;
+    [self.bucketTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(20);
+        make.top.equalTo(self.secretKeyTextField.mas_bottom).offset(20);
+        make.right.equalTo(self.view.mas_right).offset(-20);
+        make.height.mas_equalTo(40);
+    }];
     
-    UIButton *confirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(20, CGRectGetMaxY(bucketTextField.frame) + 20, kScreenSizeWidth - 40, 40)];
+    UIButton *confirmBtn = [[UIButton alloc]initWithFrame:CGRectZero];
     [confirmBtn setTitle:@"提交" forState:UIControlStateNormal];
     [confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [confirmBtn setBackgroundColor:[UIColor blackColor]];
-    confirmBtn.layer.cornerRadius = 5;
+    confirmBtn.layer.cornerRadius = 20;
     confirmBtn.clipsToBounds = YES;
     [confirmBtn addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:confirmBtn];
+    [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(20);
+        make.right.equalTo(self.view.mas_right).offset(-20);
+        make.top.equalTo(self.bucketTextField.mas_bottom).offset(20);
+        make.height.mas_equalTo(40);
+    }];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

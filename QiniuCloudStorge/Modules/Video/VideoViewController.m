@@ -37,12 +37,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"视频";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"视频列表" style:UIBarButtonItemStylePlain target:self action:@selector(toFileListVC)];
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"上传列表" style:UIBarButtonItemStylePlain target:self action:@selector(toUploadListVC)];
 }
 
 - (void)initSubViews{
     
-    UIImageView *currentImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, kScreenSizeWidth - 20, kScreenSizeHeight - 10 - 10 - 10 - 40 - kBottomBarHeight - kStatusBarHeight - kNavigationBarHeight)];
+    UIImageView *currentImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
     currentImageView.layer.borderColor = [UIColor blackColor].CGColor;
     currentImageView.layer.borderWidth = 1;
     currentImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -50,7 +49,14 @@
     [self.view addSubview:currentImageView];
     self.currentImageView = currentImageView;
     
-    UIButton *selectImageButton = [[UIButton alloc]initWithFrame:CGRectMake(10, currentImageView.bottom + 10, (kScreenSizeWidth - 30)/2, 40)];
+    [self.currentImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(10);
+        make.right.equalTo(self.view.mas_right).offset(-10);
+        make.top.equalTo(self.view.mas_top).offset(10);
+        make.bottom.equalTo(self.view.mas_bottom).offset(- 10 - 10 - 40 - kBottomBarHeight);
+    }];
+    
+    UIButton *selectImageButton = [[UIButton alloc]initWithFrame:CGRectZero];
     [selectImageButton setTitle:@"选取视频" forState:UIControlStateNormal];
     [selectImageButton.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
     [selectImageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -60,7 +66,7 @@
     [selectImageButton addTarget:self action:@selector(selectVideo) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:selectImageButton];
     
-    UIButton *uploadImageButton = [[UIButton alloc]initWithFrame:CGRectMake(selectImageButton.right + 10, currentImageView.bottom + 10, (kScreenSizeWidth - 30)/2, 40)];
+    UIButton *uploadImageButton = [[UIButton alloc]initWithFrame:CGRectZero];
     [uploadImageButton setTitle:@"上传视频" forState:UIControlStateNormal];
     [uploadImageButton.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
     [uploadImageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -69,6 +75,21 @@
     uploadImageButton.clipsToBounds = YES;
     [uploadImageButton addTarget:self action:@selector(uploadVideo) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:uploadImageButton];
+    
+    [selectImageButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(10);
+        make.top.equalTo(self.currentImageView.mas_bottom).offset(10);
+        make.right.equalTo(uploadImageButton.mas_left).offset(-10);
+        make.height.mas_equalTo(40);
+        make.width.mas_equalTo(uploadImageButton.mas_width);
+    }];
+    [uploadImageButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(selectImageButton.mas_right).offset(10);
+        make.top.equalTo(self.currentImageView.mas_bottom).offset(10);
+        make.right.equalTo(self.view.mas_right).offset(-10);
+        make.height.mas_equalTo(40);
+        make.width.mas_equalTo(selectImageButton.mas_width);
+    }];
 }
 
 - (void)toFileListVC{
@@ -76,10 +97,6 @@
     videoListVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:videoListVC animated:YES];
 }
-
-//- (void)toUploadListVC{
-//    
-//}
 
 -(void)selectVideo{
     kWSelf;

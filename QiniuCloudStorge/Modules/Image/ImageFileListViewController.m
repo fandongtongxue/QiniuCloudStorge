@@ -40,7 +40,7 @@ static NSString * const cellID = @"imageCellID";
 }
 
 - (void)initTableView{
-    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenSizeWidth, kScreenSizeHeight - kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     [tableView registerClass:[ImageFileDetailCell class] forCellReuseIdentifier:cellID];
@@ -48,6 +48,9 @@ static NSString * const cellID = @"imageCellID";
     tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:tableView];
     self.tableView = tableView;
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 
 - (void)initRefreshUI{

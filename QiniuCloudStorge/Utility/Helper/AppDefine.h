@@ -20,6 +20,9 @@
 #define kScreenSizeHeight                    ([[UIScreen mainScreen] bounds].size.height)
 #define kScreenSizeWidth                     ([[UIScreen mainScreen] bounds].size.width)
 
+#define MIN_WIDTH MIN(kScreenSizeWidth,kScreenSizeHeight)
+#define MAX_WIDTH MAX(kScreenSizeWidth,kScreenSizeHeight)
+
 #define kNavigationBarHeight  44
 #define kStatusBarHeight         [[UIApplication sharedApplication] statusBarFrame].size.height
 #define kBottomBarHeight       49

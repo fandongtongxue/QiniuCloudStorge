@@ -10,7 +10,6 @@
 #import "ImageFileDetailCell.h"
 #import "ImageFileDetailModel.h"
 #import "ConfigViewController.h"
-#import "VideoDetailViewController.h"
 
 #define kGetFileListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_video.php"
 
@@ -40,7 +39,7 @@ static NSString * const cellID = @"videoCellID";
 }
 
 - (void)initTableView{
-    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenSizeWidth, kScreenSizeHeight - kNavigationBarHeight - kStatusBarHeight) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     [tableView registerClass:[ImageFileDetailCell class] forCellReuseIdentifier:cellID];
@@ -48,6 +47,10 @@ static NSString * const cellID = @"videoCellID";
     tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:tableView];
     self.tableView = tableView;
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 
 - (void)initRefreshUI{
@@ -176,23 +179,19 @@ static NSString * const cellID = @"videoCellID";
     ImageFileDetailModel *model = self.dataArray[indexPath.row];
     //网络路径
     NSString *videoUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//    //本地路径
-//    NSString *videoCacheDir = [NSHomeDirectory() stringByAppendingPathComponent:kVideoDetailLocalPrefix];
-//    NSString *lastPathComponent = [NSString stringWithFormat:@"%@.mov", model.key];
-//    NSString *videoPath = [videoCacheDir stringByAppendingPathComponent:lastPathComponent];
-//    if ([[NSFileManager defaultManager] fileExistsAtPath:videoPath]) {
-//        MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:videoPath]];
-//        [self presentMoviePlayerViewControllerAnimated:playerVC];
-//        [playerVC.moviePlayer play];
-//    }else{
-//        MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
-//        [self presentMoviePlayerViewControllerAnimated:playerVC];
-//        [playerVC.moviePlayer play];
-//    }
-    VideoDetailViewController *detailVC = [[VideoDetailViewController alloc]init];
-    detailVC.contentURL = videoUrl;
-    detailVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detailVC animated:YES];
+    //本地路径
+    NSString *videoCacheDir = [NSHomeDirectory() stringByAppendingPathComponent:kVideoDetailLocalPrefix];
+    NSString *lastPathComponent = [NSString stringWithFormat:@"%@.mov", model.key];
+    NSString *videoPath = [videoCacheDir stringByAppendingPathComponent:lastPathComponent];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:videoPath]) {
+        MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:videoPath]];
+        [self presentMoviePlayerViewControllerAnimated:playerVC];
+        [playerVC.moviePlayer play];
+    }else{
+        MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
+        [self presentMoviePlayerViewControllerAnimated:playerVC];
+        [playerVC.moviePlayer play];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
