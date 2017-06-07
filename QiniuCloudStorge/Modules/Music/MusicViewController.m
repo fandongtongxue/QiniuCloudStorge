@@ -190,6 +190,8 @@ static NSString * const cellID = @"musicCellID";
     AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
     playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:videoUrl]];
     [playerVC.player play];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
+                                           error:nil];
     [self presentViewController:playerVC animated:YES completion:nil];
 }
 
