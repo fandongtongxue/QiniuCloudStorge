@@ -10,6 +10,7 @@
 #import "ImageFileDetailCell.h"
 #import "ImageFileDetailModel.h"
 #import "ConfigViewController.h"
+#import <AVKit/AVKit.h>
 
 #define kGetFileListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_video.php"
 
@@ -184,13 +185,15 @@ static NSString * const cellID = @"videoCellID";
     NSString *lastPathComponent = [NSString stringWithFormat:@"%@.mov", model.key];
     NSString *videoPath = [videoCacheDir stringByAppendingPathComponent:lastPathComponent];
     if ([[NSFileManager defaultManager] fileExistsAtPath:videoPath]) {
-        MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:videoPath]];
-        [self presentMoviePlayerViewControllerAnimated:playerVC];
-        [playerVC.moviePlayer play];
+        AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
+        playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL fileURLWithPath:videoPath]];
+        [playerVC.player play];
+        [self presentViewController:playerVC animated:YES completion:nil];
     }else{
-        MPMoviePlayerViewController *playerVC = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoUrl]];
-        [self presentMoviePlayerViewControllerAnimated:playerVC];
-        [playerVC.moviePlayer play];
+        AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
+        playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:videoUrl]];
+        [playerVC.player play];
+        [self presentViewController:playerVC animated:YES completion:nil];
     }
 }
 
