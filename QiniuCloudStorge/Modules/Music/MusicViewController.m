@@ -10,7 +10,6 @@
 #import "ImageFileDetailCell.h"
 #import "ImageFileDetailModel.h"
 #import "ConfigViewController.h"
-#import "MusicPlayerViewController.h"
 #import <AVKit/AVKit.h>
 
 #define kGetFileListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_music.php"
@@ -181,12 +180,6 @@ static NSString * const cellID = @"musicCellID";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ImageFileDetailModel *model = self.dataArray[indexPath.row];
     NSString *videoUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//    MusicPlayerViewController *playerVC = [[MusicPlayerViewController alloc]init];
-//    playerVC.key = model.key;
-//    playerVC.modelsArray = self.dataArray;
-//    playerVC.index = indexPath.row;
-//    playerVC.hidesBottomBarWhenPushed = YES;
-//    [self presentViewController:playerVC animated:YES completion:nil];
     AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
     playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:videoUrl]];
     [playerVC.player play];

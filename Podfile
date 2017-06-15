@@ -7,7 +7,6 @@ pod 'AMapLocation'
 pod 'MWPhotoBrowser'
 pod 'MBProgressHUD'
 pod 'MJRefresh'
-pod 'DOUAudioStreamer', '0.2.11'
 pod 'JDStatusBarNotification'
 pod 'Masonry'
 target 'QiniuCloudStorge' do
