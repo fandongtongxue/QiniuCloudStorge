@@ -8,11 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImageFileListViewController : UIViewController{
-    NSMutableArray *_selections;
-}
-
-@property (nonatomic, strong) NSMutableArray *photos;
-@property (nonatomic, strong) NSMutableArray *thumbs;
+@interface ImageFileListViewController : UIViewController
 
 @end

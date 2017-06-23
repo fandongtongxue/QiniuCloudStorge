@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationBar.barTintColor = [UIColor colorWithHexString:@"0xffde00"];
+    self.navigationBar.barTintColor = [UIColor blackColor];
     self.navigationBar.translucent = NO;
     // 导航栏文字颜色、大小
     [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:18]}];

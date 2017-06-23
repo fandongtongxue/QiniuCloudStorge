@@ -7,8 +7,6 @@
 //
 
 #import "VideoFileListViewController.h"
-#import "ImageFileDetailCell.h"
-#import "ImageFileDetailModel.h"
 #import "ConfigViewController.h"
 #import <AVKit/AVKit.h>
 
@@ -43,7 +41,7 @@ static NSString * const cellID = @"videoCellID";
     UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
-    [tableView registerClass:[ImageFileDetailCell class] forCellReuseIdentifier:cellID];
+    [tableView registerClass:[FileDetailCell class] forCellReuseIdentifier:cellID];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.showsVerticalScrollIndicator = YES;
     [self.view addSubview:tableView];
@@ -83,7 +81,7 @@ static NSString * const cellID = @"videoCellID";
                 [weakSelf.marker setString:resultDic[@"data"][@"marker"]];
             }
             for (NSInteger i = 0; i<resultArray.count; i++) {
-                ImageFileDetailModel *model = [ImageFileDetailModel modelWithDict:resultArray[i]];
+                FileDetailModel *model = [FileDetailModel modelWithDict:resultArray[i]];
                 [weakSelf.dataArray addObject:model];
             }
             if (resultArray.count < 10) {
@@ -130,7 +128,7 @@ static NSString * const cellID = @"videoCellID";
                 [weakSelf.marker setString:resultDic[@"data"][@"marker"]];
             }
             for (NSInteger i = 0; i<resultArray.count; i++) {
-                ImageFileDetailModel *model = [ImageFileDetailModel modelWithDict:resultArray[i]];
+                FileDetailModel *model = [FileDetailModel modelWithDict:resultArray[i]];
                 [weakSelf.dataArray addObject:model];
             }
             if (resultArray.count < 10) {
@@ -170,14 +168,14 @@ static NSString * const cellID = @"videoCellID";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ImageFileDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    ImageFileDetailModel *model = self.dataArray[indexPath.row];
+    FileDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    FileDetailModel *model = self.dataArray[indexPath.row];
     cell.model = model;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ImageFileDetailModel *model = self.dataArray[indexPath.row];
+    FileDetailModel *model = self.dataArray[indexPath.row];
     //网络路径
     NSString *videoUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     //本地路径
@@ -207,7 +205,7 @@ static NSString * const cellID = @"videoCellID";
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    ImageFileDetailModel *model = self.dataArray[indexPath.row];
+    FileDetailModel *model = self.dataArray[indexPath.row];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //删除视频
         kWSelf;

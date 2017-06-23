@@ -9,6 +9,8 @@
 #ifndef AppHeader_h
 #define AppHeader_h
 
+#import "FileDetailCell.h"
+#import "FileDetailModel.h"
 #import "MBProgressHUD.h"
 #import "AppHelper.h"
 #import "AFNetworking.h"
