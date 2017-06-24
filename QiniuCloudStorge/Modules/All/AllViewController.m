@@ -9,6 +9,7 @@
 #import "AllViewController.h"
 #import "ConfigViewController.h"
 #import <AVKit/AVKit.h>
+#import "FDPhotoBrowserHeader.h"
 
 #define kGetFileImageListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_image.php"
 #define kGetFileVideoListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_video.php"
@@ -244,7 +245,18 @@ static NSString * const cellID = @"fileCellID";
     switch (self.segmentedControl.selectedSegmentIndex) {
         case 0:
         {
-            
+            NSMutableArray *tempArray = [NSMutableArray array];
+            for (FileDetailModel *model in self.dataArray) {
+                FDPhotoBrowserItem *item = [[FDPhotoBrowserItem alloc]init];
+                NSString *fileUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                item.url = fileUrl;
+                [tempArray addObject:item];
+            }
+            FDPhotoBrowserView *browserView = [[FDPhotoBrowserView alloc]initWithFrame:CGRectZero ItemArray:tempArray CurrentIndex:indexPath.row];
+            [browserView show:nil];
+            [browserView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo([UIApplication sharedApplication].keyWindow);
+            }];
         }
             break;
         case 1:
