@@ -30,12 +30,6 @@ static NSString * const cellID = @"AboutCellID";
 - (void)initNavigationBar{
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"关于作者";
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"0xffde00"];
-    self.navigationController.navigationBar.translucent = NO;
-    // 导航栏文字颜色、大小
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:18]}];
-    // 设置导航栏左右按钮颜色
-    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
 }
 
 - (void)initTableView{

@@ -59,6 +59,7 @@
 		CB81A9D41EFD65190023DDC0 /* AllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB81A9D31EFD65190023DDC0 /* AllViewController.m */; };
 		CB81A9D91EFD67870023DDC0 /* FileDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB81A9D61EFD67320023DDC0 /* FileDetailCell.m */; };
 		CB81A9DA1EFD67870023DDC0 /* FileDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB81A9D71EFD67320023DDC0 /* FileDetailModel.m */; };
+		CBC12F6B1EFE518D00B4356A /* FDPhotoBrowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC12F6A1EFE518D00B4356A /* FDPhotoBrowserImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,6 +152,12 @@
 		CB81A9D61EFD67320023DDC0 /* FileDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileDetailCell.m; sourceTree = "<group>"; };
 		CB81A9D71EFD67320023DDC0 /* FileDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileDetailModel.m; sourceTree = "<group>"; };
 		CB81A9D81EFD67320023DDC0 /* FileDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileDetailModel.h; sourceTree = "<group>"; };
+		CBC12F651EFE4B4B00B4356A /* FDPhotoBrowserItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FDPhotoBrowserItem.h; sourceTree = "<group>"; };
+		CBC12F661EFE4B4B00B4356A /* FDPhotoBrowserItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FDPhotoBrowserItem.m; sourceTree = "<group>"; };
+		CBC12F671EFE4B4B00B4356A /* FDPhotoBrowserView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FDPhotoBrowserView.h; sourceTree = "<group>"; };
+		CBC12F681EFE4B4B00B4356A /* FDPhotoBrowserView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FDPhotoBrowserView.m; sourceTree = "<group>"; };
+		CBC12F691EFE518D00B4356A /* FDPhotoBrowserImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FDPhotoBrowserImageView.h; sourceTree = "<group>"; };
+		CBC12F6A1EFE518D00B4356A /* FDPhotoBrowserImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FDPhotoBrowserImageView.m; sourceTree = "<group>"; };
 		E73471291617E390AE842469 /* Pods-QiniuCloudStorge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiniuCloudStorge.release.xcconfig"; path = "Pods/Target Support Files/Pods-QiniuCloudStorge/Pods-QiniuCloudStorge.release.xcconfig"; sourceTree = "<group>"; };
 		F0FA3ED4A0983B1A899C33CA /* libPods-QiniuCloudStorge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QiniuCloudStorge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -323,6 +330,7 @@
 		AFB2E7761D95301000ECC1D0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CBC12F641EFE4B4B00B4356A /* FDPhotoBrowserView */,
 				CB81A9D51EFD67320023DDC0 /* FileDetailCell.h */,
 				CB81A9D61EFD67320023DDC0 /* FileDetailCell.m */,
 				CB81A9D81EFD67320023DDC0 /* FileDetailModel.h */,
@@ -336,6 +344,7 @@
 		AFB2E7791D95301000ECC1D0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CB81A9DB1EFE19A50023DDC0 /* Upload */,
 				CB81A9D11EFD64B40023DDC0 /* All */,
 				AFFC618D1DB0B6E100591933 /* File */,
 				AF77FCB31DAB2FA100ADA0F8 /* Music */,
@@ -519,6 +528,26 @@
 			path = All;
 			sourceTree = "<group>";
 		};
+		CB81A9DB1EFE19A50023DDC0 /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Upload;
+			sourceTree = "<group>";
+		};
+		CBC12F641EFE4B4B00B4356A /* FDPhotoBrowserView */ = {
+			isa = PBXGroup;
+			children = (
+				CBC12F651EFE4B4B00B4356A /* FDPhotoBrowserItem.h */,
+				CBC12F661EFE4B4B00B4356A /* FDPhotoBrowserItem.m */,
+				CBC12F671EFE4B4B00B4356A /* FDPhotoBrowserView.h */,
+				CBC12F681EFE4B4B00B4356A /* FDPhotoBrowserView.m */,
+				CBC12F691EFE518D00B4356A /* FDPhotoBrowserImageView.h */,
+				CBC12F6A1EFE518D00B4356A /* FDPhotoBrowserImageView.m */,
+			);
+			path = FDPhotoBrowserView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -689,6 +718,7 @@
 				AFB2E7C01D95301000ECC1D0 /* RootNavigationController.m in Sources */,
 				AFB2E7B81D95301000ECC1D0 /* ContainerViewController.m in Sources */,
 				AFB2E7C71D95301000ECC1D0 /* AppHelper.m in Sources */,
+				CBC12F6B1EFE518D00B4356A /* FDPhotoBrowserImageView.m in Sources */,
 				AF4788B11D9CF4D400E9CF24 /* UIViewController+FD.m in Sources */,
 				AF8F82961DC5CC0B002107C9 /* UIButton+EnlargeEdge.m in Sources */,
 				AF5A6C5B1DACD8EB00C60505 /* UINavigationController+Autorotate.m in Sources */,

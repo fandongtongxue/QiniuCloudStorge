@@ -8,7 +8,6 @@ pod 'MBProgressHUD'
 pod 'MJRefresh'
 pod 'JDStatusBarNotification'
 pod 'Masonry'
-pod 'YYKit'
 target 'QiniuCloudStorge' do
   # Uncomment this line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!

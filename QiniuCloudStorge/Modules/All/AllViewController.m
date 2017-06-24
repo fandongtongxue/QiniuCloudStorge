@@ -42,6 +42,8 @@ static NSString * const cellID = @"fileCellID";
 - (void)initNavigationBar{
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"七牛云";
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(uploadFile)];
+    self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 - (void)initSegmentedControl{
@@ -75,6 +77,10 @@ static NSString * const cellID = @"fileCellID";
     }];
 }
 
+- (void)uploadFile{
+    DLOG(@"点击了上传文件按钮");
+}
+
 - (void)segmentedControlDidChange:(UISegmentedControl *)sender{
     switch (sender.selectedSegmentIndex) {
         case 0:
@@ -97,14 +103,14 @@ static NSString * const cellID = @"fileCellID";
             break;
     }
     self.tableView.mj_footer = nil;
-    [self.tableView.mj_header beginRefreshing];
+    [_marker setString:@""];
+    [self requestFirstPageData];
 }
 
 - (void)initRefreshUI{
     kWSelf;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [_marker setString:@""];
-        [weakSelf.dataArray removeAllObjects];
         [weakSelf requestFirstPageData];
     }];
     self.tableView.mj_header = header;
@@ -112,12 +118,17 @@ static NSString * const cellID = @"fileCellID";
 }
 
 - (void)requestFirstPageData{
+    if (![self.tableView.mj_header isRefreshing]) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
     kWSelf;
     NSDictionary *params = @{@"uuid":[AppHelper uuid],
                              @"marker":self.marker};
     [[BaseNetworking shareInstance] GET:_url dict:params succeed:^(id data) {
         [self.tableView.mj_header endRefreshing];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (data && [data isKindOfClass:[NSDictionary class]] && [[(NSDictionary *)data objectForKey:@"status"] integerValue] == 1) {
+            [self.dataArray removeAllObjects];
             NSDictionary *resultDic = (NSDictionary *)data;
             NSArray *resultArray = resultDic[@"data"][@"data"];
             if ([resultDic[@"data"][@"marker"] isKindOfClass:[NSString class]] && resultDic[@"data"][@"marker"] !=NULL) {
@@ -127,7 +138,7 @@ static NSString * const cellID = @"fileCellID";
                 FileDetailModel *model = [FileDetailModel modelWithDict:resultArray[i]];
                 [weakSelf.dataArray addObject:model];
             }
-            if (resultArray.count < 10) {
+            if (resultArray.count < 20) {
                 self.tableView.mj_footer.state = MJRefreshStateNoMoreData;
                 if (resultArray.count == 0) {
                     [JDStatusBarNotification showWithStatus:@"暂无文件" dismissAfter:1.5 styleName:JDStatusBarStyleDark];
@@ -147,6 +158,7 @@ static NSString * const cellID = @"fileCellID";
                 ConfigViewController *configVC = [[ConfigViewController alloc]init];
                 configVC.type = ConfigVCTypeReSubmit;
                 __weak typeof(configVC) weakConfigVC = configVC;
+                configVC.hidesBottomBarWhenPushed = YES;
                 [weakSelf.navigationController pushViewController:configVC animated:YES];
                 [configVC setFinishReSubmitBlock:^{
                     [weakConfigVC.navigationController popToRootViewControllerAnimated:YES];
@@ -161,6 +173,7 @@ static NSString * const cellID = @"fileCellID";
         }
     } failure:^(NSError *error) {
         [self.tableView.mj_header endRefreshing];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
     }];
 }
@@ -181,7 +194,7 @@ static NSString * const cellID = @"fileCellID";
                 FileDetailModel *model = [FileDetailModel modelWithDict:resultArray[i]];
                 [weakSelf.dataArray addObject:model];
             }
-            if (resultArray.count < 10) {
+            if (resultArray.count < 20) {
                 self.tableView.mj_footer.state = MJRefreshStateNoMoreData;
             }
             [weakSelf.tableView reloadData];
@@ -225,14 +238,16 @@ static NSString * const cellID = @"fileCellID";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    FileDetailCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     FileDetailModel *model = self.dataArray[indexPath.row];
     NSString *fileUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     switch (self.segmentedControl.selectedSegmentIndex) {
         case 0:
+        {
             
+        }
             break;
         case 1:
-        case 2:
         {
             //本地路径
             NSString *videoCacheDir = [NSHomeDirectory() stringByAppendingPathComponent:kVideoDetailLocalPrefix];
@@ -249,6 +264,16 @@ static NSString * const cellID = @"fileCellID";
                 [playerVC.player play];
                 [self presentViewController:playerVC animated:YES completion:nil];
             }
+        }
+            break;
+        case 2:
+        {
+            AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
+            playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:fileUrl]];
+            [playerVC.player play];
+            [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
+                                                   error:nil];
+            [self presentViewController:playerVC animated:YES completion:nil];
         }
             break;
         case 3:
