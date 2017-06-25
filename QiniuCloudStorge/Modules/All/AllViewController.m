@@ -83,6 +83,7 @@ static NSString * const cellID = @"fileCellID";
 }
 
 - (void)segmentedControlDidChange:(UISegmentedControl *)sender{
+    [self.tableView setContentOffset:CGPointMake(0, 0)];
     switch (sender.selectedSegmentIndex) {
         case 0:
             //图片

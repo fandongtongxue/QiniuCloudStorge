@@ -10,8 +10,15 @@
 
 typedef void(^singleTapBlock)(void);
 
-@interface FDPhotoBrowserImageView : UIImageView
+@interface FDPhotoBrowserImageView : UIView
 
+/**
+ 设置单击手势回调
+ 
+ @param block block
+ */
 - (void)setSingleTapBlock:(singleTapBlock)block;
+
+- (void)setImageWithURL:(NSString *)url;
 
 @end

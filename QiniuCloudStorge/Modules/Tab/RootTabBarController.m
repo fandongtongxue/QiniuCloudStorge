@@ -25,7 +25,7 @@
 
 - (void)initSubVC{
     
-    UITabBarItem *allItem = [[UITabBarItem alloc]initWithTitle:@"全部" image:[UIImage imageNamed:@"tab_img_image"] selectedImage:[UIImage imageNamed:@"tab_img_file"]];
+    UITabBarItem *allItem = [[UITabBarItem alloc]initWithTitle:@"全部" image:[UIImage imageNamed:@"tab_img_file"] selectedImage:[UIImage imageNamed:@"tab_img_file"]];
     UITabBarItem *moreItem =  [[UITabBarItem alloc]initWithTitle:@"更多" image:[UIImage imageNamed:@"tab_img_more"] selectedImage:[UIImage imageNamed:@"tab_img_more"]];
     
     AllViewController *allVC = [[AllViewController alloc]init];
