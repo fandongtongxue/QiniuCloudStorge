@@ -57,6 +57,7 @@
 		CB81A9D41EFD65190023DDC0 /* AllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB81A9D31EFD65190023DDC0 /* AllViewController.m */; };
 		CB81A9D91EFD67870023DDC0 /* FileDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB81A9D61EFD67320023DDC0 /* FileDetailCell.m */; };
 		CB81A9DA1EFD67870023DDC0 /* FileDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB81A9D71EFD67320023DDC0 /* FileDetailModel.m */; };
+		CBAF74841F10C8FE0069277E /* FDVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAF74821F10C8E60069277E /* FDVideoPlayerController.m */; };
 		CBC12F6B1EFE518D00B4356A /* FDPhotoBrowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC12F6A1EFE518D00B4356A /* FDPhotoBrowserImageView.m */; };
 		CBC12F6C1EFE699300B4356A /* FDPhotoBrowserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC12F661EFE4B4B00B4356A /* FDPhotoBrowserItem.m */; };
 		CBC12F6D1EFE699300B4356A /* FDPhotoBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC12F681EFE4B4B00B4356A /* FDPhotoBrowserView.m */; };
@@ -152,6 +153,9 @@
 		CB81A9D61EFD67320023DDC0 /* FileDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileDetailCell.m; sourceTree = "<group>"; };
 		CB81A9D71EFD67320023DDC0 /* FileDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileDetailModel.m; sourceTree = "<group>"; };
 		CB81A9D81EFD67320023DDC0 /* FileDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileDetailModel.h; sourceTree = "<group>"; };
+		CBAF74811F10C8E60069277E /* FDVideoPlayerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FDVideoPlayerController.h; sourceTree = "<group>"; };
+		CBAF74821F10C8E60069277E /* FDVideoPlayerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FDVideoPlayerController.m; sourceTree = "<group>"; };
+		CBAF74831F10C8E60069277E /* FDVideoPlayerController.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FDVideoPlayerController.xcassets; sourceTree = "<group>"; };
 		CBC12F651EFE4B4B00B4356A /* FDPhotoBrowserItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FDPhotoBrowserItem.h; sourceTree = "<group>"; };
 		CBC12F661EFE4B4B00B4356A /* FDPhotoBrowserItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FDPhotoBrowserItem.m; sourceTree = "<group>"; };
 		CBC12F671EFE4B4B00B4356A /* FDPhotoBrowserView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FDPhotoBrowserView.h; sourceTree = "<group>"; };
@@ -336,6 +340,7 @@
 		AFB2E7761D95301000ECC1D0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CBAF74801F10C8E60069277E /* FDVideoPlayerController */,
 				CBC12F641EFE4B4B00B4356A /* FDPhotoBrowserView */,
 				CB81A9D51EFD67320023DDC0 /* FileDetailCell.h */,
 				CB81A9D61EFD67320023DDC0 /* FileDetailCell.m */,
@@ -542,6 +547,16 @@
 			path = Upload;
 			sourceTree = "<group>";
 		};
+		CBAF74801F10C8E60069277E /* FDVideoPlayerController */ = {
+			isa = PBXGroup;
+			children = (
+				CBAF74811F10C8E60069277E /* FDVideoPlayerController.h */,
+				CBAF74821F10C8E60069277E /* FDVideoPlayerController.m */,
+				CBAF74831F10C8E60069277E /* FDVideoPlayerController.xcassets */,
+			);
+			path = FDVideoPlayerController;
+			sourceTree = "<group>";
+		};
 		CBC12F641EFE4B4B00B4356A /* FDPhotoBrowserView */ = {
 			isa = PBXGroup;
 			children = (
@@ -714,6 +729,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBAF74841F10C8FE0069277E /* FDVideoPlayerController.m in Sources */,
 				CBEE829D1F0E7D5B00BCC3DF /* MJProgressView.m in Sources */,
 				CBEE829A1F0E7D5500BCC3DF /* MJDownloadConst.m in Sources */,
 				CBEE829B1F0E7D5500BCC3DF /* MJDownloadManager.m in Sources */,

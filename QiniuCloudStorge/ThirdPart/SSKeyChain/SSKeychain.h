@@ -193,8 +193,6 @@ extern NSString *const kSSKeychainWhereKey;
  
  @param account The account for which to return the corresponding password.
  
- @param error If accessing the password fails, upon return contains an error that describes the problem.
- 
  @return Returns a the password data for the given account and service, or `nil` if the Keychain doesn't
  have data for the given parameters.
  

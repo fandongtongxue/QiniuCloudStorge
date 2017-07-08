@@ -11,6 +11,7 @@
 #import <AVKit/AVKit.h>
 #import "FDPhotoBrowserHeader.h"
 #import "MJDownload.h"
+#import "FDVideoPlayerController.h"
 
 #define kGetFileImageListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_image.php"
 #define kGetFileVideoListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_video.php"
@@ -253,7 +254,6 @@ static NSString * const cellID = @"fileCellID";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    FileDetailCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     FileDetailModel *model = self.dataArray[indexPath.row];
     NSString *fileUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     MJDownloadInfo *info = [[MJDownloadManager defaultManager] downloadInfoForURL:fileUrl];
@@ -281,22 +281,31 @@ static NSString * const cellID = @"fileCellID";
             NSString *lastPathComponent = [NSString stringWithFormat:@"%@.mov", model.key];
             NSString *videoPath = [videoCacheDir stringByAppendingPathComponent:lastPathComponent];
             if ([[NSFileManager defaultManager] fileExistsAtPath:videoPath]) {
-                AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
-                playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL fileURLWithPath:videoPath]];
-                [playerVC.player play];
-                [self presentViewController:playerVC animated:YES completion:nil];
+//                AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
+//                playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL fileURLWithPath:videoPath]];
+//                [playerVC.player play];
+//                [self presentViewController:playerVC animated:YES completion:nil];
+                FDVideoPlayerController *playerVC = [[FDVideoPlayerController alloc]initWithURL:[NSURL fileURLWithPath:videoPath]];
+                playerVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:playerVC animated:YES];
             }else{
                 if (info.state == MJDownloadStateCompleted) {
                     MJDownloadInfo *info = [[MJDownloadManager defaultManager] downloadInfoForURL:fileUrl];
-                    AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
-                    playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL fileURLWithPath:info.file]];
-                    [playerVC.player play];
-                    [self presentViewController:playerVC animated:YES completion:nil];
+//                    AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
+//                    playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL fileURLWithPath:info.file]];
+//                    [playerVC.player play];
+//                    [self presentViewController:playerVC animated:YES completion:nil];
+                    FDVideoPlayerController *playerVC = [[FDVideoPlayerController alloc]initWithURL:[NSURL fileURLWithPath:info.file]];
+                    playerVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:playerVC animated:YES];
                 }else{
-                    AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
-                    playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:fileUrl]];
-                    [playerVC.player play];
-                    [self presentViewController:playerVC animated:YES completion:nil];
+//                    AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
+//                    playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:fileUrl]];
+//                    [playerVC.player play];
+//                    [self presentViewController:playerVC animated:YES completion:nil];
+                    FDVideoPlayerController *playerVC = [[FDVideoPlayerController alloc]initWithURL:[NSURL URLWithString:fileUrl]];
+                    playerVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:playerVC animated:YES];
                 }
             }
         }
@@ -308,6 +317,8 @@ static NSString * const cellID = @"fileCellID";
                 AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
                 playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL fileURLWithPath:info.file]];
                 [playerVC.player play];
+                [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
+                                                       error:nil];
                 [self presentViewController:playerVC animated:YES completion:nil];
             }else{
                 AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];

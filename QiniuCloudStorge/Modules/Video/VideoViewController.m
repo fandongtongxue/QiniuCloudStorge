@@ -150,9 +150,9 @@
             [[NSFileManager defaultManager] createDirectoryAtPath:videoCacheDir withIntermediateDirectories:YES attributes:nil error:nil];
         }
         
-        self.key = [NSString stringWithFormat:@"Video_%@%@",[AppHelper getPlatformString],[NSDate dateWithTimeIntervalSinceNow:3600 * 8]];
+        self.key = [NSString stringWithFormat:@"Video_%@%@.mov",[AppHelper getPlatformString],[NSDate dateWithTimeIntervalSinceNow:3600 * 8]];
         
-        NSString *lastPathComponent = [NSString stringWithFormat:@"%@.mov", self.key];
+        NSString *lastPathComponent = self.key;
         NSString *videoPath = [videoCacheDir stringByAppendingPathComponent:lastPathComponent];
         [[NSFileManager defaultManager] copyItemAtPath:moviePath toPath:videoPath error:nil];
         self.data = [NSData dataWithContentsOfFile:videoPath];
