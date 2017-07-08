@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 @class FileDetailModel;
 
+typedef void(^tapOpenButtonBlock)(NSString *fileUrl);
+
 @interface FileDetailCell : UITableViewCell
 
 @property (nonatomic, strong) UIImageView *leftImageView;
@@ -16,5 +18,7 @@
 @property (nonatomic, strong) FileDetailModel *model;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
+
+- (void)setTapOpenButtonBlock:(tapOpenButtonBlock)block;
 
 @end

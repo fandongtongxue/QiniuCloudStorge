@@ -10,6 +10,7 @@
 #import "ConfigViewController.h"
 #import <AVKit/AVKit.h>
 #import "FDPhotoBrowserHeader.h"
+#import "MJDownload.h"
 
 #define kGetFileImageListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_image.php"
 #define kGetFileVideoListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_video.php"
@@ -236,6 +237,18 @@ static NSString * const cellID = @"fileCellID";
     FileDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     FileDetailModel *model = self.dataArray[indexPath.row];
     cell.model = model;
+    [cell setTapOpenButtonBlock:^(NSString *fileUrl) {
+        NSArray *fileUrlArray = [model.key componentsSeparatedByString:@"."];
+        NSString *suffixString = fileUrlArray.lastObject;
+        if ([suffixString isEqualToString:@"mp4"] || [suffixString isEqualToString:@"mov"] || [suffixString isEqualToString:@"avi"] || [suffixString isEqualToString:@"m4v"] || [suffixString isEqualToString:@"mp3"]) {
+            MJDownloadInfo *info = [[MJDownloadManager defaultManager] downloadInfoForURL:fileUrl];
+            AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
+            playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL fileURLWithPath:info.file]];
+            [playerVC.player play];
+            UIViewController *vc = [UIApplication sharedApplication].keyWindow.rootViewController;
+            [vc presentViewController:playerVC animated:YES completion:nil];
+        }
+    }];
     return cell;
 }
 
@@ -243,6 +256,7 @@ static NSString * const cellID = @"fileCellID";
     FileDetailCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     FileDetailModel *model = self.dataArray[indexPath.row];
     NSString *fileUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    MJDownloadInfo *info = [[MJDownloadManager defaultManager] downloadInfoForURL:fileUrl];
     switch (self.segmentedControl.selectedSegmentIndex) {
         case 0:
         {
@@ -272,21 +286,37 @@ static NSString * const cellID = @"fileCellID";
                 [playerVC.player play];
                 [self presentViewController:playerVC animated:YES completion:nil];
             }else{
-                AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
-                playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:fileUrl]];
-                [playerVC.player play];
-                [self presentViewController:playerVC animated:YES completion:nil];
+                if (info.state == MJDownloadStateCompleted) {
+                    MJDownloadInfo *info = [[MJDownloadManager defaultManager] downloadInfoForURL:fileUrl];
+                    AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
+                    playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL fileURLWithPath:info.file]];
+                    [playerVC.player play];
+                    [self presentViewController:playerVC animated:YES completion:nil];
+                }else{
+                    AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
+                    playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:fileUrl]];
+                    [playerVC.player play];
+                    [self presentViewController:playerVC animated:YES completion:nil];
+                }
             }
         }
             break;
         case 2:
         {
-            AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
-            playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:fileUrl]];
-            [playerVC.player play];
-            [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
-                                                   error:nil];
-            [self presentViewController:playerVC animated:YES completion:nil];
+            if (info.state == MJDownloadStateCompleted) {
+                MJDownloadInfo *info = [[MJDownloadManager defaultManager] downloadInfoForURL:fileUrl];
+                AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
+                playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL fileURLWithPath:info.file]];
+                [playerVC.player play];
+                [self presentViewController:playerVC animated:YES completion:nil];
+            }else{
+                AVPlayerViewController *playerVC = [[AVPlayerViewController alloc]init];
+                playerVC.player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:fileUrl]];
+                [playerVC.player play];
+                [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
+                                                       error:nil];
+                [self presentViewController:playerVC animated:YES completion:nil];
+            }
         }
             break;
         case 3:

@@ -60,6 +60,10 @@
 		CBC12F6B1EFE518D00B4356A /* FDPhotoBrowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC12F6A1EFE518D00B4356A /* FDPhotoBrowserImageView.m */; };
 		CBC12F6C1EFE699300B4356A /* FDPhotoBrowserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC12F661EFE4B4B00B4356A /* FDPhotoBrowserItem.m */; };
 		CBC12F6D1EFE699300B4356A /* FDPhotoBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC12F681EFE4B4B00B4356A /* FDPhotoBrowserView.m */; };
+		CBEE829A1F0E7D5500BCC3DF /* MJDownloadConst.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEE82931F0E776900BCC3DF /* MJDownloadConst.m */; };
+		CBEE829B1F0E7D5500BCC3DF /* MJDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEE82951F0E776900BCC3DF /* MJDownloadManager.m */; };
+		CBEE829C1F0E7D5500BCC3DF /* NSString+MJDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEE82971F0E776900BCC3DF /* NSString+MJDownload.m */; };
+		CBEE829D1F0E7D5B00BCC3DF /* MJProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBEE82991F0E779400BCC3DF /* MJProgressView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -155,6 +159,15 @@
 		CBC12F691EFE518D00B4356A /* FDPhotoBrowserImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FDPhotoBrowserImageView.h; sourceTree = "<group>"; };
 		CBC12F6A1EFE518D00B4356A /* FDPhotoBrowserImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FDPhotoBrowserImageView.m; sourceTree = "<group>"; };
 		CBC12F6E1EFE8F4C00B4356A /* FDPhotoBrowserHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FDPhotoBrowserHeader.h; sourceTree = "<group>"; };
+		CBEE82911F0E776900BCC3DF /* MJDownload.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJDownload.h; sourceTree = "<group>"; };
+		CBEE82921F0E776900BCC3DF /* MJDownloadConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJDownloadConst.h; sourceTree = "<group>"; };
+		CBEE82931F0E776900BCC3DF /* MJDownloadConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJDownloadConst.m; sourceTree = "<group>"; };
+		CBEE82941F0E776900BCC3DF /* MJDownloadManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJDownloadManager.h; sourceTree = "<group>"; };
+		CBEE82951F0E776900BCC3DF /* MJDownloadManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJDownloadManager.m; sourceTree = "<group>"; };
+		CBEE82961F0E776900BCC3DF /* NSString+MJDownload.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MJDownload.h"; sourceTree = "<group>"; };
+		CBEE82971F0E776900BCC3DF /* NSString+MJDownload.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJDownload.m"; sourceTree = "<group>"; };
+		CBEE82981F0E779400BCC3DF /* MJProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJProgressView.h; sourceTree = "<group>"; };
+		CBEE82991F0E779400BCC3DF /* MJProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJProgressView.m; sourceTree = "<group>"; };
 		E73471291617E390AE842469 /* Pods-QiniuCloudStorge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiniuCloudStorge.release.xcconfig"; path = "Pods/Target Support Files/Pods-QiniuCloudStorge/Pods-QiniuCloudStorge.release.xcconfig"; sourceTree = "<group>"; };
 		F0FA3ED4A0983B1A899C33CA /* libPods-QiniuCloudStorge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QiniuCloudStorge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -436,6 +449,7 @@
 		AFB2E7A01D95301000ECC1D0 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				CBEE82901F0E776900BCC3DF /* MJDownload */,
 				AF30C8A11DB8CFA700297A65 /* XFyun */,
 				AFFC617D1DB0682900591933 /* Fabric */,
 				AFA5A8E81DB06560002BA405 /* AliyunAnalitics */,
@@ -540,6 +554,22 @@
 				CBC12F6E1EFE8F4C00B4356A /* FDPhotoBrowserHeader.h */,
 			);
 			path = FDPhotoBrowserView;
+			sourceTree = "<group>";
+		};
+		CBEE82901F0E776900BCC3DF /* MJDownload */ = {
+			isa = PBXGroup;
+			children = (
+				CBEE82981F0E779400BCC3DF /* MJProgressView.h */,
+				CBEE82991F0E779400BCC3DF /* MJProgressView.m */,
+				CBEE82911F0E776900BCC3DF /* MJDownload.h */,
+				CBEE82921F0E776900BCC3DF /* MJDownloadConst.h */,
+				CBEE82931F0E776900BCC3DF /* MJDownloadConst.m */,
+				CBEE82941F0E776900BCC3DF /* MJDownloadManager.h */,
+				CBEE82951F0E776900BCC3DF /* MJDownloadManager.m */,
+				CBEE82961F0E776900BCC3DF /* NSString+MJDownload.h */,
+				CBEE82971F0E776900BCC3DF /* NSString+MJDownload.m */,
+			);
+			path = MJDownload;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -684,6 +714,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBEE829D1F0E7D5B00BCC3DF /* MJProgressView.m in Sources */,
+				CBEE829A1F0E7D5500BCC3DF /* MJDownloadConst.m in Sources */,
+				CBEE829B1F0E7D5500BCC3DF /* MJDownloadManager.m in Sources */,
+				CBEE829C1F0E7D5500BCC3DF /* NSString+MJDownload.m in Sources */,
 				CBC12F6C1EFE699300B4356A /* FDPhotoBrowserItem.m in Sources */,
 				CBC12F6D1EFE699300B4356A /* FDPhotoBrowserView.m in Sources */,
 				CB81A9D91EFD67870023DDC0 /* FileDetailCell.m in Sources */,
