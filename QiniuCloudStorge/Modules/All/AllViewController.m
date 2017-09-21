@@ -265,7 +265,8 @@ static NSString * const cellID = @"fileCellID";
             NSMutableArray *photos = [NSMutableArray arrayWithCapacity:self.dataArray.count];
             for (int i = 0; i<self.dataArray.count; i++) {
                 //替换为中等尺寸图片
-                NSString *url = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];;
+                FileDetailModel *detailModel = self.dataArray[i];
+                NSString *url = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[detailModel.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];;
                 MJPhoto *photo = [[MJPhoto alloc] init];
                 photo.url = [NSURL URLWithString:url]; //图片路径
                 photo.srcImageView = nil; //来源于哪个UIImageView
