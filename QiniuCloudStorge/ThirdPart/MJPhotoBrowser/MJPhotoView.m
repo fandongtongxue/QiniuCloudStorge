@@ -103,13 +103,18 @@
         
         __unsafe_unretained MJPhotoView *photoView = self;
         __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
-        [_imageView sd_setImageWithURL:_photo.url placeholderImage:nil options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-            if (receivedSize > kMinProgress) {
-                if (!_isHide) {
-                    loading.progress = (float)receivedSize/expectedSize;
-                }
-            }
-        } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        
+//        [_imageView sd_setImageWithURL:_photo.url placeholderImage:nil options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+//            if (receivedSize > kMinProgress) {
+//                if (!_isHide) {
+//                    loading.progress = (float)receivedSize/expectedSize;
+//                }
+//            }
+//        } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+//            [photoView photoDidFinishLoadWithImage:image];
+//        }];
+        
+        [_imageView sd_setImageWithURL:_photo.url placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [photoView photoDidFinishLoadWithImage:image];
         }];
     }

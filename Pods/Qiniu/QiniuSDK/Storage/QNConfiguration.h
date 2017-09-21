@@ -26,7 +26,7 @@ typedef NSString * (^QNUrlConvert)(NSString *url);
 
 @class QNConfigurationBuilder;
 @class QNDnsManager;
-@class QNServiceAddress;
+@class QNZone;
 /**
  *    Builder block
  *
@@ -37,14 +37,9 @@ typedef void (^QNConfigurationBuilderBlock)(QNConfigurationBuilder *builder);
 @interface QNConfiguration : NSObject
 
 /**
- *    默认上传服务器地址
+ *    存储区域
  */
-@property (copy, nonatomic, readonly) QNServiceAddress *up;
-
-/**
- *    备用上传服务器地址
- */
-@property (copy, nonatomic, readonly) QNServiceAddress *upBackup;
+@property (copy, nonatomic, readonly) QNZone *zone;
 
 /**
  *    断点上传时的分片大小
@@ -66,6 +61,11 @@ typedef void (^QNConfigurationBuilderBlock)(QNConfigurationBuilder *builder);
  */
 @property (readonly) UInt32 timeoutInterval;
 
+/**
+ *    是否使用 https，默认为 YES
+ */
+@property (nonatomic, assign) BOOL useHttps;
+
 @property (nonatomic, readonly) id<QNRecorderDelegate> recorder;
 
 @property (nonatomic, readonly) QNRecorderKeyGenerator recorderKeyGen;
@@ -82,55 +82,104 @@ typedef void (^QNConfigurationBuilderBlock)(QNConfigurationBuilder *builder);
 
 @end
 
-/**
- * 上传服务地址
- */
-@interface QNServiceAddress : NSObject
+typedef void (^QNPrequeryReturn)(int code);
 
-- (instancetype)init:(NSString *)address ips:(NSArray *)ips;
-
-@property (nonatomic, readonly) NSString *address;
-@property (nonatomic, readonly) NSArray *ips;
-
-@end
+@class QNUpToken;
+@class QNZoneInfo;
 
 @interface QNZone : NSObject
 
-/**
- *    默认上传服务器地址
- */
-@property (nonatomic, readonly) QNServiceAddress *up;
+@property (nonatomic, strong) NSArray <NSString *> * upDomainList;
+@property (nonatomic, strong) QNZoneInfo * zoneInfo;
 
 /**
- *    备用上传服务器地址
+ *    默认上传服务器地址列表
  */
-@property (nonatomic, readonly) QNServiceAddress *upBackup;
+- (void)preQuery:(QNUpToken *)token
+              on:(QNPrequeryReturn)ret;
+
+- (NSString *)up:(QNUpToken *)token
+         isHttps:(BOOL)isHttps
+    frozenDomain:(NSString *)frozenDomain;
+
+@end
+
+@interface QNZoneInfo : NSObject
+
+@property (readonly, nonatomic) long ttl;
+@property (readonly, nonatomic) NSMutableArray <NSString *> * upDomainsList;
+@property (readonly, nonatomic) NSMutableDictionary * upDomainsDic;
+
+- (instancetype)init:(long)ttl
+       upDomainsList:(NSMutableArray <NSString *> *)upDomainsList
+        upDomainsDic:(NSMutableDictionary *)upDomainsDic;
+- (QNZoneInfo *)buildInfoFromJson:(NSDictionary *)resp;
+
+@end
+
+@interface QNFixedZone : QNZone
 
 /**
- *    Zone初始化方法
- *
- *    @param upHost     默认上传服务器地址
- *    @param upHostBackup     备用上传服务器地址
- *    @param upIp       备用上传IP
- *
- *    @return Zone实例
- */
-- (instancetype)initWithUp:(QNServiceAddress *)up
-                  upBackup:(QNServiceAddress *)upBackup;
-
-/**
- *    zone 0
+ *    zone 0 华东
  *
  *    @return 实例
  */
 + (instancetype)zone0;
 
 /**
- *    zone 1
+ *    zone 1 华北
  *
  *    @return 实例
  */
 + (instancetype)zone1;
+
+/**
+ *    zone 2 华南
+ *
+ *    @return 实例
+ */
++ (instancetype)zone2;
+
+/**
+ *    zone Na0 北美
+ *
+ *    @return 实例
+ */
++ (instancetype)zoneNa0;
+
+/**
+ *    Zone初始化方法
+ *
+ *    @param upList     默认上传服务器地址列表
+ *
+ *    @return Zone实例
+ */
+- (instancetype)initWithupDomainList:(NSArray <NSString *> *)upList;
+
+/**
+ *    Zone初始化方法
+ *
+ *    @param upList     默认上传服务器地址列表
+ *
+ *    @return Zone实例
+ */
++ (instancetype)createWithHost:(NSArray <NSString *> *)upList;
+
+- (void)preQuery:(QNUpToken *)token
+              on:(QNPrequeryReturn)ret;
+
+- (NSString *)up:(QNUpToken *)token
+         isHttps:(BOOL)isHttps
+    frozenDomain:(NSString *)frozenDomain;
+@end
+
+@interface QNAutoZone : QNZone
+
+- (instancetype)initWithDns:(QNDnsManager *)dns;
+
+- (NSString *)up:(QNUpToken *)token
+         isHttps:(BOOL)isHttps
+    frozenDomain:(NSString *)frozenDomain;
 
 @end
 
@@ -160,6 +209,11 @@ typedef void (^QNConfigurationBuilderBlock)(QNConfigurationBuilder *builder);
  *    超时时间 单位 秒
  */
 @property (assign) UInt32 timeoutInterval;
+
+/**
+ *    是否使用 https，默认为 YES
+ */
+@property (nonatomic, assign) BOOL useHttps;
 
 @property (nonatomic, strong) id<QNRecorderDelegate> recorder;
 
