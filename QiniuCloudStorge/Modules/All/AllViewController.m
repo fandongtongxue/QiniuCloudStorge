@@ -12,6 +12,8 @@
 #import "FDPhotoBrowserHeader.h"
 #import "MJDownload.h"
 #import "FDVideoPlayerController.h"
+#import "MJPhoto.h"
+#import "MJPhotoBrowser.h"
 
 #define kGetFileImageListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_image.php"
 #define kGetFileVideoListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_video.php"
@@ -260,18 +262,21 @@ static NSString * const cellID = @"fileCellID";
     switch (self.segmentedControl.selectedSegmentIndex) {
         case 0:
         {
-            NSMutableArray *tempArray = [NSMutableArray array];
-            for (FileDetailModel *model in self.dataArray) {
-                FDPhotoBrowserItem *item = [[FDPhotoBrowserItem alloc]init];
-                NSString *fileUrl = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                item.url = fileUrl;
-                [tempArray addObject:item];
+            NSMutableArray *photos = [NSMutableArray arrayWithCapacity:self.dataArray.count];
+            for (int i = 0; i<self.dataArray.count; i++) {
+                //替换为中等尺寸图片
+                NSString *url = [NSString stringWithFormat:@"%@%@",kFileDetailUrlPrefix,[model.key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];;
+                MJPhoto *photo = [[MJPhoto alloc] init];
+                photo.url = [NSURL URLWithString:url]; //图片路径
+                photo.srcImageView = nil; //来源于哪个UIImageView
+                [photos addObject:photo];
             }
-            FDPhotoBrowserView *browserView = [[FDPhotoBrowserView alloc]initWithFrame:CGRectZero ItemArray:tempArray CurrentIndex:indexPath.row];
-            [browserView show:nil];
-            [browserView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.edges.equalTo([UIApplication sharedApplication].keyWindow);
-            }];
+            //显示相册
+            MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
+            browser.currentPhotoIndex = indexPath.row; //弹出相册时显示的第一张图片是？
+            browser.photos = photos; //设置所有的图片
+            [browser show];
+            
         }
             break;
         case 1:
