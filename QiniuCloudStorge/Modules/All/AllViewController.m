@@ -191,6 +191,7 @@ static NSString * const cellID = @"fileCellID";
         self.currentImage = info[@"UIImagePickerControllerOriginalImage"];
         self.key = [NSString stringWithFormat:@"Image_%@%@",[AppHelper getPlatformString],[NSDate dateWithTimeIntervalSinceNow:3600 * 8]];
         [picker dismissViewControllerAnimated:YES completion:nil];
+        [self uploadImage];
     }else{
         NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
         
@@ -217,6 +218,7 @@ static NSString * const cellID = @"fileCellID";
             self.data = [NSData dataWithContentsOfFile:videoPath];
         }
         [self dismissViewControllerAnimated:YES completion:nil];
+        [self uploadVideo];
     }
 }
 

@@ -363,10 +363,6 @@
 		AFB2E7761D95301000ECC1D0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				CB106DD71F10D61300AA2458 /* FDVideoPickerController */,
-				CB106DD81F10D61300AA2458 /* FDPDFController */,
-				CB106DD91F10D61300AA2458 /* FDImagePickerController */,
-				CBAF74AC1F10D1690069277E /* FDMusicPlayerController */,
 				CBAF74801F10C8E60069277E /* FDVideoPlayerController */,
 				CBC12F641EFE4B4B00B4356A /* FDPhotoBrowserView */,
 				CB81A9D51EFD67320023DDC0 /* FileDetailCell.h */,
@@ -558,27 +554,6 @@
 			path = File;
 			sourceTree = "<group>";
 		};
-		CB106DD71F10D61300AA2458 /* FDVideoPickerController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FDVideoPickerController;
-			sourceTree = "<group>";
-		};
-		CB106DD81F10D61300AA2458 /* FDPDFController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FDPDFController;
-			sourceTree = "<group>";
-		};
-		CB106DD91F10D61300AA2458 /* FDImagePickerController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FDImagePickerController;
-			sourceTree = "<group>";
-		};
 		CB81A9D11EFD64B40023DDC0 /* All */ = {
 			isa = PBXGroup;
 			children = (
@@ -596,13 +571,6 @@
 				CBAF74831F10C8E60069277E /* FDVideoPlayerController.xcassets */,
 			);
 			path = FDVideoPlayerController;
-			sourceTree = "<group>";
-		};
-		CBAF74AC1F10D1690069277E /* FDMusicPlayerController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FDMusicPlayerController;
 			sourceTree = "<group>";
 		};
 		CBB36B471F737D61000E7452 /* MJPhotoBrowser */ = {
