@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, AllViewControllerUploadType) {
+    AllViewControllerUploadTypePhoto,
+    AllViewControllerUploadTypeVideo,
+};
+
 @interface AllViewController : UIViewController
 
 @end

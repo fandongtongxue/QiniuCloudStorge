@@ -382,7 +382,6 @@
 		AFB2E7791D95301000ECC1D0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				CB81A9DB1EFE19A50023DDC0 /* Upload */,
 				CB81A9D11EFD64B40023DDC0 /* All */,
 				AFFC618D1DB0B6E100591933 /* File */,
 				AF77FCB31DAB2FA100ADA0F8 /* Music */,
@@ -587,13 +586,6 @@
 				CB81A9D31EFD65190023DDC0 /* AllViewController.m */,
 			);
 			path = All;
-			sourceTree = "<group>";
-		};
-		CB81A9DB1EFE19A50023DDC0 /* Upload */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Upload;
 			sourceTree = "<group>";
 		};
 		CBAF74801F10C8E60069277E /* FDVideoPlayerController */ = {

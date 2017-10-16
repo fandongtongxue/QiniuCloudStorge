@@ -14,6 +14,7 @@
 #import "FDVideoPlayerController.h"
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
+#import "QiniuUploadManager.h"
 
 #define kGetFileImageListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_image.php"
 #define kGetFileVideoListUrl @"http://api.fandong.me/api/qiniucloudstorge/php-sdk-master/examples/list_file_video.php"
@@ -22,13 +23,22 @@
 
 static NSString * const cellID = @"fileCellID";
 
-@interface AllViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface AllViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSMutableString *marker;
 @property (nonatomic, strong) UISegmentedControl *segmentedControl;
 @property (nonatomic, copy) NSString *url;
+
+@property (nonatomic, strong) UIImage *currentImage;
+@property (nonatomic, strong) UIImageView *currentImageView;
+
+@property (nonatomic, strong) MPMoviePlayerController *player;
+@property (nonatomic, strong) NSData *data;
+@property (nonatomic, copy) NSString *key;
+
+@property (nonatomic, assign) AllViewControllerUploadType uploadType;
 
 @end
 
@@ -83,7 +93,220 @@ static NSString * const cellID = @"fileCellID";
 }
 
 - (void)uploadFile{
-    DLOG(@"点击了上传文件按钮");
+    kWSelf;
+    if (IOS8_OR_LATER) {
+        UIAlertController *alertVC = [[UIAlertController alloc]init];
+        [alertVC addAction:[UIAlertAction actionWithTitle:@"从相册选择照片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            imagePicker.delegate = self;
+            imagePicker.view.backgroundColor = [UIColor whiteColor];
+            [weakSelf.navigationController presentViewController:imagePicker animated:YES completion:nil];
+            weakSelf.uploadType = AllViewControllerUploadTypePhoto;
+        }]];
+        [alertVC addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imagePicker.delegate = self;
+            imagePicker.view.backgroundColor = [UIColor whiteColor];
+            [weakSelf.navigationController presentViewController:imagePicker animated:YES completion:nil];
+            weakSelf.uploadType = AllViewControllerUploadTypePhoto;
+        }]];
+        [alertVC addAction:[UIAlertAction actionWithTitle:@"从相册选择视频" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,nil];
+            [weakSelf presentViewController:imagePicker animated:YES completion:nil];
+            weakSelf.uploadType = AllViewControllerUploadTypeVideo;
+        }]];
+        [alertVC addAction:[UIAlertAction actionWithTitle:@"录像" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,nil];
+            [weakSelf presentViewController:imagePicker animated:YES completion:nil];
+            weakSelf.uploadType = AllViewControllerUploadTypeVideo;
+        }]];
+        [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alertVC dismissViewControllerAnimated:YES completion:nil];
+        }]];
+        [self presentViewController:alertVC animated:YES completion:nil];
+    }else{
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择照片",@"拍照",@"从相册选择视频",@"录像", nil];
+        [actionSheet showInView:self.view];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch (buttonIndex) {
+        case 0:
+        {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            imagePicker.delegate = self;
+            imagePicker.view.backgroundColor = [UIColor whiteColor];
+            [self.navigationController presentViewController:imagePicker animated:YES completion:nil];
+            self.uploadType = AllViewControllerUploadTypePhoto;
+            break;
+        }
+        case 1:
+        {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imagePicker.delegate = self;
+            imagePicker.view.backgroundColor = [UIColor whiteColor];
+            [self.navigationController presentViewController:imagePicker animated:YES completion:nil];
+            self.uploadType = AllViewControllerUploadTypePhoto;
+            break;
+        }
+        case 2:
+        {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,nil];
+            [self presentViewController:imagePicker animated:YES completion:nil];
+            self.uploadType = AllViewControllerUploadTypeVideo;
+            break;
+        }
+        case 3:
+        {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,nil];
+            [self presentViewController:imagePicker animated:YES completion:nil];
+            self.uploadType = AllViewControllerUploadTypeVideo;
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    if (self.uploadType == AllViewControllerUploadTypePhoto) {
+        self.currentImageView.image = info[@"UIImagePickerControllerOriginalImage"];
+        self.currentImage = info[@"UIImagePickerControllerOriginalImage"];
+        self.key = [NSString stringWithFormat:@"Image_%@%@",[AppHelper getPlatformString],[NSDate dateWithTimeIntervalSinceNow:3600 * 8]];
+        [picker dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
+        
+        if (CFStringCompare ((__bridge CFStringRef) mediaType, kUTTypeMovie, 0) == kCFCompareEqualTo) {
+            NSURL *videoUrl=(NSURL*)[info objectForKey:UIImagePickerControllerMediaURL];
+            NSString *moviePath = [videoUrl path];
+            
+            self.player = [[MPMoviePlayerController alloc]initWithContentURL:videoUrl] ;
+            
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerThumbnailImageRequestDidFinish:) name:MPMoviePlayerThumbnailImageRequestDidFinishNotification object:self.player];
+            
+            [self.player requestThumbnailImagesAtTimes:@[@1.0] timeOption:MPMovieTimeOptionNearestKeyFrame];
+            
+            NSString *videoCacheDir = [NSHomeDirectory() stringByAppendingPathComponent:kVideoDetailLocalPrefix];
+            if (![[NSFileManager defaultManager] fileExistsAtPath:videoCacheDir]) {
+                [[NSFileManager defaultManager] createDirectoryAtPath:videoCacheDir withIntermediateDirectories:YES attributes:nil error:nil];
+            }
+            
+            self.key = [NSString stringWithFormat:@"Video_%@%@.mov",[AppHelper getPlatformString],[NSDate dateWithTimeIntervalSinceNow:3600 * 8]];
+            
+            NSString *lastPathComponent = self.key;
+            NSString *videoPath = [videoCacheDir stringByAppendingPathComponent:lastPathComponent];
+            [[NSFileManager defaultManager] copyItemAtPath:moviePath toPath:videoPath error:nil];
+            self.data = [NSData dataWithContentsOfFile:videoPath];
+        }
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)playerThumbnailImageRequestDidFinish:(NSNotification *)noti{
+    
+    [self.player stop];
+    
+    self.player = nil;
+    
+    NSDictionary *userInfo = [noti userInfo];
+    
+    UIImage *image =[userInfo objectForKey: @"MPMoviePlayerThumbnailImageKey"];
+    
+    self.currentImageView.image = image;
+    
+    self.currentImage = image;
+}
+
+- (void)uploadImage{
+    kWSelf;
+    if (!self.currentImage) {
+        [self showAlert:@"请先选择需要上传的图片"];
+    }else{
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Set the annular determinate mode to show task progress.
+        hud.mode = MBProgressHUDModeAnnularDeterminate;
+        hud.labelText = @"上传中";
+        
+        [[QiniuUploadManager manager] getUploadTokenSuccessBlock:^(NSString *token) {
+            NSData *data = UIImageJPEGRepresentation(self.currentImage, 1.0);
+            [[QiniuUploadManager manager] upload:data Key:self.key Token:token SuccessBlock:^(NSDictionary *info) {
+                [hud hide:YES];
+                self.currentImage = nil;
+                self.currentImageView.image = nil;
+            } failBlock:^(NSError *error) {
+                [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
+                [hud hide:YES];
+            } ProgressBlock:^(float percent) {
+                DLOG(@"上传进度:%f",percent);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Instead we could have also passed a reference to the HUD
+                    // to the HUD to myProgressTask as a method parameter.
+                    [MBProgressHUD HUDForView:self.navigationController.view].progress = percent;
+                });
+            }];
+        } failBlock:^(NSError *error) {
+            [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
+            [hud hide:YES];
+        }];
+    }
+}
+
+- (void)uploadVideo{
+    kWSelf;
+    if (!self.currentImage) {
+        [self showAlert:@"请先选择需要上传的视频"];
+    }else{
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        
+        // Set the annular determinate mode to show task progress.
+        hud.mode = MBProgressHUDModeAnnularDeterminate;
+        hud.labelText = @"上传中";
+        
+        [[QiniuUploadManager manager] getUploadTokenSuccessBlock:^(NSString *token) {
+            [[QiniuUploadManager manager] upload:self.data Key:self.key Token:token SuccessBlock:^(NSDictionary *info) {
+                [hud hide:YES];
+                self.currentImage = nil;
+                self.currentImageView.image = nil;
+            } failBlock:^(NSError *error) {
+                [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
+                [hud hide:YES];
+            } ProgressBlock:^(float percent) {
+                DLOG(@"上传进度:%f",percent);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Instead we could have also passed a reference to the HUD
+                    // to the HUD to myProgressTask as a method parameter.
+                    [MBProgressHUD HUDForView:self.navigationController.view].progress = percent;
+                });
+            }];
+        } failBlock:^(NSError *error) {
+            [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
+            [hud hide:YES];
+        }];
+    }
 }
 
 - (void)segmentedControlDidChange:(UISegmentedControl *)sender{
