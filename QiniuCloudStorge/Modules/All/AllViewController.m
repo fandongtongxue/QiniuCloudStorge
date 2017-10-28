@@ -279,36 +279,32 @@ static NSString * const cellID = @"fileCellID";
 
 - (void)uploadVideo{
     kWSelf;
-    if (!self.currentImage) {
-        [self showAlert:@"请先选择需要上传的视频"];
-    }else{
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        
-        // Set the annular determinate mode to show task progress.
-        hud.mode = MBProgressHUDModeAnnularDeterminate;
-        hud.labelText = @"上传中";
-        
-        [[QiniuUploadManager manager] getUploadTokenSuccessBlock:^(NSString *token) {
-            [[QiniuUploadManager manager] upload:self.data Key:self.key Token:token SuccessBlock:^(NSDictionary *info) {
-                [hud hide:YES];
-                self.currentImage = nil;
-                self.currentImageView.image = nil;
-            } failBlock:^(NSError *error) {
-                [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
-                [hud hide:YES];
-            } ProgressBlock:^(float percent) {
-                DLOG(@"上传进度:%f",percent);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    // Instead we could have also passed a reference to the HUD
-                    // to the HUD to myProgressTask as a method parameter.
-                    [MBProgressHUD HUDForView:self.navigationController.view].progress = percent;
-                });
-            }];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    
+    // Set the annular determinate mode to show task progress.
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.labelText = @"上传中";
+    
+    [[QiniuUploadManager manager] getUploadTokenSuccessBlock:^(NSString *token) {
+        [[QiniuUploadManager manager] upload:self.data Key:self.key Token:token SuccessBlock:^(NSDictionary *info) {
+            [hud hide:YES];
+            self.currentImage = nil;
+            self.currentImageView.image = nil;
         } failBlock:^(NSError *error) {
             [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
             [hud hide:YES];
+        } ProgressBlock:^(float percent) {
+            DLOG(@"上传进度:%f",percent);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Instead we could have also passed a reference to the HUD
+                // to the HUD to myProgressTask as a method parameter.
+                [MBProgressHUD HUDForView:self.navigationController.view].progress = percent;
+            });
         }];
-    }
+    } failBlock:^(NSError *error) {
+        [weakSelf showAlert:[NSString stringWithFormat:@"%@",error]];
+        [hud hide:YES];
+    }];
 }
 
 - (void)segmentedControlDidChange:(UISegmentedControl *)sender{
