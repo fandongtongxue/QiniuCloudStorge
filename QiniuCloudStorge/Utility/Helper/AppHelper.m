@@ -151,7 +151,6 @@
 }
 
 + (NSString *)uuid{
-    return @"ef6e70d2f3d64cbeaf43fbe88151cbcf";
     NSString * currentDeviceUUIDStr = [SSKeychain passwordForService:@" "account:@"uuid"];
     if (currentDeviceUUIDStr == nil || [currentDeviceUUIDStr isEqualToString:@""]){
         NSUUID * currentDeviceUUID  = [UIDevice currentDevice].identifierForVendor;
